@@ -20,4 +20,13 @@ return {
       require("telescope").load_extension("notify")
     end,
   },
+  {
+    "folke/todo-comments.nvim",
+    opts = {
+      highlight = {
+        -- https://www.reddit.com/r/neovim/comments/xzhty5/comment/irmgu2m/
+        keyword = "fg",
+      },
+    },
+  },
 }
