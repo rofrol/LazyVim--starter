@@ -32,4 +32,5 @@ return {
       },
     },
   },
+  "ziglang/zig",
 }
