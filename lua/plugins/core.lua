@@ -41,4 +41,10 @@ return {
       position = "right",
     } },
   },
+  {
+    "natecraddock/telescope-zf-native.nvim",
+    config = function(_, opts)
+      require("telescope").load_extension("zf-native")
+    end,
+  },
 }
