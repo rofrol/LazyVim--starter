@@ -47,4 +47,5 @@ return {
       require("telescope").load_extension("zf-native")
     end,
   },
+  { "folke/tokyonight.nvim", enabled = false },
 }
