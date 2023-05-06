@@ -32,11 +32,36 @@ return {
       --require("vscode").load()
     end,
   },
+  "numToStr/Sakura.nvim",
+  {
+    "navarasu/onedark.nvim",
+    config = function()
+      require("onedark").setup({
+        style = "darker",
+        -- style = "deep",
+        toggle_style_key = "<leader>ts",
+        diagnostics = {
+          darker = false,
+          background = false,
+        },
+      })
+    end,
+  },
+  {
+    "mastertinner/nvim-quantum",
+    config = function()
+      -- require("quantum").setup()
+      -- vim.api.nvim_set_hl(0, "Normal", { fg = "#000000", bg = "#ffffff" })
+    end,
+  },
   {
     "LazyVim/LazyVim",
     opts = {
-      --background = "light",
+      background = "light",
       colorscheme = "vscode",
+      -- colorscheme = "sakura",
+      -- colorscheme = "onedark",
+      -- colorscheme = "quantum",
     },
   },
 }
