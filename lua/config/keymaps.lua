@@ -2,7 +2,6 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
 -- local function map(m, k, v)
 --   vim.keymap.set(m, k, v, { silent = true })
 -- end
@@ -16,6 +15,12 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
 map("v", "p", "P", { noremap = true, silent = true })
 
 map("n", "<Backspace>", "<cmd>noh<cr>", { noremap = true, silent = true })
+
+-- delete other buffers
+-- https://tech.serhatteker.com/post/2021-04/vim-delete-multiple-buffers/
+-- https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings-set
+map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
