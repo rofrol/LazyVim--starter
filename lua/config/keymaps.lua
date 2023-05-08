@@ -2,13 +2,19 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
 -- local function map(m, k, v)
 --   vim.keymap.set(m, k, v, { silent = true })
 -- end
 
+-- https://github.com/AndresMpa/mu-vim/blob/e6334b42775ce638f450faa665abb2772880293c/lua/mapping/navigation.lua#L47
+-- local map = vim.keymap.set
+
 -- https://blog.devgenius.io/create-custom-keymaps-in-neovim-with-lua-d1167de0f2c2
 local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
+  -- Normal messages will not be given or added to the message history
+  -- https://vi.stackexchange.com/questions/34346/silent-vs-silent-what-is-the-difference
+  local options = { noremap = true, silent = true }
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
@@ -16,11 +22,15 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
-map("v", "p", "P", { noremap = true, silent = true })
+map("v", "p", "P")
 
-map("n", "<Backspace>", "<cmd>noh<cr>", { noremap = true, silent = true })
+map("n", "<Backspace>", "<cmd>noh<cr>")
 
 -- delete other buffers
 -- https://tech.serhatteker.com/post/2021-04/vim-delete-multiple-buffers/
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings-set
 map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
+
+-- bufferline
+map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
+map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
