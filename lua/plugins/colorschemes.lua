@@ -19,7 +19,7 @@ return {
 
         -- Override colors (see ./lua/vscode/colors.lua)
         color_overrides = {
-          vscLineNumber = "#FFFFFF",
+          -- vscLineNumber = "#FFFFFF",
         },
 
         -- Override highlight groups (see ./lua/vscode/theme.lua)
