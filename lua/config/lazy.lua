@@ -18,6 +18,7 @@ require("lazy").setup({
     -- copilot multi-line suggestion accept works out of-the-box with Entering
     -- https://github.com/zbirenbaum/copilot-cmp/issues/45#issuecomment-1455134141
     { import = "lazyvim.plugins.extras.coding.copilot" },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
     -- import/override with your plugins
     { import = "plugins" },
   },
