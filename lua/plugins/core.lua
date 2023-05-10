@@ -26,12 +26,6 @@ return {
       position = "right",
     } },
   },
-  -- { "folke/tokyonight.nvim", enabled = false },
-  -- { "folke/tokyonight.nvim", opts = { style = "light" } },
-  -- { "folke/tokyonight.nvim", opts = { style = "moon" } },
-  -- { "folke/tokyonight.nvim", opts = { style = "storm" } },
-  { "folke/tokyonight.nvim", opts = { style = "night" } },
-  { "catppuccin/nvim", enabled = false },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
