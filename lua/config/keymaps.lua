@@ -32,5 +32,7 @@ map("n", "<Backspace>", "<cmd>noh<cr>")
 map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
 
 -- bufferline
-map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
 map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
+map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
+map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
+map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
