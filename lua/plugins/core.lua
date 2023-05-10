@@ -42,10 +42,13 @@ return {
     } },
   },
   {
-    "natecraddock/telescope-zf-native.nvim",
-    config = function(_, opts)
-      require("telescope").load_extension("zf-native")
-    end,
+    "telescope.nvim",
+    dependencies = {
+      "natecraddock/telescope-zf-native.nvim",
+      config = function(_, opts)
+        require("telescope").load_extension("zf-native")
+      end,
+    },
   },
   -- { "folke/tokyonight.nvim", enabled = false },
   -- { "folke/tokyonight.nvim", opts = { style = "light" } },
@@ -71,6 +74,23 @@ return {
           --     return math.floor(cols * 0.87)
           --   end
           -- end,
+        },
+      },
+    },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          hide_by_name = {
+            ".DS_Store",
+            "thumbs.db",
+            -- "node_modules",
+          },
         },
       },
     },
