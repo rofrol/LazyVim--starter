@@ -54,6 +54,16 @@ return {
         shell = "zsh --login",
       })
     end,
+    keys = {
+      -- https://github.com/LazyVim/LazyVim/discussions/193#discussioncomment-5988621
+      { [[<C-\>]] },
+      { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+      {
+        "<leader>td",
+        "<cmd>ToggleTerm size=40 dir=~/Desktop direction=horizontal<cr>",
+        desc = "Open a horizontal terminal at the Desktop directory",
+      },
+    },
   },
   {
     "folke/noice.nvim",
