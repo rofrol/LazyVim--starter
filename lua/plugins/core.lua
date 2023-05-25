@@ -1,14 +1,14 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      -- do I need this?
-      vim.list_extend(opts.ensure_installed, {
-        "tsx",
-        "typescript",
-      })
-    end,
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   opts = function(_, opts)
+  --     -- do I need this?
+  --     vim.list_extend(opts.ensure_installed, {
+  --       "tsx",
+  --       "typescript",
+  --     })
+  --   end,
+  -- },
   {
     "folke/todo-comments.nvim",
     opts = {
