@@ -1,4 +1,22 @@
 return {
+  -- { "folke/tokyonight.nvim", enabled = false },
+  -- { "folke/tokyonight.nvim", opts = { style = "light" } },
+  -- { "folke/tokyonight.nvim", opts = { style = "moon" } },
+  -- { "folke/tokyonight.nvim", opts = { style = "storm" } },
+  -- { "folke/tokyonight.nvim", opts = { style = "night" } },
+  { "catppuccin/nvim", enabled = false },
+  "https://gitlab.com/protesilaos/tempus-themes-vim",
+  "projekt0n/github-nvim-theme",
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      -- background = "light",
+      colorscheme = "vscode",
+      -- colorscheme = "sakura",
+      -- colorscheme = "onedark",
+      -- colorscheme = "quantum",
+    },
+  },
   {
     "Mofiqul/vscode.nvim",
     name = "vscode",
@@ -6,7 +24,7 @@ return {
       local c = require("vscode.colors").get_colors()
       require("vscode").setup({
         -- Alternatively set style in setup
-        -- style = 'light'
+        style = "light",
 
         -- Enable transparent background
         transparent = true,
@@ -54,20 +72,4 @@ return {
       -- vim.api.nvim_set_hl(0, "Normal", { fg = "#000000", bg = "#ffffff" })
     end,
   },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      background = "light",
-      colorscheme = "vscode",
-      -- colorscheme = "sakura",
-      -- colorscheme = "onedark",
-      -- colorscheme = "quantum",
-    },
-  },
-  -- { "folke/tokyonight.nvim", enabled = false },
-  -- { "folke/tokyonight.nvim", opts = { style = "light" } },
-  -- { "folke/tokyonight.nvim", opts = { style = "moon" } },
-  -- { "folke/tokyonight.nvim", opts = { style = "storm" } },
-  { "folke/tokyonight.nvim", opts = { style = "night" } },
-  { "catppuccin/nvim", enabled = false },
 }
