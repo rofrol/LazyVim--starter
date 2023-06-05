@@ -47,7 +47,7 @@ return {
     "akinsho/toggleterm.nvim",
     config = function()
       require("toggleterm").setup({
-        open_mapping = [[<c-\>]],
+        open_mapping = [[<c-\>]], -- non-floating terminal
         shade_terminals = false,
         -- add --login so ~/.zprofile is loaded
         -- https://vi.stackexchange.com/questions/16019/neovim-terminal-not-reading-bash-profile/16021#16021
@@ -56,7 +56,7 @@ return {
     end,
     keys = {
       -- https://github.com/LazyVim/LazyVim/discussions/193#discussioncomment-6088989
-      { [[<C-\>]] },
+      { [[<C-\>]] }, -- non-floating terminal
     },
   },
   {
