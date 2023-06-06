@@ -57,6 +57,8 @@ return {
     keys = {
       -- https://github.com/LazyVim/LazyVim/discussions/193#discussioncomment-6088989
       { [[<C-\>]] }, -- non-floating terminal
+      -- { "<leader>0", "<Cmd>2ToggleTerm size=60 direction=horizontal<Cr>", desc = "Terminal #2" },
+      { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
     },
   },
   {
