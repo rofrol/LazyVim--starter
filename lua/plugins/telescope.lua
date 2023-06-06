@@ -33,7 +33,7 @@ return {
     "telescope.nvim",
     dependencies = {
       "natecraddock/telescope-zf-native.nvim",
-      config = function(_, opts)
+      config = function()
         require("telescope").load_extension("zf-native")
       end,
     },
