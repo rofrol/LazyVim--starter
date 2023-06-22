@@ -70,4 +70,5 @@ return {
     },
   },
   { "goolord/alpha-nvim", enabled = false },
+  { "neovim/nvim-lspconfig", opts = { inlay_hints = { enabled = true } } },
 }
