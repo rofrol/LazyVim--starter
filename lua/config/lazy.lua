@@ -22,6 +22,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     -- project
     { import = "lazyvim.plugins.extras.util.project" },
+    { import = "lazyvim.plugins.extras.editor.flash" },
     -- import/override with your plugins
     { import = "plugins" },
   },
