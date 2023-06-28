@@ -23,6 +23,7 @@ require("lazy").setup({
     -- project
     { import = "lazyvim.plugins.extras.util.project" },
     { import = "lazyvim.plugins.extras.editor.flash" },
+    { import = "lazyvim.plugins.extras.editor.mini-files" },
     -- import/override with your plugins
     { import = "plugins" },
   },
