@@ -68,4 +68,15 @@ return {
   },
   { "goolord/alpha-nvim", enabled = false },
   { "neovim/nvim-lspconfig", opts = { inlay_hints = { enabled = true } } },
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      -- https://github.com/giusgad/dotfiles/blob/ed81c1cb5c92aa1216267710cb037f55a6140da2/.config/nvim/lua/plugins/config/bufferline.lua#L43
+      options = {
+        tab_size = 30,
+        separator_style = { "", "" }, -- | "thick" | "thin" | { 'left', 'right' },
+        indicator = { style = "underline", icon = "" }, -- underline style is based on terminal
+      },
+    },
+  },
 }
