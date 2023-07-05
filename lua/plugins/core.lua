@@ -1,3 +1,7 @@
+-- HIGHLIGHTING FIX
+vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { fg = "#d79921", sp = "#d79921", underline = true })
+vim.api.nvim_set_hl(0, "BufferLineCloseButtonSelected", { fg = "#d79921", sp = "#d79921", underline = true })
+vim.api.nvim_set_hl(0, "BufferLineModifiedSelected", { fg = "#d79921", sp = "#d79921", underline = true })
 return {
   -- {
   --   "nvim-treesitter/nvim-treesitter",
@@ -76,6 +80,11 @@ return {
         tab_size = 30,
         separator_style = { "", "" }, -- | "thick" | "thin" | { 'left', 'right' },
         indicator = { style = "underline", icon = "" }, -- underline style is based on terminal
+
+        -- max_name_length = 30,
+        -- https://github.com/akinsho/bufferline.nvim/blob/2f391fde91b9c3876eee359ee24cc352050e5e48/lua/bufferline/ui.lua#L367C32-L367C46
+        truncate_names = false,
+        autosize = true,
       },
     },
   },
