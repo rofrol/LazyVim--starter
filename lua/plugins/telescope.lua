@@ -85,21 +85,21 @@ return {
           function()
             require("harpoon.mark").add_file()
           end,
-          desc = "[A]dd harpoon mark",
+          desc = "Add harpoon mark",
         },
         {
           "<leader>h",
           function()
             require("telescope").extensions.harpoon.marks()
           end,
-          desc = "[S]earch h[A]rpoon mark",
+          desc = "Search harpoon mark",
         },
         {
           "<leader>j",
           function()
             require("harpoon.ui").toggle_quick_menu()
           end,
-          desc = "[H]arpoon [T]oogle quick menu",
+          desc = "Harpoon toogle quick menu",
         },
         {
           "<leader>1",
