@@ -2,6 +2,10 @@
 vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { fg = "#d79921", sp = "#d79921", underline = true })
 vim.api.nvim_set_hl(0, "BufferLineCloseButtonSelected", { fg = "#d79921", sp = "#d79921", underline = true })
 vim.api.nvim_set_hl(0, "BufferLineModifiedSelected", { fg = "#d79921", sp = "#d79921", underline = true })
+
+-- local editor_layout = require("builtin.utils.layout").editor
+-- local MAX_NAME_LENGTH = editor_layout.width(0.334, 15, 80)
+
 return {
   -- {
   --   "nvim-treesitter/nvim-treesitter",
@@ -81,10 +85,34 @@ return {
         separator_style = { "", "" }, -- | "thick" | "thin" | { 'left', 'right' },
         indicator = { style = "underline", icon = "" }, -- underline style is based on terminal
 
-        -- max_name_length = 30,
+        -- max_name_length = 40,
         -- https://github.com/akinsho/bufferline.nvim/blob/2f391fde91b9c3876eee359ee24cc352050e5e48/lua/bufferline/ui.lua#L367C32-L367C46
-        truncate_names = false,
+        truncate_names = true,
         autosize = true,
+        -- https://github.com/linrongbin16/lin.nvim/blob/75c9ab963171f18b05d3d549d00fdc7f7b8331a4/lua/configs/akinsho/bufferline-nvim/config.lua#L13C1-L23C13
+        -- name_formatter = function(buf)
+        --   local name = buf.name
+        --   local len = name ~= nil and string.len(name) or 0
+        --   if len > MAX_NAME_LENGTH then
+        --     local half = math.floor(MAX_NAME_LENGTH / 2) - 1
+        --     local left = string.sub(name, 1, half)
+        --     local right = string.sub(name, len - half, len)
+        --     name = left .. "…" .. right
+        --   end
+        --   return name
+        -- end,
+        -- https://github.com/giusgad/dotfiles/blob/ed81c1cb5c92aa1216267710cb037f55a6140da2/.config/nvim/lua/plugins/config/bufferline.lua#L24C1-L30C13
+        -- name_formatter = function(buf)
+        --   if vim.startswith(buf.name, "index") or vim.startswith(buf.name, "page") then
+        --     name = string.match(buf.path, ".*[\\/](.-)[\\/](.-)$")
+        --     return name .. "/" .. buf.name
+        --   end
+        --   return buf.name
+        -- end,
+        -- https://github.com/tuyentv96/.dotfiles/blob/dda782503d278edfd382ca51001e6033806f82f0/nvim/.config/nvim/lua/plugins/config/bufferline.lua#L33C1-L35C8
+        name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
+          return buf.name
+        end,
       },
     },
   },
