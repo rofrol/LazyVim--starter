@@ -33,8 +33,23 @@ return {
     opts = {
       window = {
         position = "right",
+        mappings = {
+          ["e"] = function()
+            vim.api.nvim_exec("Neotree focus filesystem right", true)
+          end,
+          ["b"] = function()
+            vim.api.nvim_exec("Neotree focus buffers right", true)
+          end,
+          ["g"] = function()
+            vim.api.nvim_exec("Neotree focus git_status right", true)
+          end,
+        },
       },
       filesystem = {
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = true, -- will work in version > 2.70
+        },
         filtered_items = {
           visible = true,
           hide_dotfiles = false,
@@ -45,6 +60,51 @@ return {
             -- "node_modules",
           },
         },
+        -- does not work. from https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Recipies#harpoon-index
+        components = {
+          harpoon_index = function(config, node, state)
+            local Marked = require("harpoon.mark")
+            local path = node:get_id()
+            local succuss, index = pcall(Marked.get_index_of, path)
+            if succuss and index and index > 0 then
+              return {
+                text = string.format(" ⥤ %d", index), -- <-- Add your favorite harpoon like arrow here
+                highlight = config.highlight or "NeoTreeDirectoryIcon",
+              }
+            else
+              return {}
+            end
+          end,
+        },
+        renderers = {
+          file = {
+            { "icon" },
+            { "name", use_git_status_colors = true },
+            { "harpoon_index" }, --> This is what actually adds the component in where you want it
+            { "diagnostics" },
+            { "git_status", highlight = "NeoTreeDimText" },
+          },
+        },
+      },
+      buffers = {
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = true, -- will work in version > 2.70
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>r",
+        function()
+          require("neo-tree.command").execute({
+            toggle = true,
+            -- dir = require("lazyvim.util").get_root(),
+            source = "buffers",
+            position = "right",
+          })
+        end,
+        desc = "Buffers (root dir)",
       },
     },
   },
@@ -78,6 +138,7 @@ return {
   { "neovim/nvim-lspconfig", opts = { inlay_hints = { enabled = true } } },
   {
     "akinsho/bufferline.nvim",
+    enabled = false,
     opts = {
       -- https://github.com/giusgad/dotfiles/blob/ed81c1cb5c92aa1216267710cb037f55a6140da2/.config/nvim/lua/plugins/config/bufferline.lua#L43
       options = {
@@ -200,6 +261,20 @@ return {
           require("harpoon.ui").nav_file(9)
         end,
         desc = "Harpoon go to file 9",
+      },
+      {
+        "<S-h>",
+        function()
+          require("harpoon.ui").nav_prev()
+        end,
+        desc = "Harpoon nav_prev()",
+      },
+      {
+        "<S-l>",
+        function()
+          require("harpoon.ui").nav_next()
+        end,
+        desc = "Harpoon nav_prev()",
       },
     },
   },
