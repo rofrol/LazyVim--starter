@@ -30,6 +30,7 @@ return {
   { "echasnovski/mini.pairs", enabled = false },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    commit = "669d794fdb2c065bf55ed29c6bf36901c7f5e21b",
     opts = {
       window = {
         position = "right",
@@ -68,19 +69,21 @@ return {
             local succuss, index = pcall(Marked.get_index_of, path)
             if succuss and index and index > 0 then
               return {
-                text = string.format(" ⥤ %d", index), -- <-- Add your favorite harpoon like arrow here
+                text = string.format("%d ", index), -- <-- Add your favorite harpoon like arrow here
                 highlight = config.highlight or "NeoTreeDirectoryIcon",
               }
             else
-              return {}
+              return {
+                text = "  ",
+              }
             end
           end,
         },
         renderers = {
           file = {
+            { "harpoon_index" }, --> This is what actually adds the component in where you want it
             { "icon" },
             { "name", use_git_status_colors = true },
-            { "harpoon_index" }, --> This is what actually adds the component in where you want it
             { "diagnostics" },
             { "git_status", highlight = "NeoTreeDimText" },
           },
