@@ -36,3 +36,6 @@ map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
 map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
 map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
 map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
+
+-- something is binded to <C-r> that clears the neovim
+map("n", "<C-r>", "", {})
