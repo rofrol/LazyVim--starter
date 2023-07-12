@@ -155,3 +155,41 @@ vim.cmd([[
   " Expand %% to path of current buffer in command mode.
   cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 ]])
+
+-- https://github.com/wyntau/dotfiles/blob/eeee2137befa11e74d8fc7c3c2060a7b4e4f195f/nvim/lua/basic.lua#L72C1-L76C4
+-- Open help in a vertical split instead of the default horizontal split
+vim.cmd([[
+  cabbrev h <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert h' : 'h')<cr>
+  cabbrev help <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert h' : 'help')<cr>
+]])
+
+-- vim.cmd([[
+-- cabbrev <expr> sav (getcmdtype()==':' && getcmdpos()==4 ? 'sav ' . expand('%:h').'/' : 'sav')
+-- ]])
+
+-- vim.keymap.set("c", "S", function()
+--   local lead = vim.fn.expand("%:h")
+--   return "sav " .. vim.fn.fnameescape(lead) .. (lead ~= "/" and "/" or "")
+-- end, { expr = true })
+--
+-- local bs = vim.api.nvim_replace_termcodes("<bs>", true, false, true)
+--
+-- vim.keymap.set("c", "R", function()
+--   local lead = vim.fn.expand("%:h")
+--   vim.schedule(function()
+--     if vim.fn.getcmdline():match(" $") then
+--       vim.api.nvim_feedkeys(bs, "n", false)
+--     end
+--   end)
+--   return "sav " .. vim.fn.fnameescape(lead) .. (lead ~= "/" and "/" or "")
+-- end, { expr = true })
+
+-- when doing :sav<Space> it will expand to to :sav current_dir/
+-- https://matrix.to/#/!cylwlNXSwagQmZSkzs:matrix.org/$f-HOgoPE976yY8TjrMYFZQ14b9kpcjaZfdKIUaoCJ6Q?via=matrix.org&via=gitter.im&via=tchncs.de
+vim.keymap.set("c", "<space>", function()
+  if vim.fn.getcmdtype() == ":" and vim.fn.getcmdline() == "sav" then
+    return " " .. vim.fn.expand("%:h") .. "/"
+  else
+    return "<space>"
+  end
+end, { expr = true })
