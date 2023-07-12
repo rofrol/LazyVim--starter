@@ -45,63 +45,63 @@ return {
         opts,
       },
       {
-        "<M-1>",
+        "<leader>1",
         function()
           require("harpoon.ui").nav_file(1)
         end,
         opts,
       },
       {
-        "<M-2>",
+        "<leader>2",
         function()
           require("harpoon.ui").nav_file(2)
         end,
         opts,
       },
       {
-        "<M-3>",
+        "<leader>3",
         function()
           require("harpoon.ui").nav_file(3)
         end,
         opts,
       },
       {
-        "<M-4>",
+        "<leader>4",
         function()
           require("harpoon.ui").nav_file(4)
         end,
         opts,
       },
       {
-        "<M-5>",
+        "<leader>5",
         function()
           require("harpoon.ui").nav_file(5)
         end,
         opts,
       },
       {
-        "<M-6>",
+        "<leader>6",
         function()
           require("harpoon.ui").nav_file(6)
         end,
         opts,
       },
       {
-        "<M-7>",
+        "<leader>7",
         function()
           require("harpoon.ui").nav_file(7)
         end,
         opts,
       },
       {
-        "<M-8>",
+        "<leader>8",
         function()
           require("harpoon.ui").nav_file(8)
         end,
         opts,
       },
       {
-        "<M-9>",
+        "<leader>9",
         function()
           require("harpoon.ui").nav_file(9)
         end,
