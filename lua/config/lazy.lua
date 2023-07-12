@@ -193,4 +193,7 @@ vim.keymap.set("c", " ", function()
   else
     return " "
   end
-end, { expr = true, replace_keycodes = false })
+end, {
+  expr = true,
+  replace_keycodes = false, -- path might have keycodes
+})
