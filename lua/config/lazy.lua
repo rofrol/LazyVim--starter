@@ -186,10 +186,11 @@ vim.cmd([[
 
 -- when doing :sav<Space> it will expand to to :sav current_dir/
 -- https://matrix.to/#/!cylwlNXSwagQmZSkzs:matrix.org/$f-HOgoPE976yY8TjrMYFZQ14b9kpcjaZfdKIUaoCJ6Q?via=matrix.org&via=gitter.im&via=tchncs.de
-vim.keymap.set("c", "<space>", function()
+vim.keymap.set("c", " ", function()
   if vim.fn.getcmdtype() == ":" and vim.fn.getcmdline() == "sav" then
-    return " " .. vim.fn.expand("%:h") .. "/"
+    local lead = vim.fn.expand("%:h")
+    return " " .. vim.fn.fnameescape(lead) .. "/"
   else
-    return "<space>"
+    return " "
   end
-end, { expr = true })
+end, { expr = true, replace_keycodes = false })
