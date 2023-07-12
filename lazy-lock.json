@@ -12,7 +12,7 @@
   "copilot.lua": { "branch": "master", "commit": "e48bd7020a98be217d85c006a298656294fd6210" },
   "dressing.nvim": { "branch": "master", "commit": "e6eff7a5a950a853c3903d906dbcea03f778db5f" },
   "flash.nvim": { "branch": "main", "commit": "a8da6ff212c1885ecde26af477207742959c67d7" },
-  "friendly-snippets": { "branch": "main", "commit": "6e0afe3be0ba43ef03d495a529de8fb22721c0d0" },
+  "friendly-snippets": { "branch": "main", "commit": "ca668b7a4a2913ad1109b5e4aaf0013651956b13" },
   "github-nvim-theme": { "branch": "main", "commit": "e28eb579079c6abeb9c21bd85bb9a04379ac64b4" },
   "gitsigns.nvim": { "branch": "main", "commit": "48c3ae8ec74cb83f9570ceb0c5ab8217db7a2220" },
   "harpoon": { "branch": "master", "commit": "21f4c47c6803d64ddb934a5b314dcb1b8e7365dc" },
@@ -62,5 +62,5 @@
   "vscode": { "branch": "main", "commit": "05973862f95f85dd0564338a03baf61b56e1823f" },
   "which-key.nvim": { "branch": "main", "commit": "d871f2b664afd5aed3dc1d1573bef2fb24ce0484" },
   "yanky.nvim": { "branch": "main", "commit": "b12561386a25645adb7504e0e6a8c5dc8b31e6da" },
-  "zig": { "branch": "master", "commit": "6bc9c4f716afbb15465f79f84f61221f394fa5b6" }
+  "zig": { "branch": "master", "commit": "711b4e93e2b98233a5e225611891a0c25c6c12d9" }
 }
