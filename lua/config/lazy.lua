@@ -63,3 +63,95 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     -- vim.api.nvim_set_hl(0, "@lsp.mod.readonly", { italic = true })
   end,
 })
+
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   callback = function()
+--     vim.cmd("silent! lcd %:p:h")
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   command = "silent! lcd %:p:h",
+-- })
+
+-- vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "silent! lcd %:p:h" })
+
+-- local generic_augroup = vim.api.nvim_create_augroup("config_generic", { clear = true })
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   group = generic_augroup,
+--   callback = function()
+--     vim.cmd("silent! lcd %:p:h")
+--     -- if vim.o.buftype ~= "terminal" then
+--     --   vim.cmd("silent! lcd %:p:h")
+--     -- end
+--   end,
+-- })
+--
+-- vim.api.nvim_command("command! Lcd lcd %:p:h")
+-- vim.keymap.set("n", "<leader>p", ":lcd %:p:h<CR>:pwd<CR>", { desc = "Set local path to current file's path" })
+
+-- local api = vim.api
+-- local RunFile = api.nvim_create_augroup("RunFile", { clear = true })
+--
+-- api.nvim_create_autocmd({ "BufEnter" }, {
+--   pattern = { "*" },
+--   command = "lcd %:p:h",
+--   group = RunFile,
+-- })
+--
+-- vim.cmd([[
+--   augroup AutoSaveOnInsertLeave
+--     autocmd!
+--     autocmd BufEnter * lcd %:p:h
+--   augroup end
+-- ]])
+
+-- vim.api.nvim_create_user_command("S", function(opts)
+--   vim.cmd({ cmd = "saveas", args = { opts.fargs[1] } })
+-- end, {
+--   nargs = 1,
+--   -- complete = function(ArgLead, CmdLine, CursorPos)
+--   --   -- return vim.fn.getcompletion(vim.fn.expand("%:h"), "file", 0)
+--   --   -- return vim.fn.getcompletion(vim.fn.expand("%:p:h"), "file", 0)
+--   --   -- return vim.fn.readdir(vim.fn.getcwd())
+--   --   -- return vim.fn.expand("%:h")
+--   --   -- return vim.fn.getcompletion(vim.fn.readdir(vim.fn.getcwd()), "file", 0)
+--   --   return vim.fn.getcompletion(
+--   --     vim.fn.split(
+--   --       vim.fn.substitute(vim.fn.glob(vim.fn.expand("%:h") .. "/*"), vim.fn.expand("%:h") .. "/", "", "g"),
+--   --       "\n"
+--   --     )
+--   --   )
+--   --   -- return vim.fn.readdir(vim.fn.expand("%:h"))
+--   -- end,
+--   complete = complete,
+--   bang = true,
+-- })
+
+local function join_file_parent(lead)
+  local parent = vim.fn.expand("%:p:h")
+  return parent .. (parent == "/" and "" or "/") .. lead
+end
+
+-- https://app.element.io/#/room/#neovim:matrix.org/$NRq6DdJlrJWk8dIQUvj18bD8EymugPW0Cv44vOAEw-A
+local function complete(lead)
+  local parent = vim.fn.expand("%:p:h")
+  return vim.tbl_map(function(path)
+    return vim.fn.fnamemodify(path, ":p"):gsub("^" .. vim.pesc(parent) .. "/?", "")
+  end, vim.fn.getcompletion(join_file_parent(lead), "file"))
+  -- neovim master: end, vim.fn.getcompletion(vim.fs.joinpath(vim.fn.expand("%:p:h"), lead), "file"))
+end
+
+vim.api.nvim_create_user_command("S", function(opts)
+  vim.cmd({ cmd = "sav", args = { vim.fn.fnameescape(join_file_parent(opts.fargs[1])) } })
+end, {
+  nargs = "?",
+  -- complete = complete,
+  complete = "file",
+})
+
+-- https://github.com/mmai/dotfiles/blob/056d58a0d113fae80fc38b351025476c665bb4b6/.config/classicNvim/lua/user/keymaps.lua#L20
+vim.cmd([[
+  " Expand %% to path of current buffer in command mode.
+  cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+]])
