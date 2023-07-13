@@ -14,7 +14,7 @@
 local function map(mode, lhs, rhs, opts)
   -- Normal messages will not be given or added to the message history
   -- https://vi.stackexchange.com/questions/34346/silent-vs-silent-what-is-the-difference
-  local options = { noremap = true, silent = true }
+  local options = { silent = true } -- remap = false is default alread
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
@@ -38,4 +38,4 @@ map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
 map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
 
 -- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
-map("v", "p", "P")
+map("x", "p", "P")
