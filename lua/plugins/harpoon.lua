@@ -3,22 +3,20 @@ local opts = { noremap = true, silent = true }
 return {
   {
     "ThePrimeagen/harpoon",
-    opts = {
-      global_settings = {
-        tabline = true,
-        tabline_prefix = "   ",
-        tabline_suffix = "   ",
-      },
-      menu = {
-        width = vim.api.nvim_win_get_width(0) - 10,
-      },
-    },
+    event = "BufWinEnter",
     config = function()
       vim.cmd("highlight! HarpoonInactive guibg=NONE guifg=#63698c")
       vim.cmd("highlight! HarpoonActive guibg=NONE guifg=black")
       vim.cmd("highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7")
       vim.cmd("highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7")
       vim.cmd("highlight! TabLineFill guibg=NONE guifg=white")
+
+      require("harpoon").setup({
+        tabline = true,
+        menu = {
+          width = vim.api.nvim_win_get_width(0) - 10,
+        },
+      })
     end,
     keys = {
       {
