@@ -45,7 +45,9 @@ return {
       {
         "<space>t",
         function()
-          require("harpoon.mark").toggle_file()
+          local index = require("harpoon.mark").get_index_of(vim.fn.bufname())
+          require("mini.bufremove").delete(0, true)
+          require("harpoon.mark").rm_file(index)
         end,
         opts,
       },
