@@ -43,6 +43,13 @@ return {
         opts,
       },
       {
+        "<space>t",
+        function()
+          require("harpoon.mark").toggle_file()
+        end,
+        opts,
+      },
+      {
         "<leader>1",
         function()
           require("harpoon.ui").nav_file(1)
