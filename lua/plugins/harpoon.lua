@@ -3,10 +3,7 @@ local opts = { noremap = true, silent = true }
 return {
   {
     "ThePrimeagen/harpoon",
-    event = "VeryLazy",
-    -- event = "BufWinEnter", -- also autoloads tabline
-    -- lazy = false, -- also autoloads tabline
-    -- event = "VimEnter", -- also autoloads tabline
+    lazy = false, -- any lazy handler triggers lazy loading. i.e. keymaps
     config = function()
       vim.cmd("highlight! HarpoonInactive guibg=NONE guifg=#63698c")
       vim.cmd("highlight! HarpoonActive guibg=NONE guifg=black")
