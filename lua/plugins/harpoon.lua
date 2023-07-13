@@ -3,8 +3,10 @@ local opts = { noremap = true, silent = true }
 return {
   {
     "ThePrimeagen/harpoon",
-    event = "BufWinEnter",
+    event = "VeryLazy",
+    -- event = "BufWinEnter", -- also autoloads tabline
     -- lazy = false, -- also autoloads tabline
+    -- event = "VimEnter", -- also autoloads tabline
     config = function()
       vim.cmd("highlight! HarpoonInactive guibg=NONE guifg=#63698c")
       vim.cmd("highlight! HarpoonActive guibg=NONE guifg=black")
