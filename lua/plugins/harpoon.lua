@@ -4,6 +4,7 @@ return {
   {
     "ThePrimeagen/harpoon",
     event = "BufWinEnter",
+    -- lazy = false, -- also works
     config = function()
       vim.cmd("highlight! HarpoonInactive guibg=NONE guifg=#63698c")
       vim.cmd("highlight! HarpoonActive guibg=NONE guifg=black")
