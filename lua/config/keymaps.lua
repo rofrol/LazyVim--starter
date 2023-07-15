@@ -37,5 +37,12 @@ map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
 map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
 map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
 
+-- does not work
 -- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
-map("x", "p", "P")
+-- map("v", "p", "P", { noremap = true, silent = true })
+
+-- https://vi.stackexchange.com/questions/25259/clipboard-is-reset-after-first-paste-in-visual-mode/25260#25260
+vim.cmd([[
+xnoremap <expr> p 'pgv"'.v:register.'y`>'
+xnoremap <expr> P 'Pgv"'.v:register.'y`>'
+]])
