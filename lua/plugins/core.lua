@@ -3,6 +3,15 @@ vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { fg = "#d79921", sp = "#d799
 vim.api.nvim_set_hl(0, "BufferLineCloseButtonSelected", { fg = "#d79921", sp = "#d79921", underline = true })
 vim.api.nvim_set_hl(0, "BufferLineModifiedSelected", { fg = "#d79921", sp = "#d79921", underline = true })
 
+-- disable autoformat for markdown files as there is some truncation issue
+-- https://www.lazyvim.org/configuration/tips#disable-autoformat-for-some-buffers
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "lua" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
+
 -- local editor_layout = require("builtin.utils.layout").editor
 -- local MAX_NAME_LENGTH = editor_layout.width(0.334, 15, 80)
 
