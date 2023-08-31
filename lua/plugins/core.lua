@@ -202,4 +202,14 @@ return {
     -- https://github.com/alpha2phi/modern-neovim/blob/eb688331b2f44b2fa35a5f26d7856322b92d1e53/lua/plugins/init.lua#L41
     opts = { background_colour = "#eeeeee" },
   },
+  {
+  "RaafatTurki/hex.nvim",
+    config = function()
+      require("hex").setup()
+    end,
+    keys = {
+      { "<leader>bb", "<Cmd>:lua require('hex').dump()<Cr>", desc = "hex" },
+      { "<leader>bn", "<Cmd>:lua require('hex').assemble()<Cr>", desc = "normal" },
+    },
+  },
 }
