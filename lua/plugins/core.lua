@@ -149,8 +149,8 @@ return {
       },
     },
   },
-  { "goolord/alpha-nvim", enabled = false },
   { "neovim/nvim-lspconfig", opts = { inlay_hints = { enabled = true } } },
+  { "nvimdev/dashboard-nvim", enabled = false },
   {
     "akinsho/bufferline.nvim",
     enabled = false,
