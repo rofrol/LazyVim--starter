@@ -149,8 +149,14 @@ return {
       },
     },
   },
-  { "neovim/nvim-lspconfig", opts = { inlay_hints = { enabled = true } } },
   { "nvimdev/dashboard-nvim", enabled = false },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      inlay_hints = { enabled = true },
+      --,autoformat = false
+    },
+  },
   {
     "akinsho/bufferline.nvim",
     enabled = false,
