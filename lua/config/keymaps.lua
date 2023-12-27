@@ -22,6 +22,8 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
+-- https://vi.stackexchange.com/questions/25259/clipboard-is-reset-after-first-paste-in-visual-mode/25260#25260
+-- https://github.com/disrupted/dotfiles/blob/1513aaa6d44654a2d8e0df6dd76078f15faa2460/.config/nvim/init.lua#L468
 map("v", "p", "P")
 
 map("n", "<Backspace>", "<cmd>noh<cr>")
@@ -36,13 +38,3 @@ map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
 map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
 map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
 map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
-
--- does not work
--- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
--- map("v", "p", "P", { noremap = true, silent = true })
-
--- https://vi.stackexchange.com/questions/25259/clipboard-is-reset-after-first-paste-in-visual-mode/25260#25260
-vim.cmd([[
-xnoremap <expr> p 'pgv"'.v:register.'y`>'
-xnoremap <expr> P 'Pgv"'.v:register.'y`>'
-]])
