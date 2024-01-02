@@ -3,9 +3,10 @@ vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { fg = "#d79921", sp = "#d799
 vim.api.nvim_set_hl(0, "BufferLineCloseButtonSelected", { fg = "#d79921", sp = "#d79921", underline = true })
 vim.api.nvim_set_hl(0, "BufferLineModifiedSelected", { fg = "#d79921", sp = "#d79921", underline = true })
 
+-- does not work
 -- disable autoformat for markdown files as there is some truncation issue
 -- https://www.lazyvim.org/configuration/tips#disable-autoformat-for-some-buffers
-  vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "lua" },
   callback = function()
     vim.b.autoformat = false
@@ -209,7 +210,7 @@ return {
     opts = { background_colour = "#eeeeee" },
   },
   {
-  "RaafatTurki/hex.nvim",
+    "RaafatTurki/hex.nvim",
     config = function()
       require("hex").setup()
     end,
