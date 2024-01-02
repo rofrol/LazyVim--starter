@@ -55,11 +55,13 @@ return {
         mappings = {
           i = {
             -- This allows the user to map <CR>. If multiple file selections are detected, it will edit/open each file. If hitting <CR> on a single selection, it'll fall back to actions.select_default...
+            -- CR means carriage return (Enter key) https://stackoverflow.com/questions/22142755/what-is-the-meaning-of-a-cr-at-the-end-of-some-vim-mappings
             -- select with Tab (goes up) or Shift-Tab.
             -- ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
             -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
             -- https://github.com/nvim-telescope/telescope.nvim/blob/3466159b0fcc1876483f6f53587562628664d850/lua/telescope/mappings.lua#L179
             ['<CR>'] = select_one_or_multi,
+            ["<C-y>"] = require("telescope.actions.layout").toggle_preview,
           }
         },
       },
