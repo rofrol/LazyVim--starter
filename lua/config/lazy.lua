@@ -5,29 +5,14 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.loader.enable()
 
--- Bootstap hotpot into lazy plugin dir if it does not exist yet.
-local hotpotpath = vim.fn.stdpath("data") .. "/lazy/hotpot.nvim"
-if not vim.loop.fs_stat(hotpotpath) then
-  vim.notify("Bootstrapping hotpot.nvim...", vim.log.levels.INFO)
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--single-branch",
-    -- You may with to pin a known version tag with `--branch=vX.Y.Z`
-    "--branch=v0.9.6",
-    "https://github.com/rktjmp/hotpot.nvim.git",
-    hotpotpath,
-  })
-end
-
+-- there were still some errors, so I am using nfnl instead
 -- As per lazy's install instructions, but insert hotpots path at the front
 -- this workded https://github.com/ThiagoLira/.dotfiles/blob/a5a01ecde3673ebd018e79fb814d095ac4e080be/nvim/.config/nvim/lua/plugins.lua#L16C1-L21C4
 -- combined with this https://github.com/rktjmp/hotpot.nvim#install
 -- https://github.com/rktjmp/hotpot.nvim/issues/97
 -- https://github.com/rktjmp/hotpot.nvim-x-lazy.nvim
-vim.opt.runtimepath:prepend(hotpotpath)
 
 require("lazy").setup({
   spec = {
@@ -107,4 +92,4 @@ end, {
   replace_keycodes = false, -- path might have keycodes
 })
 
-require("say-hello")
+require("sth/hello")
