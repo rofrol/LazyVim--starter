@@ -161,4 +161,9 @@ return {
   --     vim.g["conjure#debug"] = true
   --   end,
   -- },
+  {
+    "dundalek/parpar.nvim",
+    dependencies = { "gpanders/nvim-parinfer", "julienvincent/nvim-paredit" },
+    opts = { }
+  },
 }
