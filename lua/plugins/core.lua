@@ -17,6 +17,13 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- local MAX_NAME_LENGTH = editor_layout.width(0.334, 15, 80)
 
 return {
+  -- https://github.com/ThiagoLira/.dotfiles/blob/a5a01ecde3673ebd018e79fb814d095ac4e080be/nvim/.config/nvim/lua/plugins.lua#L16C1-L21C4
+  {
+    'rktjmp/hotpot.nvim',
+    config = function()
+      require('hotpot')
+    end
+  },
   -- {
   --   "nvim-treesitter/nvim-treesitter",
   --   opts = function(_, opts)
