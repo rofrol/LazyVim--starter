@@ -1,4 +1,5 @@
-{:source-file-patterns ["fnl/**/*.fnl"]}
+{}
+; {:source-file-patterns ["fnl/**/*.fnl"]}
 ; (local config (require :nfnl.config))
 ; (local default (config.default))
 ;
