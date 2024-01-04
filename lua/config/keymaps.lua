@@ -33,6 +33,7 @@ map("n", "<Backspace>", "<cmd>noh<cr>")
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings-set
 map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
 
+-- I don't use it anymore as I use harpoon tabs
 -- bufferline
 map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
 map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
