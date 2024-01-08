@@ -8,7 +8,7 @@
 -- https://github.com/ooloth/dotfiles/blob/6c3848ef4a13fe4be01e48108a883f4404d2f65e/config/nvim-lazyvim/lua/config/autocmds.lua#L26
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup("markdown_conceal", { clear = true }),
-  pattern = { 'markdown' },
+  pattern = { 'markdown', 'json' },
   callback = function()
     vim.wo.conceallevel = 0
   end,
