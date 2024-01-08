@@ -220,4 +220,15 @@ return {
       { "<leader>bn", "<Cmd>:lua require('hex').assemble()<Cr>", desc = "normal" },
     },
   },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters = {
+        markdownlint = {
+          -- https://github.com/itsdmd/nvim/blob/ef068f6f9245e798e1da4066befd3950188b5ed6/lua/plugins/markdownlint.lua#L3§
+          args = { "--disable", "MD013", "--" },
+        },
+      },
+    },
+  }
 }
