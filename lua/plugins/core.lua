@@ -227,7 +227,7 @@ return {
         markdownlint = {
           -- https://github.com/markdownlint/markdownlint/blob/main/docs/RULES.md#md013---line-length
           -- https://github.com/itsdmd/nvim/blob/ef068f6f9245e798e1da4066befd3950188b5ed6/lua/plugins/markdownlint.lua#L3§
-          args = { "--disable", "MD013", "--" },
+          args = { "-r", "~MD013,~MD034", "--" },
         },
       },
     },
