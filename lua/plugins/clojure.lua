@@ -105,6 +105,7 @@ return {
       -- alternatives with <localleader>K and <localleader>gd
       vim.g["conjure#mapping#doc_word"] = "K"
       vim.g["conjure#mapping#def_word"] = "gd"
+      vim.g["conjure#log#hud#enabled"] = false
     end,
   {
     "dundalek/parpar.nvim",
