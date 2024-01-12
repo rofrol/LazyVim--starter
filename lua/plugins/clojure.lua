@@ -35,17 +35,9 @@ return {
   -- Enable rainbow parenthesis
   { "HiPhish/rainbow-delimiters.nvim" },
 
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup()
-    end,
-  },
-
   -- Add s-exp mappings
   { "PaterJason/nvim-treesitter-sexp" },
+  { "echasnovski/mini.surround" },
 
   -- Colorize the output of the log buffer
   {
