@@ -67,16 +67,6 @@ return {
         end,
       })
 
-      vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-        pattern = "conjure-log-*",
-        group = augroup,
-        callback = function()
-          local buffer = vim.api.nvim_get_current_buf()
-          vim.diagnostic.disable(buffer)
-          vim.g.conjure_baleia.automatically(buffer)
-        end,
-      })
-
       vim.api.nvim_create_user_command("BaleiaColorize", function()
         vim.g.conjure_baleia.once(vim.api.nvim_get_current_buf())
       end, { bang = true })
@@ -96,7 +86,20 @@ return {
     init = function()
       -- print color codes if baleia.nvim is available
       local colorize = require("lazyvim.util").has("baleia.nvim")
-      vim.g["conjure#log#strip_ansi_escape_sequences_line_limit"] = colorize and 1 or 0
+      vim.g["conjure#log#strip_ansi_escape_sequences_line_limit"] = colorize and 1 or nil
+
+      -- disable diagnostics in log buffer and colorize it
+      vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+        pattern = "conjure-log-*",
+        callback = function()
+          local buffer = vim.api.nvim_get_current_buf()
+          vim.diagnostic.disable(buffer)
+
+          if colorize and vim.g.conjure_baleia then
+            vim.g.conjure_baleia.automatically(buffer)
+          end
+        end,
+      })
 
       -- prefer LSP for jump-to-definition and symbol-doc, and use conjure
       -- alternatives with <localleader>K and <localleader>gd
