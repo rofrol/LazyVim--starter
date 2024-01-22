@@ -107,6 +107,7 @@ return {
       vim.g["conjure#mapping#def_word"] = "gd"
       vim.g["conjure#log#hud#enabled"] = false
     end,
+  },
   {
     "dundalek/parpar.nvim",
     dependencies = { "gpanders/nvim-parinfer", "julienvincent/nvim-paredit" },
