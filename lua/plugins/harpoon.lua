@@ -1,4 +1,4 @@
-local opts = { noremap = true, silent = true }
+local opts = { silent = true }
 
 return {
   {
@@ -48,6 +48,20 @@ return {
           local index = require("harpoon.mark").get_index_of(vim.fn.bufname())
           require("mini.bufremove").delete(0, true)
           require("harpoon.mark").rm_file(index)
+        end,
+        opts,
+      },
+      {
+        "<S-h>",
+        function()
+          require("harpoon.ui").nav_prev()
+        end,
+        opts,
+      },
+      {
+        "<S-l>",
+        function()
+          require("harpoon.ui").nav_next()
         end,
         opts,
       },
