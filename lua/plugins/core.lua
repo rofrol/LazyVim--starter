@@ -290,4 +290,18 @@ return {
       },
     }
   },
+  { "gbprod/substitute.nvim",
+    dependencies = { "gbprod/yanky.nvim" },
+    -- Do not copy to clipboard on paste in visual mode with yanky
+    -- https://www.reddit.com/r/neovim/comments/xvaj1u/comment/isww3iw/
+    keys = {
+      { mode = "x", "p", "<cmd>lua require('substitute').visual()<cr>", desc = "substitute" },
+      { mode = "x", "P", "<cmd>lua require('substitute').visual()<cr>", desc = "substitute" },
+    },
+    config = function()
+      require("substitute").setup({
+        on_substitute = require("yanky.integration").substitute(),
+      })
+    end,
+  },
 }
