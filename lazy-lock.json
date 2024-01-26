@@ -49,7 +49,7 @@
   "nvim-parinfer": { "branch": "master", "commit": "5ca09287ab3f4144f78ff7977fabc27466f71044" },
   "nvim-quantum": { "branch": "main", "commit": "7835d57655bd579f6435653200df540457bd9f31" },
   "nvim-spectre": { "branch": "master", "commit": "d958cc3ea8b3fb2f0922dff6177630a40751a3a9" },
-  "nvim-treesitter": { "branch": "master", "commit": "4bc1f9a4eb5e7a0a963636a8b2aa419c17234c62" },
+  "nvim-treesitter": { "branch": "master", "commit": "efda19a54a157da8635aa6cb84f56a10593b1a23" },
   "nvim-treesitter-context": { "branch": "master", "commit": "9c06b115abc57c99cf0aa81dc29490f5001f57a1" },
   "nvim-treesitter-sexp": { "branch": "master", "commit": "6fec8e807a61823f54075890e7aeed24ff75341e" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "19a91a38b02c1c28c14e0ba468d20ae1423c39b2" },
@@ -77,5 +77,5 @@
   "vscode": { "branch": "main", "commit": "826102511b9b689a16e3e55c30f2eb65eedc99f6" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" },
-  "zig": { "branch": "master", "commit": "bea958df4d0c5fc38633f09b6490c16e24a03155" }
+  "zig": { "branch": "master", "commit": "8a0429e885489eac497aa97fdfcaaa1befb2b6d4" }
 }
