@@ -41,7 +41,6 @@ return {
   { "echasnovski/mini.pairs", enabled = false },
   {
     "nvim-neo-tree/neo-tree.nvim",
-    commit = "669d794fdb2c065bf55ed29c6bf36901c7f5e21b",
     opts = {
       tabline = true,
       tabline_icons = true,
@@ -63,7 +62,7 @@ return {
       filesystem = {
         follow_current_file = {
           enabled = true,
-          leave_dirs_open = true, -- will work in version > 2.70
+          leave_dirs_open = true,
         },
         filtered_items = {
           visible = true,
@@ -75,13 +74,14 @@ return {
             -- "node_modules",
           },
         },
-        -- does not work. from https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Recipies#harpoon-index
+        -- does not work -> https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Recipes#harpoon-index
+        -- below works ok
         components = {
-          harpoon_index = function(config, node, state)
+          harpoon_index = function(config, node, _)
             local Marked = require("harpoon.mark")
             local path = node:get_id()
-            local succuss, index = pcall(Marked.get_index_of, path)
-            if succuss and index and index > 0 then
+            local success, index = pcall(Marked.get_index_of, path)
+            if success and index and index > 0 then
               return {
                 text = string.format("%d ", index), -- <-- Add your favorite harpoon like arrow here
                 highlight = config.highlight or "NeoTreeDirectoryIcon",
@@ -105,8 +105,23 @@ return {
       },
       buffers = {
         follow_current_file = {
-          enabled = true,
-          leave_dirs_open = true, -- will work in version > 2.70
+          leave_dirs_open = true,
+        },
+        window = {
+          mappings = {
+            -- disable Y mapping for warning: invalid mapping for Y nil
+            -- https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/1324
+            ["Y"] = "noop"
+          }
+        },
+      },
+      git_status = {
+        window = {
+          mappings = {
+            -- disable Y mapping for warning: invalid mapping for Y nil
+            -- https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/1324
+            ["Y"] = "noop"
+          }
         },
       },
     },
