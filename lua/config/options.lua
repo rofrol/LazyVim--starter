@@ -11,4 +11,13 @@ vim.g.maplocalleader = [[;]]
 local ccmd = vim.api.nvim_create_autocmd
 ccmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 ccmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
-ccmd("TermOpen", { command = "startinsert", pattern = "*" })
+
+-- https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/43781#43781
+ccmd({ "TermOpen", "BufEnter" }, {
+    pattern = "*",
+    callback = function()
+        if vim.opt.buftype:get() == "terminal" then
+            vim.cmd(":startinsert")
+        end
+    end
+})
