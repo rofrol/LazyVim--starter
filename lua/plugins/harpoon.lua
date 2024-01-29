@@ -3,6 +3,7 @@ local opts = { silent = true }
 return {
   {
     "ThePrimeagen/harpoon",
+    dependencies = { "echasnovski/mini.bufremove" },
     lazy = false, -- any lazy handler triggers lazy loading. i.e. keymaps
     config = function()
       vim.cmd("highlight! HarpoonInactive guibg=NONE guifg=#63698c")
@@ -45,11 +46,20 @@ return {
       {
         "<space>t",
         function()
-          local index = require("harpoon.mark").get_index_of(vim.fn.bufname())
+          -- I use it instead of require("harpoon.mark").rm_file() because table.remove works with tabline
+          local index = require("harpoon.mark").get_current_index()
+          local config = require('harpoon').get_mark_config()
+          table.remove(config.marks, index);
+
+          local global_settings = require("harpoon").get_global_settings()
+          if global_settings.tabline then
+            vim.cmd("redrawt")
+          end
+
           require("mini.bufremove").delete(0, true)
-          require("harpoon.mark").rm_file(index)
         end,
         opts,
+        desc = "Harpoon remove file",
       },
       {
         "<S-h>",
