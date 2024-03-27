@@ -4,6 +4,7 @@
 local opt = vim.opt
 opt.swapfile = false
 opt.relativenumber = false
+opt.wrap = true
 vim.g.maplocalleader = [[;]]
 
 -- https://github.com/TristanLeclair/nvim/blob/8a6d3dfcdf01245b8fe34c5d9b1afffcfb063f56/lua/tlecla/options.lua#L46C1-L49C61
