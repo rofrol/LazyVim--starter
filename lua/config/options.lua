@@ -25,6 +25,11 @@ ccmd({ "TermOpen", "BufEnter" }, {
 
 function Run_command_and_close(command)
   vim.cmd('botright new')
-  vim.fn.termopen(command, {on_exit = function() vim.cmd('bdelete!') end})
+  vim.fn.termopen(command, {on_exit = function(_, exit_status)
+    if exit_status == 0 then
+      vim.cmd('bdelete!')
+    end
+  end})
 end
+
 vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua Run_command_and_close('git sync')<CR>]], {noremap = true})
