@@ -41,4 +41,12 @@ map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
 map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
 
 -- https://www.reddit.com/r/neovim/comments/16cso6u/comment/jzlcy3c/
-vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+if vim.fn.has("mac") == 1 then
+  -- unmap C-s on mac
+  -- umap XXX may get error if there is no such mapping.
+  -- map XXX <Nop> won't get error in that case and can disable vim's original(built in) command, such as d or s or c, while umap can't.
+  -- https://vi.stackexchange.com/questions/16392/what-is-the-difference-between-unmap-and-mapping-to-nop/36833#36833
+  vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
+
+  vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+end
