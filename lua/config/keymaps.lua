@@ -39,3 +39,6 @@ map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
 map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
 map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
 map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
+
+-- https://www.reddit.com/r/neovim/comments/16cso6u/comment/jzlcy3c/
+vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
