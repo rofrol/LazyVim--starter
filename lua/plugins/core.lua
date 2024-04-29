@@ -150,6 +150,8 @@ return {
         -- https://vi.stackexchange.com/questions/16019/neovim-terminal-not-reading-bash-profile/16021#16021
         shell = "zsh --login",
         -- shell = "nu",
+        start_in_insert = true,
+        persist_mode = false,
       })
     end,
     keys = {
