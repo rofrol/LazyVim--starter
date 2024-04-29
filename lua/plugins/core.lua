@@ -156,9 +156,11 @@ return {
       -- https://github.com/LazyVim/LazyVim/discussions/193#discussioncomment-6088989
       { [[<C-\>]] }, -- non-floating terminal
       -- { "<leader>0", "<Cmd>2ToggleTerm size=60 direction=horizontal<Cr>", desc = "Terminal #2" },
-      { "<leader>2", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
-      { "<leader>3", "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
-      { "<leader>4", "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
+      { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+      { "<leader>-", "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #2" },
+      { "<M-2>", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+      { "<M-3>", "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
+      { "<M-4>", "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
     },
   },
   {
