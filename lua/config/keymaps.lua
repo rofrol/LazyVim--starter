@@ -38,12 +38,16 @@ map("n", "<Backspace>", "<cmd>noh<cr>")
 function _G.close_all_buffers_except_current_and_terminals()
   local current_buf = vim.api.nvim_get_current_buf()
   local bufs = vim.api.nvim_list_bufs()
+  local closed_bufs = 0
 
   for _, buf in ipairs(bufs) do
     if buf ~= current_buf and vim.api.nvim_buf_get_option(buf, 'buftype') ~= 'terminal' then
       vim.api.nvim_buf_delete(buf, { force = true })
+      closed_bufs = closed_bufs + 1
     end
   end
+
+  print(closed_bufs .. " buffer(s) closed")
 end
 
 -- Keybinding
