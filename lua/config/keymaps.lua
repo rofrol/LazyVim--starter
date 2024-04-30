@@ -28,10 +28,27 @@ map("v", "p", "P")
 
 map("n", "<Backspace>", "<cmd>noh<cr>")
 
--- delete other buffers
+-- delete other buffers except the current one and terminals
+-- copilot
 -- https://tech.serhatteker.com/post/2021-04/vim-delete-multiple-buffers/
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings-set
-map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
+-- map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
+
+-- Function to close all buffers except current buffer and terminal buffers
+function _G.close_all_buffers_except_current_and_terminals()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local bufs = vim.api.nvim_list_bufs()
+
+  for _, buf in ipairs(bufs) do
+    if buf ~= current_buf and vim.api.nvim_buf_get_option(buf, 'buftype') ~= 'terminal' then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end
+
+-- Keybinding
+vim.api.nvim_set_keymap('n', '<leader>do', ':lua close_all_buffers_except_current_and_terminals()<CR>', { noremap = true, silent = true })
+
 
 -- I don't use it anymore as I use harpoon tabs
 -- bufferline
