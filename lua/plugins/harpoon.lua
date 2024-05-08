@@ -46,16 +46,15 @@ return {
       {
         "<space>t",
         function()
-          -- I use it instead of require("harpoon.mark").rm_file() because table.remove works with tabline
           local index = require("harpoon.mark").get_current_index()
-          local config = require('harpoon').get_mark_config()
-          table.remove(config.marks, index);
-
-          local global_settings = require("harpoon").get_global_settings()
-          if global_settings.tabline then
-            vim.cmd("redrawt")
+          if index ~= nil then
+            local config = require('harpoon').get_mark_config()
+            table.remove(config.marks, index)
+            local global_settings = require("harpoon").get_global_settings()
+            if global_settings.tabline then
+              vim.cmd("redrawt")
+            end
           end
-
           require("mini.bufremove").delete(0, true)
         end,
         opts,
