@@ -14,7 +14,10 @@
 local function map(mode, lhs, rhs, opts)
   -- Normal messages will not be given or added to the message history
   -- https://vi.stackexchange.com/questions/34346/silent-vs-silent-what-is-the-difference
-  local options = { silent = true } -- remap = false is default alread
+  -- noremap prevents recursive mapping, meaning that the keybinding
+  -- will not trigger other mappings. It ensures that the key sequence executes
+  -- only the assigned command without any further remapping.
+  local options = { silent = true } -- remap = false is default already
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
@@ -71,3 +74,6 @@ if vim.fn.has("mac") == 1 then
 
   vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 end
+
+map('n', '<leader>sp', ':setlocal spell spelllang=pl<CR>:setlocal spellfile=$HOME/.config/nvim/spell/pl.utf-8.add<CR>:echo "Spelling set to Polish"<CR>', { noremap = true, silent = true })
+map('n', '<leader>se', ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>', { noremap = true, silent = true })
