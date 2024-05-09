@@ -78,5 +78,5 @@ end
 map('n', '<leader>sp', ':setlocal spell spelllang=pl<CR>:setlocal spellfile=$HOME/.config/nvim/spell/pl.utf-8.add<CR>:echo "Spelling set to Polish"<CR>')
 map('n', '<leader>se', ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>')
 
-map('n', '<leader>a', 'gsaiw`')
-map('v', '<leader>a', 'gsa`')
+map('n', '<leader>a', 'gsaiw`wl')
+map('v', '<leader>a', 'gsa``>lll')
