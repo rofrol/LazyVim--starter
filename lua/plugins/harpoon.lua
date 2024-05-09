@@ -21,7 +21,7 @@ return {
     end,
     keys = {
       {
-        "<leader>a",
+        "<leader>ha",
         function()
           require("harpoon.mark").add_file()
         end,
@@ -29,7 +29,7 @@ return {
         opts,
       },
       {
-        "<leader>j",
+        "<leader>hj",
         function()
           require("harpoon.ui").toggle_quick_menu()
         end,
@@ -44,7 +44,7 @@ return {
         opts,
       },
       {
-        "<space>t",
+        "<space>ht",
         function()
           local index = require("harpoon.mark").get_current_index()
           if index ~= nil then
