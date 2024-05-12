@@ -85,6 +85,9 @@ vim.cmd([[
 vim.keymap.set("c", " ", function()
   if vim.fn.getcmdtype() == ":" and vim.fn.getcmdline() == "sav" then
     local lead = vim.fn.expand("%:h")
+    if lead == "" then
+      lead = vim.fn.getcwd()
+    end
     return " " .. vim.fn.fnameescape(lead) .. "/"
   else
     return " "
