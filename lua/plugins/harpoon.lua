@@ -24,9 +24,9 @@ return {
       -- https://github.com/tjdevries/config_manager/blob/afbb6942b712174a7e87acbca6908e283caa46cc/xdg_config/nvim/after/plugin/harpoon.lua#L16
       for i = 1, 6, 1 do
         vim.keymap.set(
-          'n',
+          { "i", "x", "n", "s" },
           vim.fn.has("mac") == 1 and string.format("<D-%s>", i) or string.format("<leader>%s", i),
-          ':lua require("harpoon.ui").nav_file(' .. i .. ')<CR>',
+          '<cmd>lua require("harpoon.ui").nav_file(' .. i .. ')<CR>',
           { desc = string.format('Harpoon file %s', i), expr = false, noremap = true, silent = true }
         )
       end
