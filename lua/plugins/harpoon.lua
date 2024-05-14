@@ -18,10 +18,22 @@ return {
           width = vim.api.nvim_win_get_width(0) - 20,
         },
       })
+
+      -- https://github.com/evertonlopesc/nvim/blob/8000d26e8d3d0f63382520f14b048b2691696573/lua/keymaps/init.lua#L48
+      -- https://github.com/insanum/dotfiles/blob/d40c677c64a5f14f00ecc0f9f7833304bb0bd483/config/nvim/lua/lazy_overrides.lua#L300
+      -- https://github.com/tjdevries/config_manager/blob/afbb6942b712174a7e87acbca6908e283caa46cc/xdg_config/nvim/after/plugin/harpoon.lua#L16
+      for i = 1, 6, 1 do
+        vim.keymap.set(
+          'n',
+          vim.fn.has("mac") == 1 and string.format("<D-%s>", i) or string.format("<leader>%s", i),
+          ':lua require("harpoon.ui").nav_file(' .. i .. ')<CR>',
+          { desc = string.format('Harpoon file %s', i), expr = false, noremap = true, silent = true }
+        )
+      end
     end,
     keys = {
       {
-        "<leader>ha",
+        "<leader>a",
         function()
           require("harpoon.mark").add_file()
         end,
@@ -29,7 +41,7 @@ return {
         opts,
       },
       {
-        "<leader>hj",
+        "<leader>j",
         function()
           require("harpoon.ui").toggle_quick_menu()
         end,
@@ -44,7 +56,7 @@ return {
         opts,
       },
       {
-        "<space>ht",
+        "<space>t",
         function()
           local index = require("harpoon.mark").get_current_index()
           if index ~= nil then
@@ -74,69 +86,14 @@ return {
         end,
         opts,
       },
-      {
-        "<leader>1",
-        function()
-          require("harpoon.ui").nav_file(1)
-        end,
-        opts,
-      },
-      {
-        "<leader>2",
-        function()
-          require("harpoon.ui").nav_file(2)
-        end,
-        opts,
-      },
-      {
-        "<leader>3",
-        function()
-          require("harpoon.ui").nav_file(3)
-        end,
-        opts,
-      },
-      {
-        "<leader>4",
-        function()
-          require("harpoon.ui").nav_file(4)
-        end,
-        opts,
-      },
-      {
-        "<leader>5",
-        function()
-          require("harpoon.ui").nav_file(5)
-        end,
-        opts,
-      },
-      {
-        "<leader>6",
-        function()
-          require("harpoon.ui").nav_file(6)
-        end,
-        opts,
-      },
-      {
-        "<leader>7",
-        function()
-          require("harpoon.ui").nav_file(7)
-        end,
-        opts,
-      },
-      {
-        "<leader>8",
-        function()
-          require("harpoon.ui").nav_file(8)
-        end,
-        opts,
-      },
-      {
-        "<leader>9",
-        function()
-          require("harpoon.ui").nav_file(9)
-        end,
-        opts,
-      },
+      -- {
+      --   vim.fn.has("mac") == 1 and "<D-1>" or "<leader>1",
+      --   -- "<leader>1",
+      --   function()
+      --     require("harpoon.ui").nav_file(1)
+      --   end,
+      --   opts,
+      -- },
     },
   },
 }
