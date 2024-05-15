@@ -97,4 +97,4 @@ end, {
   replace_keycodes = false, -- path might have keycodes
 })
 
-require("sth/hello")
+-- require("sth/hello")
