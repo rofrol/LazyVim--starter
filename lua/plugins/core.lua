@@ -312,4 +312,8 @@ return {
     end,
   },
   { "lukas-reineke/headlines.nvim", enabled = false },
+  {
+    "folke/noice.nvim",
+    tag = "v2.0.2",
+  }
 }
