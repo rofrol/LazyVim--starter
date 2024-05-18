@@ -1,5 +1,5 @@
 return {
-  -- cmp settings coppied from lua/plugins/example.lua
+  -- coppied from lua/plugins/example.lua
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
