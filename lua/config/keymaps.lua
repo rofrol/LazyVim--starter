@@ -82,3 +82,45 @@ map('n', '<leader>za', 'gsaiw`wl')
 map('v', '<leader>za', 'gsa``>lll')
 
 vim.api.nvim_set_keymap('n', '<leader>zz', ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>', { noremap = true, silent = true })
+
+local wk = require("which-key")
+
+wk.register({
+  ["<leader>"] = {
+    v = {
+      name = "+vertical",
+      s = { function() 
+              local term = require("toggleterm.terminal").Terminal:new({
+                direction = "vertical",
+              })
+              term:toggle()
+              -- settings size in Terminal:new does not work when direction is vertical
+              vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+            end, 
+            "Open terminal with 1/3 width" 
+          },
+    },
+  },
+})
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local ziglings = Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
+
+function _ziglings_toggle()
+  ziglings:toggle()
+  -- settings size in Terminal:new does not work when direction is vertical
+  vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+end
+
+-- vim.api.nvim_set_keymap("n", "<leader>vt", "<cmd>lua _ziglings_toggle()<CR>", {noremap = true, silent = true})
+
+wk.register({
+  ["<leader>"] = {
+    v = {
+      name = "+vertical",
+      z = { _ziglings_toggle, 
+            "Open terminal with watchexec ziglings with 1/3 width" 
+          },
+    },
+  },
+})
