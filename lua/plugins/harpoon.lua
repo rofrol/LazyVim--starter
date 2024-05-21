@@ -22,7 +22,7 @@ return {
       -- https://github.com/evertonlopesc/nvim/blob/8000d26e8d3d0f63382520f14b048b2691696573/lua/keymaps/init.lua#L48
       -- https://github.com/insanum/dotfiles/blob/d40c677c64a5f14f00ecc0f9f7833304bb0bd483/config/nvim/lua/lazy_overrides.lua#L300
       -- https://github.com/tjdevries/config_manager/blob/afbb6942b712174a7e87acbca6908e283caa46cc/xdg_config/nvim/after/plugin/harpoon.lua#L16
-      for i = 1, 6, 1 do
+      for i = 1, 9, 1 do
         vim.keymap.set(
           { "i", "x", "n", "s" },
           (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and string.format("<D-%s>", i) or string.format("<leader>%s", i),
