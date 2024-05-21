@@ -87,9 +87,9 @@ local wk = require("which-key")
 
 wk.register({
   ["<leader>"] = {
-    v = {
+    t = {
       name = "+vertical",
-      s = { function() 
+      v = { function() 
               local term = require("toggleterm.terminal").Terminal:new({
                 direction = "vertical",
               })
@@ -116,7 +116,7 @@ end
 
 wk.register({
   ["<leader>"] = {
-    v = {
+    t = {
       name = "+vertical",
       z = { _ziglings_toggle, 
             "Open terminal with watchexec ziglings with 1/3 width" 

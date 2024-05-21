@@ -56,7 +56,7 @@ return {
         opts,
       },
       {
-        "<space>t",
+        "<space>ht",
         function()
           local index = require("harpoon.mark").get_current_index()
           if index ~= nil then
