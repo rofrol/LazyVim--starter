@@ -37,24 +37,29 @@ map("n", "<Backspace>", "<cmd>noh<cr>")
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings-set
 -- map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
 
--- Function to close all buffers except current buffer and terminal buffers
-function _G.close_all_buffers_except_current_and_terminals()
+-- Function to close all non-visible file buffers
+function _G.close_all_non_visible_file_buffers()
   local current_buf = vim.api.nvim_get_current_buf()
+  local visible_bufs = {}
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    visible_bufs[vim.api.nvim_win_get_buf(win)] = true
+  end
+
   local bufs = vim.api.nvim_list_bufs()
   local closed_bufs = 0
 
   for _, buf in ipairs(bufs) do
-    if buf ~= current_buf and vim.api.nvim_buf_get_option(buf, 'buftype') ~= 'terminal' then
+    if buf ~= current_buf and not visible_bufs[buf] and vim.api.nvim_buf_get_option(buf, 'buftype') == '' then
       vim.api.nvim_buf_delete(buf, { force = true })
       closed_bufs = closed_bufs + 1
     end
   end
 
-  print(closed_bufs .. " buffer(s) closed")
+  print(closed_bufs .. " non-visible file buffer(s) closed")
 end
 
 -- Keybinding
-vim.api.nvim_set_keymap('n', '<leader>do', ':lua close_all_buffers_except_current_and_terminals()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>do', ':lua close_all_non_visible_file_buffers()<CR>', { noremap = true, silent = true })
 
 
 -- I don't use it anymore as I use harpoon tabs
