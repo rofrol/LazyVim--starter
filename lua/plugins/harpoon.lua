@@ -25,7 +25,7 @@ return {
       for i = 1, 6, 1 do
         vim.keymap.set(
           { "i", "x", "n", "s" },
-          vim.fn.has("mac") == 1 and string.format("<D-%s>", i) or string.format("<leader>%s", i),
+          (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and string.format("<D-%s>", i) or string.format("<leader>%s", i),
           '<cmd>lua require("harpoon.ui").nav_file(' .. i .. ')<CR>',
           { desc = string.format('Harpoon file %s', i), expr = false, noremap = true, silent = true }
         )

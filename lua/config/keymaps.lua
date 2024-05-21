@@ -65,7 +65,7 @@ map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
 map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
 
 -- https://www.reddit.com/r/neovim/comments/16cso6u/comment/jzlcy3c/
-if vim.fn.has("mac") == 1 then
+if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
   -- unmap C-s on mac
   -- umap XXX may get error if there is no such mapping.
   -- map XXX <Nop> won't get error in that case and can disable vim's original(built in) command, such as d or s or c, while umap can't.
