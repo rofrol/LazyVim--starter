@@ -6,7 +6,7 @@ opt.swapfile = false
 opt.relativenumber = false
 opt.wrap = true
 vim.g.maplocalleader = [[;]]
-opt.shell = "zsh --login"
+LazyVim.terminal.setup("zsh")
 
 -- https://github.com/TristanLeclair/nvim/blob/8a6d3dfcdf01245b8fe34c5d9b1afffcfb063f56/lua/tlecla/options.lua#L46C1-L49C61
 -- https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/22956#22956
