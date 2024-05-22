@@ -35,7 +35,9 @@ return {
       {
         "<leader>a",
         function()
-          require("harpoon.mark").add_file()
+          if vim.api.nvim_buf_get_option(0, 'buftype') == '' then
+            require("harpoon.mark").add_file()
+          end
         end,
         desc = "Add harpoon mark",
         opts,
