@@ -26,7 +26,18 @@ return {
         vim.keymap.set(
           { "i", "x", "n", "s" },
           (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and string.format("<D-%s>", i) or string.format("<leader>%s", i),
-          '<cmd>lua require("harpoon.ui").nav_file(' .. i .. ')<CR>',
+          function()
+            if vim.api.nvim_buf_get_option(0, 'buftype') ~= '' then
+              for _, win in ipairs(vim.api.nvim_list_wins()) do
+                local buf = vim.api.nvim_win_get_buf(win)
+                if vim.api.nvim_buf_get_option(buf, 'buftype') == '' then
+                  vim.api.nvim_set_current_win(win)
+                  break
+                end
+              end
+            end
+            require("harpoon.ui").nav_file(i)
+          end,
           { desc = string.format('Harpoon file %s', i), expr = false, noremap = true, silent = true }
         )
       end
