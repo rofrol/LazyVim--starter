@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- local MAX_NAME_LENGTH = editor_layout.width(0.334, 15, 80)
 
 return {
-  { "Olical/nfnl", ft = "fennel" },
+  { "Olical/nfnl",            ft = "fennel" },
   -- {
   --   "nvim-treesitter/nvim-treesitter",
   --   opts = function(_, opts)
@@ -97,9 +97,9 @@ return {
           file = {
             { "harpoon_index" }, --> This is what actually adds the component in where you want it
             { "icon" },
-            { "name", use_git_status_colors = true },
+            { "name",         use_git_status_colors = true },
             { "diagnostics" },
-            { "git_status", highlight = "NeoTreeDimText" },
+            { "git_status",   highlight = "NeoTreeDimText" },
           },
         },
       },
@@ -168,9 +168,9 @@ return {
       -- { "<leader>0", "<Cmd>2ToggleTerm size=60 direction=horizontal<Cr>", desc = "Terminal #2" },
       { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
       { "<leader>-", "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #2" },
-      { "<M-2>", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
-      { "<M-3>", "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
-      { "<M-4>", "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
+      { "<M-2>",     "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+      { "<M-3>",     "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
+      { "<M-4>",     "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
     },
   },
   {
@@ -181,7 +181,7 @@ return {
       },
     },
   },
-  { "nvimdev/dashboard-nvim", enabled = false },
+  { "nvimdev/dashboard-nvim",       enabled = false },
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -196,7 +196,7 @@ return {
       -- https://github.com/giusgad/dotfiles/blob/ed81c1cb5c92aa1216267710cb037f55a6140da2/.config/nvim/lua/plugins/config/bufferline.lua#L43
       options = {
         tab_size = 30,
-        separator_style = { "", "" }, -- | "thick" | "thin" | { 'left', 'right' },
+        separator_style = { "", "" },                   -- | "thick" | "thin" | { 'left', 'right' },
         indicator = { style = "underline", icon = "" }, -- underline style is based on terminal
 
         -- max_name_length = 40,
@@ -246,7 +246,7 @@ return {
       require("hex").setup()
     end,
     keys = {
-      { "<leader>bb", "<Cmd>:lua require('hex').dump()<Cr>", desc = "hex" },
+      { "<leader>bb", "<Cmd>:lua require('hex').dump()<Cr>",     desc = "hex" },
       { "<leader>bn", "<Cmd>:lua require('hex').assemble()<Cr>", desc = "normal" },
     },
   },
@@ -279,15 +279,15 @@ return {
       plugins = {
         options = {
           enabled = true,
-          ruler = false, -- disables the ruler text in the cmd line area
+          ruler = false,   -- disables the ruler text in the cmd line area
           showcmd = false, -- disables the command in the last line of the screen
-          -- you may turn on/off statusline in zen mode by setting 'laststatus' 
+          -- you may turn on/off statusline in zen mode by setting 'laststatus'
           -- statusline will be shown only if 'laststatus' == 3
           laststatus = 0, -- turn off the statusline in zen mode
         },
       },
     },
-        keys = {
+    keys = {
       { "<leader>zm", "<Cmd>:ZenMode<Cr>", desc = "ZenMode" },
     },
 
@@ -301,11 +301,12 @@ return {
         -- we try to get the foreground from the highlight groups or fallback color
         color = { "Normal", "#000000" },
         term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
-        inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+        inactive = false,    -- when true, other windows will be fully dimmed (unless they contain the same buffer)
       },
     }
   },
-  { "gbprod/substitute.nvim",
+  {
+    "gbprod/substitute.nvim",
     dependencies = { "gbprod/yanky.nvim" },
     -- Do not copy to clipboard on paste in visual mode with yanky
     -- https://www.reddit.com/r/neovim/comments/xvaj1u/comment/isww3iw/
