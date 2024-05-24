@@ -59,7 +59,8 @@ function _G.close_all_non_visible_file_buffers()
 end
 
 -- Keybinding
-vim.api.nvim_set_keymap('n', '<leader>do', ':lua close_all_non_visible_file_buffers()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>do', ':lua close_all_non_visible_file_buffers()<CR>',
+  { noremap = true, silent = true })
 
 
 -- I don't use it anymore as I use harpoon tabs
@@ -80,13 +81,17 @@ if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
   vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 end
 
-map('n', '<leader>sp', ':setlocal spell spelllang=pl<CR>:setlocal spellfile=$HOME/.config/nvim/spell/pl.utf-8.add<CR>:echo "Spelling set to Polish"<CR>')
-map('n', '<leader>se', ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>')
+map('n', '<leader>sp',
+  ':setlocal spell spelllang=pl<CR>:setlocal spellfile=$HOME/.config/nvim/spell/pl.utf-8.add<CR>:echo "Spelling set to Polish"<CR>')
+map('n', '<leader>se',
+  ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>')
 
 map('n', '<leader>za', 'gsaiw`wl')
 map('v', '<leader>za', 'gsa``>lll')
 
-vim.api.nvim_set_keymap('n', '<leader>zz', ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>zz',
+  ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>',
+  { noremap = true, silent = true })
 
 local wk = require("which-key")
 
@@ -94,21 +99,21 @@ wk.register({
   ["<leader>"] = {
     t = {
       name = "+vertical",
-      v = { function() 
-              local term = require("toggleterm.terminal").Terminal:new({
-                direction = "vertical",
-              })
-              term:toggle()
-              -- settings size in Terminal:new does not work when direction is vertical
-              vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-            end, 
-            "Open terminal with 1/3 width" 
-          },
+      v = { function()
+        local term = require("toggleterm.terminal").Terminal:new({
+          direction = "vertical",
+        })
+        term:toggle()
+        -- settings size in Terminal:new does not work when direction is vertical
+        vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+      end,
+        "Open terminal with 1/3 width"
+      },
     },
   },
 })
 
-local Terminal  = require('toggleterm.terminal').Terminal
+local Terminal = require('toggleterm.terminal').Terminal
 local ziglings = Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
 
 function _ziglings_toggle()
@@ -123,9 +128,23 @@ wk.register({
   ["<leader>"] = {
     t = {
       name = "+vertical",
-      z = { _ziglings_toggle, 
-            "Open terminal with watchexec ziglings with 1/3 width" 
-          },
+      z = { _ziglings_toggle,
+        "Open terminal with watchexec ziglings with 1/3 width"
+      },
     },
   },
 })
+
+function Run_command_and_close(command)
+  vim.cmd('botright new')
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.fn.termopen(command, {
+    on_exit = function(_, exit_status)
+      if exit_status == 0 then
+        vim.api.nvim_buf_delete(bufnr, { force = true })
+      end
+    end
+  })
+end
+
+vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua Run_command_and_close('git sync')<CR>]], { noremap = true })
