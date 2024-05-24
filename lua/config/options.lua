@@ -38,11 +38,13 @@ vim.api.nvim_command "augroup end"
 function Run_command_and_close(command)
   vim.cmd('botright new')
   local bufnr = vim.api.nvim_get_current_buf()
-  vim.fn.termopen(command, {on_exit = function(_, exit_status)
-    if exit_status == 0 then
-      vim.api.nvim_buf_delete(bufnr, {force = true})
+  vim.fn.termopen(command, {
+    on_exit = function(_, exit_status)
+      if exit_status == 0 then
+        vim.api.nvim_buf_delete(bufnr, { force = true })
+      end
     end
-  end})
+  })
 end
 
-vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua Run_command_and_close('git sync')<CR>]], {noremap = true})
+vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua Run_command_and_close('git sync')<CR>]], { noremap = true })
