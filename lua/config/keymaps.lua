@@ -137,7 +137,7 @@ wk.register({
 
 function Run_command_and_close(command)
   vim.cmd('botright new')
-  vim.cmd('resize 7')
+  vim.cmd('resize 5')
   local bufnr = vim.api.nvim_get_current_buf()
   vim.fn.termopen(command, {
     on_exit = function(_, exit_status)
