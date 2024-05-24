@@ -325,5 +325,21 @@ return {
   {
     "folke/noice.nvim",
     tag = "v2.0.2",
-  }
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        ["markdown"] = { "markdownlint-cli2" },
+      },
+    },
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "markdownlint-cli2" })
+    end,
+  },
 }
