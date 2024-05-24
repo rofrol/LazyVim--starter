@@ -8,9 +8,9 @@ local ccmd = vim.api.nvim_create_autocmd
 -- FileType https://github.com/LazyVim/LazyVim/blob/879e29504d43e9f178d967ecc34d482f902e5a91/lua/lazyvim/config/autocmds.lua#L75
 -- vim.wo.conceallevel https://github.com/LazyVim/LazyVim/blob/879e29504d43e9f178d967ecc34d482f902e5a91/lua/lazyvim/plugins/extras/lang/tex.lua#L35
 -- https://github.com/ooloth/dotfiles/blob/6c3848ef4a13fe4be01e48108a883f4404d2f65e/config/nvim-lazyvim/lua/config/autocmds.lua#L26
-ccmd('FileType', {
+ccmd("FileType", {
   group = vim.api.nvim_create_augroup("markdown_conceal", { clear = true }),
-  pattern = { 'markdown', 'json' },
+  pattern = { "markdown", "json" },
   callback = function()
     vim.wo.conceallevel = 0
   end,
@@ -29,7 +29,9 @@ ccmd("TermOpen", {
 ccmd({ "FileType" }, {
   pattern = { "lua" },
   callback = function()
-    vim.b.autoformat = false
+    -- Fields cannot be injected into the reference of `table<number, table<string, any>>` for `autoformat`. To allow injection, add `[any]: any` to the definition.
+    -- vim.b.autoformat = false
+    vim.b["autoformat"] = false
   end,
 })
 
@@ -55,6 +57,6 @@ ccmd({ "FileType" }, {
 
 -- works even if toggleterm option persist_mode = false
 -- https://vi.stackexchange.com/questions/22307/neovim-go-into-insert-mode-when-clicking-in-a-terminal-in-a-pane/22327#22327
-vim.api.nvim_command "augroup terminal_setup | au!"
-vim.api.nvim_command "autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i"
-vim.api.nvim_command "augroup end"
+vim.api.nvim_command("augroup terminal_setup | au!")
+vim.api.nvim_command("autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i")
+vim.api.nvim_command("augroup end")
