@@ -55,8 +55,9 @@ ccmd({ "FileType" }, {
 --     end
 -- })
 
+-- disabling bc sometimes I want to click on character in normal mode and with it enabled it goes into insert mode
 -- works even if toggleterm option persist_mode = false
 -- https://vi.stackexchange.com/questions/22307/neovim-go-into-insert-mode-when-clicking-in-a-terminal-in-a-pane/22327#22327
-vim.api.nvim_command("augroup terminal_setup | au!")
-vim.api.nvim_command("autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i")
-vim.api.nvim_command("augroup end")
+-- vim.api.nvim_command("augroup terminal_setup | au!")
+-- vim.api.nvim_command("autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i")
+-- vim.api.nvim_command("augroup end")
