@@ -86,6 +86,7 @@ map('n', '<leader>sp',
 map('n', '<leader>se',
   ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>')
 
+-- mini.surround - wrap with backtick (`) and go to the end
 map('n', '<leader>za', 'gsaiw`wl')
 map('v', '<leader>za', 'gsa``>lll')
 
