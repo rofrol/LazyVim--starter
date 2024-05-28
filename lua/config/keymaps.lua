@@ -150,3 +150,17 @@ function Run_command_and_close(command)
 end
 
 vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua Run_command_and_close('git sync')<CR>]], { noremap = true })
+
+-- Use alt+hjkl to move cursor
+-- needs `macos_option_as_alt yes` in kitty.conf
+-- https://www.reddit.com/r/neovim/comments/18ck6uq/comment/kcb9d8q/
+-- vim.api.nvim_del_keymap('n', '<A-j>')
+-- vim.api.nvim_del_keymap('v', '<A-j>')
+-- vim.api.nvim_set_keymap('i', '<A-j>', '<Down>', { noremap = true })
+
+-- vim.api.nvim_del_keymap('n', '<A-k>')
+-- vim.api.nvim_del_keymap('v', '<A-k>')
+-- vim.api.nvim_set_keymap('i', '<A-k>', '<Up>', { noremap = true })
+
+-- vim.api.nvim_set_keymap('i', '<A-h>', '<Left>', { noremap = true })
+-- vim.api.nvim_set_keymap('i', '<A-l>', '<Right>', { noremap = true })
