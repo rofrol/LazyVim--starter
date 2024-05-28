@@ -12,6 +12,7 @@ return {
     opts = {
       -- background = "light",
       colorscheme = "vscode",
+      -- colorscheme = "visual_studio_code",
       -- colorscheme = "sakura",
       -- colorscheme = "onedark",
       -- colorscheme = "quantum",
@@ -72,4 +73,31 @@ return {
       -- vim.api.nvim_set_hl(0, "Normal", { fg = "#000000", bg = "#ffffff" })
     end,
   },
+  -- {
+  --   "askfiy/visual_studio_code",
+  --   -- priority = 100,
+  --   config = function()
+  --     require("visual_studio_code").setup({
+  --       -- `dark` or `light`
+  --       mode = "light",
+  --     })
+  --     -- vim.cmd([[colorscheme visual_studio_code]])
+  --
+  --     require("lualine").setup({
+  --       options = {
+  --         theme = "visual_studio_code",
+  --         -- theme = "vscode",
+  --         icons_enabled = true,
+  --         component_separators = { left = "", right = "" },
+  --         section_separators = { left = "", right = "" },
+  --         disabled_filetypes = {},
+  --         globalstatus = true,
+  --         refresh = {
+  --           statusline = 100,
+  --         },
+  --       },
+  --       sections = require("visual_studio_code").get_lualine_sections(),
+  --     })
+  --   end,
+  -- },
 }
