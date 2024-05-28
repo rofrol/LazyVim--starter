@@ -91,7 +91,7 @@ map('n', '<leader>za', 'gsaiw`wl')
 map('v', '<leader>za', 'gsa``>lll')
 
 vim.api.nvim_set_keymap('n', '<leader>zz',
-  ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>',
+  ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>:Gitsigns toggle_signs<CR>',
   { noremap = true, silent = true })
 
 local wk = require("which-key")
