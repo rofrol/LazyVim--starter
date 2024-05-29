@@ -104,12 +104,35 @@ local which_key_table = {
     o = {
       name = "Spell",
       p = {
-        ':setlocal spell spelllang=pl<CR>:setlocal spellfile=$HOME/.config/nvim/spell/pl.utf-8.add<CR>:echo "Spelling set to Polish"<CR>',
+        function()
+          -- vim.opt.spell = true
+          vim.bo.spelllang = "pl"
+          vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/pl.utf-8.add"
+          print("Spelling set to Polish");
+        end,
         "Spelling set to Polish"
       },
       e = {
-        ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>',
+        function()
+          -- vim.opt.spell = true
+          vim.bo.spelllang = "en_us"
+          vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+          print("Spelling set to English (US)");
+        end,
         "Spelling set to English (US)"
+      },
+      m = {
+        function()
+          -- vim.opt.spell = true
+          vim.opt.spelllang = { "programming", "pl", "en" }
+          vim.opt.spellfile = {
+            vim.fn.stdpath("config") .. "/spell/programming.utf-8.add",
+            vim.fn.stdpath("config") .. "/spell/pl.utf-8.add",
+            vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+          }
+          print("Spelling set to Programming, Polish, English (US)");
+        end,
+        "Spelling set to Programming, Polish, English (US)"
       },
     },
     w = {
