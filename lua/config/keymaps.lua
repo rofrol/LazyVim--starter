@@ -101,40 +101,6 @@ end
 
 local which_key_table = {
   ["<leader>"] = {
-    o = {
-      name = "Spell",
-      p = {
-        function()
-          -- vim.opt.spell = true
-          vim.bo.spelllang = "pl"
-          vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/pl.utf-8.add"
-          print("Spelling set to Polish");
-        end,
-        "Spelling set to Polish"
-      },
-      e = {
-        function()
-          -- vim.opt.spell = true
-          vim.bo.spelllang = "en_us"
-          vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
-          print("Spelling set to English (US)");
-        end,
-        "Spelling set to English (US)"
-      },
-      m = {
-        function()
-          -- vim.opt.spell = true
-          vim.opt.spelllang = { "programming", "pl", "en" }
-          vim.opt.spellfile = {
-            vim.fn.stdpath("config") .. "/spell/programming.utf-8.add",
-            vim.fn.stdpath("config") .. "/spell/pl.utf-8.add",
-            vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
-          }
-          print("Spelling set to Programming, Polish, English (US)");
-        end,
-        "Spelling set to Programming, Polish, English (US)"
-      },
-    },
     w = {
       v = {
         function()
