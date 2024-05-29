@@ -117,7 +117,7 @@ wk.register({
 local Terminal = require('toggleterm.terminal').Terminal
 local ziglings = Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
 
-function _ziglings_toggle()
+function Ziglings_toggle()
   ziglings:toggle()
   -- settings size in Terminal:new does not work when direction is vertical
   vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
@@ -129,7 +129,7 @@ wk.register({
   ["<leader>"] = {
     t = {
       name = "+vertical",
-      z = { _ziglings_toggle,
+      z = { Ziglings_toggle,
         "Open terminal with watchexec ziglings with 1/3 width"
       },
     },
