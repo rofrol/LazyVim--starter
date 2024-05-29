@@ -2,6 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local wk = require("which-key")
+
 -- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
 -- local function map(m, k, v)
 --   vim.keymap.set(m, k, v, { silent = true })
@@ -21,6 +23,8 @@ local function map(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
+  -- below does not work with: map('n', '<leader>za', 'gsaiw`wl')
+  -- vim.keymap.set(mode, lhs, rhs, options)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
@@ -28,8 +32,6 @@ end
 -- https://vi.stackexchange.com/questions/25259/clipboard-is-reset-after-first-paste-in-visual-mode/25260#25260
 -- https://github.com/disrupted/dotfiles/blob/1513aaa6d44654a2d8e0df6dd76078f15faa2460/.config/nvim/init.lua#L468
 map("v", "p", "P")
-
-map("n", "<Backspace>", "<cmd>noh<cr>")
 
 -- delete other buffers except the current one and terminals
 -- copilot
@@ -58,17 +60,13 @@ function _G.close_all_non_visible_file_buffers()
   print(closed_bufs .. " non-visible file buffer(s) closed")
 end
 
--- Keybinding
-vim.api.nvim_set_keymap('n', '<leader>do', ':lua close_all_non_visible_file_buffers()<CR>',
-  { noremap = true, silent = true })
-
 
 -- I don't use it anymore as I use harpoon tabs
 -- bufferline
-map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
-map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
-map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
-map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
+-- map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
+-- map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
+-- map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
+-- map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
 
 -- https://www.reddit.com/r/neovim/comments/16cso6u/comment/jzlcy3c/
 if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
@@ -81,60 +79,12 @@ if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
   vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 end
 
-map('n', '<leader>sp',
-  ':setlocal spell spelllang=pl<CR>:setlocal spellfile=$HOME/.config/nvim/spell/pl.utf-8.add<CR>:echo "Spelling set to Polish"<CR>')
-map('n', '<leader>se',
-  ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>')
 
 -- mini.surround - wrap with backtick (`) and go to the end
 map('n', '<leader>za', 'gsaiw`wl')
 map('v', '<leader>za', 'gsa``>lll')
 
-vim.api.nvim_set_keymap('n', '<leader>zz',
-  ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>:Gitsigns toggle_signs<CR>',
-  { noremap = true, silent = true })
-
-local wk = require("which-key")
-
-wk.register({
-  ["<leader>"] = {
-    t = {
-      name = "+vertical",
-      v = { function()
-        local term = require("toggleterm.terminal").Terminal:new({
-          direction = "vertical",
-        })
-        term:toggle()
-        -- settings size in Terminal:new does not work when direction is vertical
-        vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-      end,
-        "Open terminal with 1/3 width"
-      },
-    },
-  },
-})
-
-local Terminal = require('toggleterm.terminal').Terminal
-local ziglings = Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
-
-function Ziglings_toggle()
-  ziglings:toggle()
-  -- settings size in Terminal:new does not work when direction is vertical
-  vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-end
-
--- vim.api.nvim_set_keymap("n", "<leader>vt", "<cmd>lua _ziglings_toggle()<CR>", {noremap = true, silent = true})
-
-wk.register({
-  ["<leader>"] = {
-    t = {
-      name = "+vertical",
-      z = { Ziglings_toggle,
-        "Open terminal with watchexec ziglings with 1/3 width"
-      },
-    },
-  },
-})
+local ziglings = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
 
 function Run_command_and_close(command)
   vim.cmd('botright new')
@@ -149,7 +99,68 @@ function Run_command_and_close(command)
   })
 end
 
-vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua Run_command_and_close('git sync')<CR>]], { noremap = true })
+
+local which_key_table = {
+  ["<leader>"] = {
+    o = {
+      name = "Spell",
+      p = {
+        ':setlocal spell spelllang=pl<CR>:setlocal spellfile=$HOME/.config/nvim/spell/pl.utf-8.add<CR>:echo "Spelling set to Polish"<CR>',
+        "Spelling set to Polish"
+      },
+      e = {
+        ':setlocal spell spelllang=en_us<CR>:setlocal spellfile=$HOME/.config/nvim/spell/en.utf-8.add<CR>:echo "Spelling set to English (US)"<CR>',
+        "Spelling set to English (US)"
+      },
+    },
+    w = {
+      v = {
+        function()
+          local term = require("toggleterm.terminal").Terminal:new({
+            direction = "vertical",
+          })
+          term:toggle()
+          -- settings size in Terminal:new does not work when direction is vertical
+          vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+        end,
+        "Open terminal with 1/3 width"
+      },
+      z = {
+        function()
+          ziglings:toggle()
+          -- settings size in Terminal:new does not work when direction is vertical
+          vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+        end,
+        "Open terminal with watchexec ziglings with 1/3 width"
+      },
+      o = {
+        close_all_non_visible_file_buffers,
+        "close_all_non_visible_file_buffers"
+      },
+    },
+    z = {
+      z = {
+        ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>:Gitsigns toggle_signs<CR>',
+        -- does not work without below line
+        "my zen mode"
+      },
+    },
+    g = {
+      m = {
+        function()
+          Run_command_and_close("git sync")
+        end,
+        "my git sync"
+      },
+    },
+  }
+}
+-- on_load copied from lazy/LazyVim/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
+LazyVim.on_load("which-key.nvim", function()
+  vim.schedule(function()
+    require("which-key").register(which_key_table)
+  end)
+end)
 
 -- Use alt+hjkl to move cursor
 -- needs `macos_option_as_alt yes` in kitty.conf
@@ -164,3 +175,59 @@ vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua Run_command_and_close('git sync'
 
 -- vim.api.nvim_set_keymap('i', '<A-h>', '<Left>', { noremap = true })
 -- vim.api.nvim_set_keymap('i', '<A-l>', '<Right>', { noremap = true })
+
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    local bufnr = ev.buf
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+    if not client then
+      return
+    end
+
+    -- I used client.server_capabilities.inlayHintProvider instead off
+    -- client.supports_method('textDocument/inlayHint') and it was the same.
+    -- https://github.com/neovim/neovim/issues/24183#issuecomment-1613193304
+    if client.server_capabilities.inlayHintProvider then
+      local current_setting = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+      local inlay_hints_group = vim.api.nvim_create_augroup('rofrol/toggle_inlay_hints', { clear = false })
+
+      -- https://github.com/MariaSolOs/dotfiles/blob/597848ee02e6500454d6b5817a1ed0928e80dafa/.config/nvim/lua/lsp.lua#L105-L119
+      vim.api.nvim_create_autocmd('InsertEnter', {
+        group = inlay_hints_group,
+        desc = 'Enable inlay hints',
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+
+          -- create a single use autocommand to turn the inlay hints back on
+          -- when leaving insert mode
+          -- https://github.com/AstroNvim/astrocommunity/blob/c12216c538088c5ec892b1c3cf616ca882a7d22e/lua/astrocommunity/recipes/astrolsp-no-insert-inlay-hints/init.lua#L20
+          vim.api.nvim_create_autocmd("InsertLeave", {
+            buffer = bufnr,
+            once = true,
+            callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
+          })
+        end,
+      })
+
+      -- https://github.com/nix-community/kickstart-nix.nvim/blob/758ca4ef427ca1444d530b0e32dd6add32734181/nvim/plugin/autocommands.lua#L100
+      require("which-key").register(
+        {
+          ["<leader>"] = {
+            c = {
+              h = {
+                function()
+                  vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
+                end,
+                "[lsp] toggle inlay hints"
+              },
+            },
+          },
+        }
+      )
+    end
+  end,
+})

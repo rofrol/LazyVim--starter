@@ -58,7 +58,7 @@ return {
       require("onedark").setup({
         style = "darker",
         -- style = "deep",
-        toggle_style_key = "<leader>ts",
+        toggle_style_key = "<leader>uo",
         diagnostics = {
           darker = false,
           background = false,
