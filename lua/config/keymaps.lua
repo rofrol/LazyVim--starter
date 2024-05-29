@@ -39,8 +39,7 @@ map("v", "p", "P")
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings-set
 -- map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
 
--- Function to close all non-visible file buffers
-function _G.close_all_non_visible_file_buffers()
+local function close_all_non_visible_file_buffers()
   local current_buf = vim.api.nvim_get_current_buf()
   local visible_bufs = {}
   for _, win in ipairs(vim.api.nvim_list_wins()) do
