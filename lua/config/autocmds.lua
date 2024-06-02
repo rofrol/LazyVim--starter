@@ -61,3 +61,14 @@ ccmd({ "FileType" }, {
 -- vim.api.nvim_command("augroup terminal_setup | au!")
 -- vim.api.nvim_command("autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i")
 -- vim.api.nvim_command("augroup end")
+
+-- https://neovim.discourse.group/t/how-do-i-prevent-neovim-commenting-out-next-line-after-a-comment-line/3711/7
+-- https://superuser.com/questions/271023/can-i-disable-continuation-of-comments-to-the-next-line-in-vim
+-- https://www.reddit.com/r/neovim/comments/17fc669/turn_off_auto_commenting_lazynvim/
+-- :help fo-table
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ 'o' })
+  end,
+})
