@@ -223,3 +223,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+-- https://stackoverflow.com/questions/4768088/automatic-new-line-and-indentation-in-vim-when-inside-braces
+map('i', '{<CR>', '{<CR>}<Esc>O')
