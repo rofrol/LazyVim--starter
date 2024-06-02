@@ -19,7 +19,8 @@ local function map(mode, lhs, rhs, opts)
   -- noremap prevents recursive mapping, meaning that the keybinding
   -- will not trigger other mappings. It ensures that the key sequence executes
   -- only the assigned command without any further remapping.
-  local options = { silent = true } -- remap = false is default already
+  local options = { silent = true, noremap = true }
+  -- remap = false is default already for vim.keymap.set
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
