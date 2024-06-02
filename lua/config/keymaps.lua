@@ -33,6 +33,10 @@ end
 -- https://github.com/disrupted/dotfiles/blob/1513aaa6d44654a2d8e0df6dd76078f15faa2460/.config/nvim/init.lua#L468
 map("v", "p", "P")
 
+-- copy and paste visual selection
+-- https://stackoverflow.com/questions/731189/how-to-duplicate-a-selection-and-place-it-above-or-below-the-selection/14634666#14634666
+map('v', '<C-p>', "y'>p")
+
 -- delete other buffers except the current one and terminals
 -- copilot
 -- https://tech.serhatteker.com/post/2021-04/vim-delete-multiple-buffers/
@@ -97,7 +101,6 @@ function Run_command_and_close(command)
     end
   })
 end
-
 
 local which_key_table = {
   ["<leader>"] = {
