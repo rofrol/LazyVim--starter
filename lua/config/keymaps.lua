@@ -2,15 +2,9 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
--- local function map(m, k, v)
---   vim.keymap.set(m, k, v, { silent = true })
--- end
-
--- https://github.com/AndresMpa/mu-vim/blob/e6334b42775ce638f450faa665abb2772880293c/lua/mapping/navigation.lua#L47
--- local map = vim.keymap.set
-
 -- https://blog.devgenius.io/create-custom-keymaps-in-neovim-with-lua-d1167de0f2c2
+-- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
+-- https://github.com/AndresMpa/mu-vim/blob/e6334b42775ce638f450faa665abb2772880293c/lua/mapping/navigation.lua#L47
 local function map(mode, lhs, rhs, opts)
   -- Normal messages will not be given or added to the message history
   -- https://vi.stackexchange.com/questions/34346/silent-vs-silent-what-is-the-difference
@@ -22,9 +16,9 @@ local function map(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  -- below does not work with: map('n', '<leader>za', 'gsaiw`wl')
-  -- vim.keymap.set(mode, lhs, rhs, options)
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  -- this needs `noremap: false` to work: map('n', '<leader>za', 'gsaiw`wl')
+  vim.keymap.set(mode, lhs, rhs, options)
+  -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 -- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
@@ -76,15 +70,14 @@ if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
   -- umap XXX may get error if there is no such mapping.
   -- map XXX <Nop> won't get error in that case and can disable vim's original(built in) command, such as d or s or c, while umap can't.
   -- https://vi.stackexchange.com/questions/16392/what-is-the-difference-between-unmap-and-mapping-to-nop/36833#36833
-  vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
+  map({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
 
-  vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+  map({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 end
 
-
 -- mini.surround - wrap with backtick (`) and go to the end
-map('n', '<leader>za', 'gsaiw`wl')
-map('v', '<leader>za', 'gsa``>lll')
+map('n', '<leader>za', 'gsaiw`wl', { remap = true })
+map('v', '<leader>za', 'gsa``>lll', { remap = true })
 
 local ziglings = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
 
