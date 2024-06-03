@@ -20,10 +20,10 @@ local function spell_multiple()
   vim.opt.spelllang = { "techspeak", "en_us", "pl" }
   vim.opt.spellfile = {
     techspeak_spellfile .. ".utf-8.add",
-    vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
     vim.fn.stdpath("config") .. "/spell/pl.utf-8.add",
+    vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
   }
-  print("Spelling set to techspeak, English (US), Polish");
+  print("Spelling set to techspeak, Polish, English (US)");
 end
 spell_multiple()
 
