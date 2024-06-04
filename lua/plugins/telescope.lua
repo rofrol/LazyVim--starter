@@ -90,7 +90,7 @@ return {
         -- sorting_strategy = "ascending",
         -- winblend = 0,
         -- https://www.reddit.com/r/neovim/comments/r22xrq/comment/hm2dv20/
-        layout_strategy = "vertical",
+        layout_strategy = "flex",
         layout_config = {
           height = 0.95,
           -- preview_width = 0.65,
