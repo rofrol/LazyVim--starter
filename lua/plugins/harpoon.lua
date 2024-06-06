@@ -27,10 +27,10 @@ return {
 	  (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and { "i", "x", "n", "s" } or  { "x", "n", "s" },
           (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and string.format("<D-%s>", i) or string.format("<leader>%s", i),
           function()
-            if vim.api.nvim_buf_get_option(0, 'buftype') ~= '' then
+            if vim.api.nvim_get_option_value('buftype', { buf = 0 }) ~= '' then
               for _, win in ipairs(vim.api.nvim_list_wins()) do
                 local buf = vim.api.nvim_win_get_buf(win)
-                if vim.api.nvim_buf_get_option(buf, 'buftype') == '' then
+                if vim.api.nvim_get_option_value('buftype', { buf = buf }) == '' then
                   vim.api.nvim_set_current_win(win)
                   break
                 end
@@ -46,7 +46,7 @@ return {
       {
         "<leader>a",
         function()
-          if vim.api.nvim_buf_get_option(0, 'buftype') == '' then
+          if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == '' then
             require("harpoon.mark").add_file()
           end
         end,
