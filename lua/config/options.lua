@@ -6,7 +6,11 @@ opt.swapfile = false
 opt.relativenumber = false
 opt.wrap = true
 vim.g.maplocalleader = [[;]]
-LazyVim.terminal.setup("zsh")
+if vim.fn.has("mac") == 1 then
+  LazyVim.terminal.setup("zsh")
+else
+  LazyVim.terminal.setup("bash")
+end
 
 -- HIGHLIGHTING FIX
 vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { fg = "#d79921", sp = "#d79921", underline = true })
