@@ -58,31 +58,31 @@ return {
         },
         -- does not work -> https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Recipes#harpoon-index
         -- below works ok
-        components = {
-          harpoon_index = function(config, node, _)
-            local Marked = require("harpoon.mark")
-            local path = node:get_id()
-            local success, index = pcall(Marked.get_index_of, path)
-            if success and index and index > 0 then
-              return {
-                text = string.format("%d ", index), -- <-- Add your favorite harpoon like arrow here
-                highlight = config.highlight or "NeoTreeDirectoryIcon",
-              }
-            else
-              return {
-                text = "  ",
-              }
-            end
-          end,
-          space = function(config, node, _)
-            return {
-              text = "  ",
-            }
-          end,
-        },
+        -- components = {
+        --   harpoon_index = function(config, node, _)
+        --     local Marked = require("harpoon.mark")
+        --     local path = node:get_id()
+        --     local success, index = pcall(Marked.get_index_of, path)
+        --     if success and index and index > 0 then
+        --       return {
+        --         text = string.format("%d ", index), -- <-- Add your favorite harpoon like arrow here
+        --         highlight = config.highlight or "NeoTreeDirectoryIcon",
+        --       }
+        --     else
+        --       return {
+        --         text = "  ",
+        --       }
+        --     end
+        --   end,
+        --   space = function(config, node, _)
+        --     return {
+        --       text = "  ",
+        --     }
+        --   end,
+        -- },
         renderers = {
           file = {
-            { "harpoon_index" }, --> This is what actually adds the component in where you want it
+            -- { "harpoon_index" }, --> This is what actually adds the component in where you want it
             { "icon" },
             { "name",         use_git_status_colors = true },
             { "diagnostics" },
@@ -90,7 +90,7 @@ return {
           },
           -- from lazy/neo-tree.nvim/lua/neo-tree/defaults.lua
           directory = {
-            { "space" },
+            -- { "space" },
             { "indent" },
             { "icon" },
             { "current_filter" },

@@ -1,8 +1,11 @@
-local opts = { silent = true }
+if true then return {} end
+-- local opts = { noremap = true, silent = true }
+local opts = { noremap = true }
 
 return {
   {
     "ThePrimeagen/harpoon",
+    branch = "master",
     dependencies = { "echasnovski/mini.bufremove" },
     lazy = false, -- any lazy handler triggers lazy loading. i.e. keymaps
     config = function()
