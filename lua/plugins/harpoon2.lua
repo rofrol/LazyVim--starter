@@ -20,22 +20,6 @@ return {
         local Extensions = require("harpoon.extensions")
         local Logger = require("harpoon.logger")
 
-        -- local Path = require("plenary.path")
-        -- local function normalize_path(buf_name, root)
-        --   return Path:new(buf_name):make_relative(root)
-        -- end
-        -- local bufname = normalize_path(
-        --   vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf()),
-        --   list.config.get_root_dir()
-        -- )
-        -- local item = list:get_by_value(bufname)
-
-        -- local path = vim.loop.fs_realpath(item.value)
-        -- local bufnr = vim.fn.bufnr(path, false)
-        -- print(path)
-        -- print(bufnr)
-        -- print(vim.inspect(item))
-        -- print(vim.inspect(list))
         local items = list.items
         if item ~= nil then
           for i = 1, list._length do
