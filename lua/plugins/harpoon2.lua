@@ -14,6 +14,7 @@ return {
       local harpoon = require("harpoon")
       local list = harpoon:list()
 
+      -- Based on https://github.com/ThePrimeagen/harpoon/blob/0378a6c428a0bed6a2781d459d7943843f374bce/lua/harpoon/list.lua#L184
       function Remove(item)
         item = item or list.config.create_list_item(list.config)
         print("Hello")
