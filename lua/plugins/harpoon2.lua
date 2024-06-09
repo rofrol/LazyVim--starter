@@ -13,6 +13,51 @@ return {
       local opts = { noremap = true, silent = true }
       local harpoon = require("harpoon")
       local list = harpoon:list()
+
+      function Remove_at(item)
+        item = item or list.config.create_list_item(list.config)
+        print("Hello")
+        local Extensions = require("harpoon.extensions")
+        local Logger = require("harpoon.logger")
+
+        -- local Path = require("plenary.path")
+        -- local function normalize_path(buf_name, root)
+        --   return Path:new(buf_name):make_relative(root)
+        -- end
+        -- local bufname = normalize_path(
+        --   vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf()),
+        --   list.config.get_root_dir()
+        -- )
+        -- local item = list:get_by_value(bufname)
+
+        -- local path = vim.loop.fs_realpath(item.value)
+        -- local bufnr = vim.fn.bufnr(path, false)
+        -- print(path)
+        -- print(bufnr)
+        -- print(vim.inspect(item))
+        -- print(vim.inspect(list))
+        local items = list.items
+        if item ~= nil then
+          for i = 1, list._length do
+            local v = items[i]
+            print(vim.inspect(v))
+            if list.config.equals(v, item) then
+              -- this clears list somehow
+              -- items[i] = nil
+              table.remove(items, i)
+              list._length = list._length - 1
+
+              Logger:log("HarpoonList:remove", { item = item, index = i })
+
+              Extensions.extensions:emit(
+                Extensions.event_names.REMOVE,
+                { list = list, item = item, idx = i }
+              )
+              break
+            end
+          end
+        end
+      end
       local keys = {
         {
           "<leader>a",
@@ -24,7 +69,6 @@ return {
         {
           "<leader>j",
           function()
-            local harpoon = require("harpoon")
             harpoon.ui:toggle_quick_menu(harpoon:list())
           end,
           desc = "Harpoon Quick Menu",
@@ -32,7 +76,6 @@ return {
         {
           "<leader>h1",
           function()
-            local harpoon = require("harpoon")
             harpoon:list():replace_at(1)
           end,
           desc = 'Replace harppon mark 1 with current buffer that is not marked with harpoon',
@@ -41,55 +84,8 @@ return {
         {
           "<leader>ht",
           function()
-            print("Hello")
-            local Extensions = require("harpoon.extensions")
-            local Logger = require("harpoon.logger")
-            local Path = require("plenary.path")
-            local function normalize_path(buf_name, root)
-              return Path:new(buf_name):make_relative(root)
-            end
-            -- local item = list.config.create_list_item(list.config)
-
-            local bufname = normalize_path(
-              vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf()),
-              list.config.get_root_dir()
-            )
-            local item = list:get_by_value(bufname)
-            -- local path = vim.loop.fs_realpath(item.value)
-            -- local bufnr = vim.fn.bufnr(path, false)
-            -- print(path)
-            -- print(bufnr)
-            -- print(vim.inspect(item))
-            -- print(vim.inspect(list))
-            local items = list.items
-            if item ~= nil then
-              for i = 1, list._length do
-                local v = items[i]
-                print(vim.inspect(v))
-                if list.config.equals(v, item) then
-                  table.remove(items, i)
-                  list._length = list._length - 1
-
-                  Logger:log("HarpoonList:remove", { item = item, index = i })
-
-                  Extensions.extensions:emit(
-                    Extensions.event_names.REMOVE,
-                    { list = list, item = item, idx = i }
-                  )
-                  break
-                end
-              end
-            end
-            -- local index = require("harpoon.mark").get_current_index()
-            -- if index ~= nil then
-            --   local config = require('harpoon').get_mark_config()
-            --   table.remove(config.marks, index)
-            --   local global_settings = require("harpoon").get_global_settings()
-            --   if global_settings.tabline then
-            --     vim.cmd("redrawt")
-            --   end
-            -- end
-            -- require("mini.bufremove").delete(0, true)
+            Remove_at()
+            require("mini.bufremove").delete(0, true)
           end,
           opts,
           desc = "Harpoon remove file",
@@ -97,8 +93,6 @@ return {
         {
           "<leader>hm",
           function()
-            local harpoon = require 'harpoon'
-            local list = harpoon:list()
             local item = list.config.create_list_item(list.config)
 
             if not list:get_by_value(item.value) then
