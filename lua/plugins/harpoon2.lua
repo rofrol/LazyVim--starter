@@ -14,7 +14,7 @@ return {
       local harpoon = require("harpoon")
       local list = harpoon:list()
 
-      function Remove_at(item)
+      function Remove(item)
         item = item or list.config.create_list_item(list.config)
         print("Hello")
         local Extensions = require("harpoon.extensions")
@@ -68,7 +68,7 @@ return {
         {
           "<leader>ht",
           function()
-            Remove_at()
+            Remove()
             require("mini.bufremove").delete(0, true)
           end,
           opts,
