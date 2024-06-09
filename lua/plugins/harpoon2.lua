@@ -42,22 +42,21 @@ return {
           "<leader>ht",
           function()
             print("Hello")
-            local harpoon = require("harpoon")
-            local list = harpoon:list()
             local Path = require("plenary.path")
             local function normalize_path(buf_name, root)
               return Path:new(buf_name):make_relative(root)
             end
-            local item = list.config.create_list_item(list.config)
+            -- local item = list.config.create_list_item(list.config)
+
             -- normalize_path(
             --   vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf()),
             --   vim.loop.cwd()
             -- )
-            -- local bufname = normalize_path(
-            --   vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf()),
-            --   list.config.get_root_dir()
-            -- )
-            -- local item = list:get_by_value(bufname)
+            local bufname = normalize_path(
+              vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf()),
+              list.config.get_root_dir()
+            )
+            local item = list:get_by_value(bufname)
             print("item")
             print(item.value)
             local path = vim.loop.fs_realpath(item.value)
@@ -65,9 +64,38 @@ return {
             print(path)
             print(bufnr)
             -- list:remove()
-            list:remove_at(2)
-            -- print(vim.inspect(item))
+            -- list:remove_at(2)
+            print(vim.inspect(item))
             -- list:remove(item)
+
+            -- print(vim.inspect(list))
+            print(list._length)
+            local items = list.items
+            print(items)
+            if item ~= nil then
+              print("here1")
+              for i = 1, list._length do
+                print("here2")
+                local v = items[i]
+                print(vim.inspect(v))
+                if list.config.equals(v, item) then
+                  print("here3")
+                  table.remove(items, i)
+                  -- self._length = list:determine_length(list, list._length)
+                  list._length = list._length - 1
+                  -- Logger:log("HarpoonList:remove", { item = item, index = i })
+                  -- self.items[i] = nil
+                  -- if i == self._length then
+                  --   self._length = determine_length(self.items, self._length)
+                  -- end
+                  -- Extensions.extensions:emit(
+                  --   Extensions.event_names.REMOVE,
+                  --   { list = self, item = item, idx = i }
+                  -- )
+                  break
+                end
+              end
+            end
             -- local index = require("harpoon.mark").get_current_index()
             -- if index ~= nil then
             --   local config = require('harpoon').get_mark_config()
