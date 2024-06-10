@@ -103,10 +103,10 @@ return {
       return keys
     end,
     config = function()
-      vim.cmd("highlight! HarpoonInactive guibg=NONE guifg=#333333")
-      vim.cmd("highlight! HarpoonActive guibg=#cccccc guifg=black")
+      vim.cmd("highlight! HarpoonInactive guibg=#cccccc guifg=black")
+      vim.cmd("highlight! HarpoonActive guibg=NONE guifg=#333333")
       vim.cmd("highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7")
-      vim.cmd("highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7")
+      vim.cmd("highlight! HarpoonNumberInactive guibg=#cccccc guifg=#7aa2f7")
       vim.cmd("highlight! TabLineFill guibg=NONE guifg=white")
     end,
   },
@@ -125,9 +125,9 @@ return {
           local file_name = harpoon_file_path == "" and "(empty)" or vim.fn.fnamemodify(harpoon_file_path, ':t')
 
           if current_file_path == harpoon_file_path then
-            contents[index] = string.format("%%#HarpoonNumberActive# %s %%#HarpoonActive# %s ", index, file_name)
+            contents[index] = string.format("%%#HarpoonNumberActive# %s%%#HarpoonActive# %s ", index, file_name)
           else
-            contents[index] = string.format("%%#HarpoonNumberInactive# %s %%#HarpoonInactive# %s ", index, file_name)
+            contents[index] = string.format("%%#HarpoonNumberInactive# %s%%#HarpoonInactive# %s ", index, file_name)
           end
         end
 
