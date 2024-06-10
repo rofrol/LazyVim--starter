@@ -103,7 +103,7 @@ return {
       return keys
     end,
     config = function()
-      vim.cmd("highlight! HarpoonInactive guibg=#cccccc guifg=black")
+      vim.cmd("highlight! HarpoonInactive guibg=#cccccc guifg=#555555")
       vim.cmd("highlight! HarpoonActive guibg=NONE guifg=#333333")
       vim.cmd("highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7")
       vim.cmd("highlight! HarpoonNumberInactive guibg=#cccccc guifg=#7aa2f7")
