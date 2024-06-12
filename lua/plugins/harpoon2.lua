@@ -43,6 +43,81 @@ return {
           end
         end
       end
+      -- https://github.com/ThePrimeagen/harpoon/pull/400
+      -- function M.get_global_settings()
+      --   log.trace("get_global_settings()")
+      --   return HarpoonConfig.global_settings
+      -- end
+      -- local function filter_filetype()
+      --   local current_filetype = vim.bo.filetype
+      --   local excluded_filetypes = harpoon.get_global_settings().excluded_filetypes
+      --
+      --   if current_filetype == "harpoon" then
+      --     log.error("filter_filetype(): You can't add harpoon to the harpoon")
+      --     error("You can't add harpoon to the harpoon")
+      --     return
+      --   end
+      --
+      --   if vim.tbl_contains(excluded_filetypes, current_filetype) then
+      --     log.error(
+      --       'filter_filetype(): This filetype cannot be added or is included in the "excluded_filetypes" option'
+      --     )
+      --     error(
+      --       'This filetype cannot be added or is included in the "excluded_filetypes" option'
+      --     )
+      --     return
+      --   end
+      -- end
+      -- function M.set_current_at(idx)
+      --   filter_filetype()
+      --   local buf_name = get_buf_name()
+      --   log.trace("set_current_at(): Setting id", idx, buf_name)
+      --   local config = harpoon.get_mark_config()
+      --   local current_idx = M.get_index_of(buf_name)
+      --
+      --   -- Remove it if it already exists
+      --   if M.valid_index(current_idx) then
+      --     config.marks[current_idx] = create_mark("")
+      --   end
+      --
+      --   config.marks[idx] = create_mark(buf_name)
+      --
+      --   for i = 1, M.get_length() do
+      --     if not config.marks[i] then
+      --       config.marks[i] = create_mark("")
+      --     end
+      --   end
+      --
+      --   emit_changed()
+      -- end
+      -- function Replace_or_add(item)
+      --   item = item or list.config.create_list_item(list.config)
+      --   print("Hello")
+      --   local Extensions = require("harpoon.extensions")
+      --   local Logger = require("harpoon.logger")
+      --
+      --   local items = list.items
+      --   if item ~= nil then
+      --     for i = 1, list._length do
+      --       local v = items[i]
+      --       print(vim.inspect(v))
+      --       if list.config.equals(v, item) then
+      --         -- this clears list somehow
+      --         -- items[i] = nil
+      --         table.remove(items, i)
+      --         list._length = list._length - 1
+      --
+      --         Logger:log("HarpoonList:remove", { item = item, index = i })
+      --
+      --         Extensions.extensions:emit(
+      --           Extensions.event_names.REMOVE,
+      --           { list = list, item = item, idx = i }
+      --         )
+      --         break
+      --       end
+      --     end
+      --   end
+      -- end
       local keys = {
         {
           "<leader>a",
@@ -113,7 +188,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     -- dependencies =  { "abeldekat/harpoonline", version = "*" },
-    config = function()
+    config = function(_, opts)
       -- https://github.com/ThePrimeagen/harpoon/issues/352#issuecomment-1873053256
       local harpoon = require('harpoon');
       function Harpoon_files()
@@ -136,8 +211,42 @@ return {
       end
 
       require('lualine').setup {
+      }
+      table.insert(opts.sections.lualine_a,
+        function()
+          return "😄"
+        end
+      )
+
+      local wpm = require("wpm")
+
+      -- prepend with 1
+      -- https://stackoverflow.com/questions/71299599/how-to-prepend-an-item-to-lua-array/71299679#71299679
+      -- table.insert(opts.sections.lualine_z, 1, "location")
+      -- table.insert(opts.sections.lualine_z, 1, wpm.wpm)
+      -- table.insert(opts.sections.lualine_z, 1, wpm.historic_graph)
+
+      require('lualine').setup {
+        sections = {
+          lualine_a = opts.sections.lualine_a,
+          -- lualine_z = opts.sections.lualine_z,
+          lualine_z = {
+            wpm.wpm,
+            wpm.historic_graph,
+            "location",
+            -- https://stackoverflow.com/questions/50478236/lua-spread-operator-on-an-array/50478498#50478498
+            unpack(opts.sections.lualine_z),
+          },
+        },
         tabline = {
-          lualine_a = { { Harpoon_files, color = { bg = '#ffffff' }, } },
+          lualine_a = {
+            {
+              Harpoon_files,
+              -- setting bg is needed to disable right separator . bug?
+              -- https://www.reddit.com/r/neovim/comments/18s7185/help_with_lualines_component_separators/
+              color = { bg = '#ffffff' },
+            }
+          },
         },
       }
     end,
