@@ -176,7 +176,7 @@ return {
         end,
       })
 
-      local ziglings = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
+      local zigbuild = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
       local which_key_table = {
         ["<leader>"] = {
           w = {
@@ -193,11 +193,11 @@ return {
             },
             z = {
               function()
-                ziglings:toggle()
+                zigbuild:toggle()
                 -- settings size in Terminal:new does not work when direction is vertical
                 vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
               end,
-              "Open terminal with watchexec ziglings with 1/3 width"
+              "Open terminal with watchexec zig build with 1/3 width"
             },
           },
         }
