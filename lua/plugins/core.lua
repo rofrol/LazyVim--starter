@@ -389,11 +389,11 @@ return {
       vim.list_extend(opts.ensure_installed, { "markdownlint-cli2" })
     end,
   },
-  -- {
-  --   "asyncedd/wpm.nvim",
-  --   config = function()
-  --       require("wpm").setup({
-  --       })
-  --   end
-  -- }
+  {
+    "asyncedd/wpm.nvim",
+    config = function()
+        require("wpm").setup({
+        })
+    end
+  },
 }
