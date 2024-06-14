@@ -188,7 +188,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     -- dependencies =  { "abeldekat/harpoonline", version = "*" },
-    dependencies =  { "asyncedd/wpm.nvim" },
+    dependencies =  { "ThePrimeagen/harpoon", "asyncedd/wpm.nvim" },
     config = function(_, opts)
       -- https://github.com/ThePrimeagen/harpoon/issues/352#issuecomment-1873053256
       local harpoon = require('harpoon');
