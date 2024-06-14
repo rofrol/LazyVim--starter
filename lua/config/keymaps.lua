@@ -79,8 +79,6 @@ end
 map('n', '<leader>za', 'gsaiw`wl', { remap = true })
 map('v', '<leader>za', 'gsa``>lll', { remap = true })
 
-local ziglings = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
-
 function Run_command_and_close(command)
   vim.cmd('botright new')
   vim.cmd('resize 5')
@@ -97,25 +95,6 @@ end
 local which_key_table = {
   ["<leader>"] = {
     w = {
-      v = {
-        function()
-          local term = require("toggleterm.terminal").Terminal:new({
-            direction = "vertical",
-          })
-          term:toggle()
-          -- settings size in Terminal:new does not work when direction is vertical
-          vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-        end,
-        "Open terminal with 1/3 width"
-      },
-      z = {
-        function()
-          ziglings:toggle()
-          -- settings size in Terminal:new does not work when direction is vertical
-          vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-        end,
-        "Open terminal with watchexec ziglings with 1/3 width"
-      },
       o = {
         close_all_non_visible_file_buffers,
         "close_all_non_visible_file_buffers"
