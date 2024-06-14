@@ -1,3 +1,5 @@
+-- ciw has lag because of this file
+if true then return {} end
 return {
   -- Add Clojure & related to treesitter
   {
