@@ -1,4 +1,5 @@
 -- if true then return {} end
+local Keys = require("helpers.keys")
 return {
   -- { "Olical/nfnl",            ft = "fennel" },
   -- {
@@ -394,6 +395,12 @@ return {
     config = function()
         require("wpm").setup({
         })
+    end
+  },
+  { "echasnovski/mini.surround",
+    config = function()
+      Keys.map('n', '<leader>za', 'gsaiw`wl', { remap = true, desc = 'wrap with backtick (`) and go to the end' })
+      Keys.map('v', '<leader>za', 'gsa``>lll', { remap = true, desc = 'wrap with backtick (`) and go to the end' })
     end
   },
 }
