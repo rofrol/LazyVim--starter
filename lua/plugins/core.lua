@@ -390,13 +390,6 @@ return {
       vim.list_extend(opts.ensure_installed, { "markdownlint-cli2" })
     end,
   },
-  {
-    "asyncedd/wpm.nvim",
-    config = function()
-        require("wpm").setup({
-        })
-    end
-  },
   { "echasnovski/mini.surround",
     config = function()
       Keys.map('n', '<leader>za', 'gsaiw`wl', { remap = true, desc = 'wrap with backtick (`) and go to the end' })

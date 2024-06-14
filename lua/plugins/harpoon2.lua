@@ -220,6 +220,7 @@ return {
       )
 
       local wpm = require("wpm")
+      wpm.setup({})
 
       -- prepend with 1
       -- https://stackoverflow.com/questions/71299599/how-to-prepend-an-item-to-lua-array/71299679#71299679
