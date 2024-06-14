@@ -53,7 +53,8 @@ if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
   -- umap XXX may get error if there is no such mapping.
   -- map XXX <Nop> won't get error in that case and can disable vim's original(built in) command, such as d or s or c, while umap can't.
   -- https://vi.stackexchange.com/questions/16392/what-is-the-difference-between-unmap-and-mapping-to-nop/36833#36833
-  Keys.map({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
+  -- Keys.map({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
+  vim.keymap.del({ "i", "x", "n", "s" }, "<C-s>")
 
   Keys.map({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 end
