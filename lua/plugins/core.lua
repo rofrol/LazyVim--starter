@@ -175,51 +175,42 @@ return {
           return 20
         end,
       })
-
-      local zigbuild = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
-      local which_key_table = {
-        ["<leader>"] = {
-          w = {
-            v = {
-              function()
-                local term = require("toggleterm.terminal").Terminal:new({
-                  direction = "vertical",
-                })
-                term:toggle()
-                -- settings size in Terminal:new does not work when direction is vertical
-                vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-              end,
-              "Open terminal with 1/3 width"
-            },
-            z = {
-              function()
-                zigbuild:toggle()
-                -- settings size in Terminal:new does not work when direction is vertical
-                vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-              end,
-              "Open terminal with watchexec zig build with 1/3 width"
-            },
-          },
-        }
-      }
-      -- on_load copied from lazy/LazyVim/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
-      LazyVim.on_load("which-key.nvim", function()
-        vim.schedule(function()
-          require("which-key").register(which_key_table)
-        end)
-      end)
-
     end,
-    keys = {
-      -- https://github.com/LazyVim/LazyVim/discussions/193#discussioncomment-6088989
-      { [[<C-\>]] }, -- non-floating terminal
-      -- { "<leader>0", "<Cmd>2ToggleTerm size=60 direction=horizontal<Cr>", desc = "Terminal #2" },
-      { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
-      { "<leader>-", "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #2" },
-      { "<M-2>",     "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
-      { "<M-3>",     "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
-      { "<M-4>",     "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
-    },
+    keys = function()
+      local zigbuild = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
+      -- on_load copied from lazy/LazyVim/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
+      -- require("which-key").register(which_key_table)
+      local keys = {
+        -- https://github.com/LazyVim/LazyVim/discussions/193#discussioncomment-6088989
+        { [[<C-\>]] }, -- non-floating terminal
+        -- { "<leader>0", "<Cmd>2ToggleTerm size=60 direction=horizontal<Cr>", desc = "Terminal #2" },
+        { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+        { "<leader>-", "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #2" },
+        { "<M-2>",     "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+        { "<M-3>",     "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
+        { "<M-4>",     "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
+        { "<leader>wv",
+          function()
+            local term = require("toggleterm.terminal").Terminal:new({
+              direction = "vertical",
+            })
+            term:toggle()
+            -- settings size in Terminal:new does not work when direction is vertical
+            vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+          end,
+          desc = "Open terminal with 1/3 width"
+        },
+        { "<leader>wb",
+        function()
+          zigbuild:toggle()
+          -- settings size in Terminal:new does not work when direction is vertical
+          vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+        end,
+        desc = "Open terminal with watchexec zig build with 1/3 width"
+        },
+      }
+      return keys
+    end,
   },
   {
     "folke/noice.nvim",
