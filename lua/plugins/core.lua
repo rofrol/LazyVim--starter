@@ -1,5 +1,6 @@
+-- if true then return {} end
 return {
-  { "Olical/nfnl",            ft = "fennel" },
+  -- { "Olical/nfnl",            ft = "fennel" },
   -- {
   --   "nvim-treesitter/nvim-treesitter",
   --   opts = function(_, opts)
@@ -354,11 +355,11 @@ return {
       vim.list_extend(opts.ensure_installed, { "markdownlint-cli2" })
     end,
   },
-  {
-    "asyncedd/wpm.nvim",
-    config = function()
-        require("wpm").setup({
-        })
-    end
-  }
+  -- {
+  --   "asyncedd/wpm.nvim",
+  --   config = function()
+  --       require("wpm").setup({
+  --       })
+  --   end
+  -- }
 }
