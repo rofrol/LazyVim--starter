@@ -81,7 +81,9 @@ local which_key_table = {
       },
     },
     z = {
-      z = { Util.toggle_zen_mode, "my zen mode" },
+      z = { function()
+        Util.toggle_zen_mode()
+      end, "my zen mode" },
     },
     g = {
       m = {

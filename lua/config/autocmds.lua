@@ -76,6 +76,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
-		Util.enable_zen_mode()
+    if vim.g.myzenmode then
+      Util.enable_zen_mode()
+    else
+      Util.disable_zen_mode()
+    end
 	end,
 })

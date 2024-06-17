@@ -20,23 +20,31 @@ function M.map(mode, lhs, rhs, opts)
 end
 
 function M.toggle_zen_mode()
-  vim.o.number = not vim.o.number
-  vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3)
-  if vim.o.laststatus == 0 then
-    vim.cmd("set noshowmode")
+  if vim.g.myzenmode then
+    M.disable_zen_mode()
   else
-    vim.cmd("set showmode")
+    M.enable_zen_mode()
   end
-  if package.loaded["gitsigns"] then
-    require("gitsigns").toggle_signs()
+end
+
+function M.disable_zen_mode()
+  vim.g.myzenmode = false
+  vim.o.number = true
+  vim.o.laststatus = 3
+  vim.cmd("set showmode")
+  if require("gitsigns.config").signcolumn then
+    require("gitsigns").toggle_signs(true)
   end
 end
 
 function M.enable_zen_mode()
+  vim.g.myzenmode = true
   vim.o.number = false
   vim.o.laststatus = 0
   vim.cmd("set noshowmode")
-  require("gitsigns").toggle_signs()
+  if not require("gitsigns.config").signcolumn then
+    require("gitsigns").toggle_signs(false)
+  end
 end
 
 
