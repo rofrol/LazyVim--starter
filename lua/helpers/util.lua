@@ -36,9 +36,7 @@ function M.enable_zen_mode()
   vim.o.number = false
   vim.o.laststatus = 0
   vim.cmd("set noshowmode")
-  if package.loaded["gitsigns"] then
-    require("gitsigns").toggle_signs()
-  end
+  require("gitsigns").toggle_signs()
 end
 
 
