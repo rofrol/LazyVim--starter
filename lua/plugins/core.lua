@@ -86,9 +86,9 @@ return {
           file = {
             -- { "harpoon_index" }, --> This is what actually adds the component in where you want it
             { "icon" },
-            { "name",         use_git_status_colors = true },
+            { "name",       use_git_status_colors = true },
             { "diagnostics" },
-            { "git_status",   highlight = "NeoTreeDimText" },
+            { "git_status", highlight = "NeoTreeDimText" },
           },
           -- from lazy/neo-tree.nvim/lua/neo-tree/defaults.lua
           directory = {
@@ -177,7 +177,12 @@ return {
       })
     end,
     keys = function()
-      local zigbuild = require('toggleterm.terminal').Terminal:new({ direction = "vertical", cmd = "watchexec -c -r zig build", hidden = false })
+      local zigbuild = require('toggleterm.terminal').Terminal:new({
+        direction = "vertical",
+        cmd =
+        "watchexec -c -r zig build",
+        hidden = false
+      })
       -- on_load copied from lazy/LazyVim/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
       -- require("which-key").register(which_key_table)
       local keys = {
@@ -189,7 +194,8 @@ return {
         { "<M-2>",     "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
         { "<M-3>",     "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
         { "<M-4>",     "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
-        { "<leader>wv",
+        {
+          "<leader>wv",
           function()
             local term = require("toggleterm.terminal").Terminal:new({
               direction = "vertical",
@@ -200,13 +206,14 @@ return {
           end,
           desc = "Open terminal with 1/3 width"
         },
-        { "<leader>wb",
-        function()
-          zigbuild:toggle()
-          -- settings size in Terminal:new does not work when direction is vertical
-          vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
-        end,
-        desc = "Open terminal with watchexec zig build with 1/3 width"
+        {
+          "<leader>wb",
+          function()
+            zigbuild:toggle()
+            -- settings size in Terminal:new does not work when direction is vertical
+            vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+          end,
+          desc = "Open terminal with watchexec zig build with 1/3 width"
         },
       }
       return keys
@@ -381,10 +388,13 @@ return {
       vim.list_extend(opts.ensure_installed, { "markdownlint-cli2" })
     end,
   },
-  { "echasnovski/mini.surround",
+  {
+    "echasnovski/mini.surround",
     opts = function()
-      Keys.map('n', '<leader>za', 'gsaiw`wl', { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
-      Keys.map('v', '<leader>za', 'gsa``>lll', { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
+      Keys.map('n', '<leader>za', 'gsaiw`wl',
+        { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
+      Keys.map('v', '<leader>za', 'gsa``>lll',
+        { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
     end
   },
 }
