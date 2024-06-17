@@ -249,7 +249,8 @@ return {
       -- https://github.com/alpha2phi/modern-neovim/blob/eb688331b2f44b2fa35a5f26d7856322b92d1e53/lua/plugins/init.lua#L41
       background_colour = "Normal",
       top_down = false,
-      stages = "fade_in_slide_out",
+      fps = 60,
+      stages = "static",
       timeout = 3000,
       on_open = function(win)
         local buf = vim.api.nvim_win_get_buf(win)
