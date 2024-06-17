@@ -2,6 +2,7 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+local Util = require("helpers.util")
 local ccmd = vim.api.nvim_create_autocmd
 
 -- override default LazyVim options for Markdown files
@@ -71,4 +72,10 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.formatoptions:remove({ 'o' })
   end,
+})
+
+vim.api.nvim_create_autocmd("Syntax", {
+	callback = function()
+		Util.enable_zen_mode()
+	end,
 })
