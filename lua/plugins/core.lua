@@ -227,7 +227,13 @@ return {
       },
     },
   },
-  { "nvimdev/dashboard-nvim",       enabled = false },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      top_down = false,
+    },
+  },
+  { "nvimdev/dashboard-nvim", enabled = false },
   {
     "neovim/nvim-lspconfig",
     opts = {
