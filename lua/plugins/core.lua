@@ -383,8 +383,8 @@ return {
   },
   { "echasnovski/mini.surround",
     config = function()
-      Keys.map('n', '<leader>za', 'gsaiw`wl', { remap = true, desc = 'wrap with backtick (`) and go to the end' })
-      Keys.map('v', '<leader>za', 'gsa``>lll', { remap = true, desc = 'wrap with backtick (`) and go to the end' })
+      Keys.map('n', '<leader>za', 'gsaiw`wl', { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
+      Keys.map('v', '<leader>za', 'gsa``>lll', { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
     end
   },
 }
