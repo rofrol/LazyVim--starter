@@ -12,17 +12,19 @@ return {
         local current = Grapple.find({ buffer = 0 })
         local output = {}
 
-        for index, tag in ipairs(tags) do
-          local file_name = vim.fn.fnamemodify(tag.path, ":t")
+        if tags ~= nil then
+          for index, tag in ipairs(tags) do
+            local file_name = vim.fn.fnamemodify(tag.path, ":t")
 
-          if current and current.path == tag.path then
-            table.insert(output, string.format("%%#GrappleOpeningTriangle#◢%%#GrappleNumberActive# %s%%#GrappleActive# %s %%#GrappleClosingTriangle#◣", index, file_name))
-          else
-            table.insert(output, string.format("%%#GrappleBg# %%#GrappleNumberInctive# %s%%#GrappleInactive# %s  ", index, file_name))
+            if current and current.path == tag.path then
+              table.insert(output, string.format("%%#GrappleActiveOpeningTriangle#◢%%#GrappleNumberActive# %s%%#GrappleActive# %s %%#GrappleActiveClosingTriangle#◣", index, file_name))
+            else
+              table.insert(output, string.format("%%#GrappleBg#%%#GrappleInactiveOpeningTriangle#◢%%#GrappleNumberInctive# %s%%#GrappleInactive# %s %%#GrappleInactiveClosingTriangle#◣", index, file_name))
+            end
           end
         end
 
-        local statusline = table.concat(output)
+        local statusline = table.concat(output, ' ')
         if opts.include_icon then
           statusline = string.format("%s %%#GrappleIcon# %s", statusline, opts.icon)
         end

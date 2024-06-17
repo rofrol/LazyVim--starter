@@ -15,9 +15,11 @@ return {
       vim.api.nvim_set_hl(0, 'GrappleNumberActive', { fg = "#af01db" })
       vim.api.nvim_set_hl(0, 'GrappleNumberInctive', { fg = "#af01db", bg = "#cccccc" })
       vim.api.nvim_set_hl(0, 'GrappleIcon', { fg = "#af01db", bg = "#ffffff" })
-      vim.api.nvim_set_hl(0, 'GrappleOpeningTriangle', { fg = "#ffffff", bg = "#cccccc" })
-      vim.api.nvim_set_hl(0, 'GrappleClosingTriangle', { fg = "#ffffff", bg = "#cccccc" })
-      vim.api.nvim_set_hl(0, 'GrappleBg', { fg = "#ffffff", bg = "#cccccc" })
+      vim.api.nvim_set_hl(0, 'GrappleActiveOpeningTriangle', { fg = "#ffffff", bg = "#aaaaaa" })
+      vim.api.nvim_set_hl(0, 'GrappleActiveClosingTriangle', { fg = "#ffffff", bg = "#aaaaaa" })
+      vim.api.nvim_set_hl(0, 'GrappleInactiveOpeningTriangle', { fg = "#cccccc", bg = "#aaaaaa" })
+      vim.api.nvim_set_hl(0, 'GrappleInactiveClosingTriangle', { fg = "#cccccc", bg = "#aaaaaa" })
+      vim.api.nvim_set_hl(0, 'GrappleBg', { fg = "#ffffff", bg = "#aaaaaa" })
 
       vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd", bg = "#cccccc" })
     end,
