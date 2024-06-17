@@ -72,6 +72,19 @@ function Run_command_and_close(command)
   })
 end
 
+local function toggle_zen_mode()
+  vim.o.number = not vim.o.number
+  vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3)
+  if vim.o.laststatus == 0 then
+    vim.cmd("set noshowmode")
+  else
+    vim.cmd("set showmode")
+  end
+  if package.loaded["gitsigns"] then
+    require("gitsigns").toggle_signs()
+  end
+end
+
 local which_key_table = {
   ["<leader>"] = {
     w = {
@@ -81,11 +94,7 @@ local which_key_table = {
       },
     },
     z = {
-      z = {
-        ':set number!<CR>:lua vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3) if vim.o.laststatus == 0 then vim.cmd("set noshowmode") else vim.cmd("set showmode") end<CR>:Gitsigns toggle_signs<CR>',
-        -- does not work without below line
-        "my zen mode"
-      },
+      z = { toggle_zen_mode, "my zen mode" },
     },
     g = {
       m = {
