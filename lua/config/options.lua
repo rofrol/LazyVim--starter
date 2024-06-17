@@ -20,6 +20,7 @@ vim.api.nvim_set_hl(0, "BufferLineModifiedSelected", { fg = "#d79921", sp = "#d7
 -- local editor_layout = require("builtin.utils.layout").editor
 -- local MAX_NAME_LENGTH = editor_layout.width(0.334, 15, 80)
 
+-- does not work settings this in autocmds.lua
 -- https://vi.stackexchange.com/questions/29552/how-to-modify-only-the-background-colour-of-a-colourscheme-in-neovim-using-lua/29557#29557
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
