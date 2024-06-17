@@ -64,5 +64,5 @@
   "wpm.nvim": { "branch": "main", "commit": "e080c39f8ba539fe854d2055e741b6cefc74f96f" },
   "yanky.nvim": { "branch": "main", "commit": "73215b77d22ebb179cef98e7e1235825431d10e4" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" },
-  "zig": { "branch": "master", "commit": "455899668b620dfda40252501c748c0a983555bd" }
+  "zig": { "branch": "master", "commit": "254a3ba9d963bd031d1e536d0da1ad0621121db2" }
 }
