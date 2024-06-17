@@ -2,22 +2,22 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local Keys = require("helpers.keys")
+local Util = require("helpers.util")
 
 -- https://vi.stackexchange.com/questions/39149/how-to-stop-neovim-from-yanking-text-on-pasting-over-selection/39907#39907
 -- https://vi.stackexchange.com/questions/25259/clipboard-is-reset-after-first-paste-in-visual-mode/25260#25260
 -- https://github.com/disrupted/dotfiles/blob/1513aaa6d44654a2d8e0df6dd76078f15faa2460/.config/nvim/init.lua#L468
-Keys.map("v", "p", "P")
+Util.map("v", "p", "P")
 
 -- copy and paste visual selection
 -- https://stackoverflow.com/questions/731189/how-to-duplicate-a-selection-and-place-it-above-or-below-the-selection/14634666#14634666
-Keys.map('v', '<C-p>', "y'>p")
+Util.map('v', '<C-p>', "y'>p")
 
 -- delete other buffers except the current one and terminals
 -- copilot
 -- https://tech.serhatteker.com/post/2021-04/vim-delete-multiple-buffers/
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings-set
--- Keys.map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
+-- Util.map("n", "<Leader>do", "<cmd>%bdelete|edit#|bdelete#<cr>")
 
 local function close_all_non_visible_file_buffers()
   local current_buf = vim.api.nvim_get_current_buf()
@@ -42,10 +42,10 @@ end
 
 -- I don't use it anymore as I use grapple tabs
 -- bufferline
--- Keys.map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
--- Keys.map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
--- Keys.map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
--- Keys.map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
+-- Util.map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
+-- Util.map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})
+-- Util.map("n", "<Leader>mH", ":lua require'bufferline'.move_to(1)<CR>", {})
+-- Util.map("n", "<Leader>mL", ":lua require'bufferline'.move_to(-1)<CR>", {})
 
 -- https://www.reddit.com/r/neovim/comments/16cso6u/comment/jzlcy3c/
 if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
@@ -53,10 +53,10 @@ if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
   -- umap XXX may get error if there is no such mapping.
   -- map XXX <Nop> won't get error in that case and can disable vim's original(built in) command, such as d or s or c, while umap can't.
   -- https://vi.stackexchange.com/questions/16392/what-is-the-difference-between-unmap-and-mapping-to-nop/36833#36833
-  -- Keys.map({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
+  -- Util.map({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
   vim.keymap.del({ "i", "x", "n", "s" }, "<C-s>")
 
-  Keys.map({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+  Util.map({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 end
 
 function Run_command_and_close(command)
@@ -72,19 +72,6 @@ function Run_command_and_close(command)
   })
 end
 
-local function toggle_zen_mode()
-  vim.o.number = not vim.o.number
-  vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3)
-  if vim.o.laststatus == 0 then
-    vim.cmd("set noshowmode")
-  else
-    vim.cmd("set showmode")
-  end
-  if package.loaded["gitsigns"] then
-    require("gitsigns").toggle_signs()
-  end
-end
-
 local which_key_table = {
   ["<leader>"] = {
     w = {
@@ -94,7 +81,7 @@ local which_key_table = {
       },
     },
     z = {
-      z = { toggle_zen_mode, "my zen mode" },
+      z = { Util.toggle_zen_mode, "my zen mode" },
     },
     g = {
       m = {
@@ -118,14 +105,14 @@ end)
 -- https://www.reddit.com/r/neovim/comments/18ck6uq/comment/kcb9d8q/
 -- vim.api.nvim_del_keymap('n', '<A-j>')
 -- vim.api.nvim_del_keymap('v', '<A-j>')
--- Keys.map('i', '<A-j>', '<Down>')
+-- Util.map('i', '<A-j>', '<Down>')
 
 -- vim.api.nvim_del_keymap('n', '<A-k>')
 -- vim.api.nvim_del_keymap('v', '<A-k>')
--- Keys.map('i', '<A-k>', '<Up>')
+-- Util.map('i', '<A-k>', '<Up>')
 
--- Keys.map('i', '<A-h>', '<Left>')
--- Keys.map('i', '<A-l>', '<Right>')
+-- Util.map('i', '<A-h>', '<Left>')
+-- Util.map('i', '<A-l>', '<Right>')
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -185,4 +172,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- https://stackoverflow.com/questions/4768088/automatic-new-line-and-indentation-in-vim-when-inside-braces
 -- https://www.reddit.com/r/neovim/comments/hz9pwo/enable_smart_indent_on_curly_braces/
-Keys.map('i', '{<CR>', '{<CR>}<Esc>O')
+Util.map('i', '{<CR>', '{<CR>}<Esc>O')

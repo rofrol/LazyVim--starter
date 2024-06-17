@@ -19,4 +19,18 @@ function M.map(mode, lhs, rhs, opts)
   -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+function M.toggle_zen_mode()
+  vim.o.number = not vim.o.number
+  vim.o.laststatus = (vim.o.laststatus == 3 and 0 or 3)
+  if vim.o.laststatus == 0 then
+    vim.cmd("set noshowmode")
+  else
+    vim.cmd("set showmode")
+  end
+  if package.loaded["gitsigns"] then
+    require("gitsigns").toggle_signs()
+  end
+end
+
+
 return M

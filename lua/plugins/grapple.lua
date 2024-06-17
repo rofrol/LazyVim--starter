@@ -2,7 +2,7 @@
 return {
   {
     "cbochs/grapple.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.bufremove" },
     opts = {
       scope = "git",          -- also try out "git_branch"
       icons = true,           -- setting to "true" requires "nvim-web-devicons"
@@ -22,10 +22,9 @@ return {
       vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd", bg = "#cccccc" })
     end,
     keys = function()
-      local opts = { noremap = true, silent = true }
       local keys = {
         { "<leader>a", "<cmd>Grapple tag<cr>",          desc = "Tag a file" },
-        { "<leader>ht", "<cmd>Grapple untag<cr>",          desc = "Untag a file" },
+        { "<leader>ht", function() require("grapple").untag(); require("mini.bufremove").delete(0, true);  end, desc = "Untag a file" },
         { "<leader>j", "<cmd>Grapple toggle_tags<cr>",     desc = "Toggle tags menu" },
         { "<S-l>",     "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
         { "<S-h>",     "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
