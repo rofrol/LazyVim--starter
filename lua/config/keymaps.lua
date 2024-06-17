@@ -40,7 +40,7 @@ local function close_all_non_visible_file_buffers()
 end
 
 
--- I don't use it anymore as I use harpoon tabs
+-- I don't use it anymore as I use grapple tabs
 -- bufferline
 -- Keys.map("n", "<Leader>mh", ":BufferLineMovePrev<CR>", {})
 -- Keys.map("n", "<Leader>ml", ":BufferLineMoveNext<CR>", {})

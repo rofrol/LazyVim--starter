@@ -10,7 +10,7 @@ local select_one_or_multi = function(prompt_bufnr)
     for _, j in pairs(multi) do
       if j.path ~= nil then
         -- vim.cmd(string.format('%s %s', 'edit', j.path))
-        require("harpoon.mark").add_file(j.path)
+        require("grapple").app():tag({path = j.path})
       end
     end
   else
@@ -23,6 +23,8 @@ return {
     "telescope.nvim",
     dependencies = {
       "natecraddock/telescope-zf-native.nvim",
+      "natecraddock/telescope-zf-native.nvim",
+      "cbochs/grapple.nvim",
       config = function()
         require("telescope").load_extension("zf-native")
       end,

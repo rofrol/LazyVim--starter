@@ -1,29 +1,33 @@
--- if true then return {} end
 return {
   {
     "nvim-lualine/lualine.nvim",
-    -- dependencies =  { "abeldekat/harpoonline", version = "*" },
-    dependencies =  { "ThePrimeagen/harpoon", "asyncedd/wpm.nvim" },
+    dependencies = { "cbochs/grapple.nvim", "asyncedd/wpm.nvim" },
     config = function(_, opts)
       -- https://github.com/ThePrimeagen/harpoon/issues/352#issuecomment-1873053256
-      local harpoon = require('harpoon');
-      function Harpoon_files()
-        local contents = {}
-        local marks_length = harpoon:list():length()
-        local current_file_path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
-        for index = 1, marks_length do
-          local harpoon_file_path = harpoon:list():get(index).value
-          local file_name = harpoon_file_path == "" and "(empty)" or vim.fn.fnamemodify(harpoon_file_path, ':t')
+      function Grapple_files()
+        local Grapple = require("grapple")
+        local app = Grapple.app()
+        opts = vim.tbl_deep_extend("keep", opts or {}, app.settings.statusline)
+        local tags = Grapple.tags()
+        local current = Grapple.find({ buffer = 0 })
+        local output = {}
 
-          if current_file_path == harpoon_file_path then
-            contents[index] = string.format("%%#HarpoonNumberActive# %s%%#HarpoonActive# %s ", index, file_name)
+        for index, tag in ipairs(tags) do
+          local file_name = vim.fn.fnamemodify(tag.path, ":t")
+
+          if current and current.path == tag.path then
+            table.insert(output, string.format("%%#GrappleNumberActive# %s%%#GrappleActive# %s ", index, file_name))
           else
-            contents[index] = string.format("%%#HarpoonNumberInactive# %s%%#HarpoonInactive# %s ", index, file_name)
+            table.insert(output, string.format("%%#GrappleNumberInctive# %s%%#GrappleInactive# %s ", index, file_name))
           end
         end
 
-        -- print(vim.inspect(table.concat(contents)))
-        return table.concat(contents)
+        local statusline = table.concat(output)
+        if opts.include_icon then
+          statusline = string.format("%s %%#GrappleIcon# %s", statusline, opts.icon)
+        end
+
+        return statusline
       end
 
       require('lualine').setup {
@@ -46,7 +50,6 @@ return {
       require('lualine').setup {
         sections = {
           lualine_a = opts.sections.lualine_a,
-          -- lualine_z = opts.sections.lualine_z,
           lualine_z = {
             wpm.wpm,
             wpm.historic_graph,
@@ -58,7 +61,7 @@ return {
         tabline = {
           lualine_a = {
             {
-              Harpoon_files,
+              Grapple_files,
               -- setting bg is needed to disable right separator . bug?
               -- https://www.reddit.com/r/neovim/comments/18s7185/help_with_lualines_component_separators/
               color = { bg = '#ffffff' },
