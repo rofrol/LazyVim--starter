@@ -17,8 +17,9 @@ return {
       vim.api.nvim_set_hl(0, 'GrappleIcon', { fg = "#af01db", bg = "#ffffff" })
       vim.api.nvim_set_hl(0, 'GrappleOpeningTriangle', { fg = "#ffffff", bg = "#cccccc" })
       vim.api.nvim_set_hl(0, 'GrappleClosingTriangle', { fg = "#ffffff", bg = "#cccccc" })
+      vim.api.nvim_set_hl(0, 'GrappleBg', { fg = "#ffffff", bg = "#cccccc" })
 
-      vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd"})
+      vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd", bg = "#cccccc" })
     end,
     keys = function()
       local opts = { noremap = true, silent = true }
