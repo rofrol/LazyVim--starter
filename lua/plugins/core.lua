@@ -382,7 +382,7 @@ return {
     end,
   },
   { "echasnovski/mini.surround",
-    config = function()
+    opts = function()
       Keys.map('n', '<leader>za', 'gsaiw`wl', { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
       Keys.map('v', '<leader>za', 'gsa``>lll', { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
     end
