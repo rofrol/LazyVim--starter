@@ -16,9 +16,9 @@ return {
           local file_name = vim.fn.fnamemodify(tag.path, ":t")
 
           if current and current.path == tag.path then
-            table.insert(output, string.format("%%#GrappleNumberActive# %s%%#GrappleActive# %s ", index, file_name))
+            table.insert(output, string.format("%%#GrappleOpeningTriangle#◢%%#GrappleNumberActive# %s%%#GrappleActive# %s %%#GrappleClosingTriangle#◣", index, file_name))
           else
-            table.insert(output, string.format("%%#GrappleNumberInctive# %s%%#GrappleInactive# %s ", index, file_name))
+            table.insert(output, string.format(" %%#GrappleNumberInctive# %s%%#GrappleInactive# %s  ", index, file_name))
           end
         end
 
