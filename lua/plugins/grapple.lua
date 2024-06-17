@@ -4,10 +4,10 @@ return {
     "cbochs/grapple.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
-        scope = "git", -- also try out "git_branch"
-        icons = true, -- setting to "true" requires "nvim-web-devicons"
-        status = true,
-        include_icon = false, -- this has no effect, always set to true when checked in lualine.lua
+      scope = "git",          -- also try out "git_branch"
+      icons = true,           -- setting to "true" requires "nvim-web-devicons"
+      status = true,
+      include_icon = false,   -- this has no effect, always set to true when checked in lualine.lua
     },
     config = function()
       vim.api.nvim_set_hl(0, 'GrappleActive', { fg = "#333333" })
@@ -24,17 +24,26 @@ return {
     keys = function()
       local opts = { noremap = true, silent = true }
       local keys = {
-        { "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
-        { "<leader>j", "<cmd>Grapple toggle_tags<cr>", desc = "Toggle tags menu" },
-        { "<S-l>", "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
-        { "<S-h>", "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
+        { "<leader>a", "<cmd>Grapple toggle<cr>",          desc = "Tag a file" },
+        { "<leader>j", "<cmd>Grapple toggle_tags<cr>",     desc = "Toggle tags menu" },
+        { "<S-l>",     "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
+        { "<S-h>",     "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
       }
 
       for i = 1, 9 do
         table.insert(keys, {
-          mode = (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and { "i", "x", "n", "s" } or  { "x", "n", "s" },
-          (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and string.format("<D-%s>", i) or string.format("<leader>%s", i),
-          string.format("<cmd>Grapple select index=%s<cr>", i),
+          mode = (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and { "i", "x", "n", "s" } or
+          { "x", "n", "s" },
+          (vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app") and string.format("<D-%s>", i) or
+          string.format("<leader>%s", i),
+          function()
+            local Grapple = require("grapple")
+            local tags = Grapple.tags()
+            if i > #tags then
+              return
+            end
+            Grapple.select({ index = i })
+          end,
           desc = string.format("Grapple select %s tag", i),
         })
       end
