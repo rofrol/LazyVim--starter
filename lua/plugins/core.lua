@@ -220,10 +220,18 @@ return {
     end,
   },
   {
+    -- interesting noice config
+    -- https://github.com/chrisgrieser/.config/blob/main/nvim/lua/plugins/noice-and-notification.lua
     "folke/noice.nvim",
     opts = {
-      cmdline = {
-        view = "cmdline",
+      views = {
+        cmdline_popup = {
+          size = { width = 100 },
+          position = {
+            row = -2,
+            col = 0,
+          },
+        },
       },
       -- https://github.com/folke/noice.nvim/wiki/A-Guide-to-Messages
       -- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
