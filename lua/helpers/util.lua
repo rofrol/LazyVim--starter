@@ -32,9 +32,7 @@ function M.disable_zen_mode()
   vim.o.number = true
   vim.o.laststatus = 3
   vim.cmd("set showmode")
-  if require("gitsigns.config").signcolumn then
-    require("gitsigns").toggle_signs(true)
-  end
+  M.toggle_signs_no_refresh(true)
 end
 
 function M.enable_zen_mode()
@@ -42,10 +40,18 @@ function M.enable_zen_mode()
   vim.o.number = false
   vim.o.laststatus = 0
   vim.cmd("set noshowmode")
-  if not require("gitsigns.config").signcolumn then
+  M.toggle_signs_no_refresh(false)
+end
+
+function M.toggle_signs_no_refresh(value)
+  -- toggle_signs does refresh and Gitsigns flashed
+  -- so we need to toggle if it is in differen state
+
+  if value and require("gitsigns.config").signcolumn then
+    require("gitsigns").toggle_signs(true)
+  elseif not value and not require("gitsigns.config").signcolumn then
     require("gitsigns").toggle_signs(false)
   end
 end
-
 
 return M
