@@ -253,7 +253,6 @@ return {
       stages = "static",
       timeout = 3000,
       on_open = function(win)
-        local buf = vim.api.nvim_win_get_buf(win)
         local height = vim.api.nvim_win_get_height(win)
         local width = vim.api.nvim_win_get_width(win)
         local row = vim.api.nvim_win_get_position(win)[1]
