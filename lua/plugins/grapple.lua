@@ -41,6 +41,8 @@ return {
           function()
             local Grapple = require("grapple")
             local tags = Grapple.tags()
+
+            -- prevent switching to index bigger than number of tags
             if i > #tags then
               return
             end
