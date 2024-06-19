@@ -35,8 +35,11 @@ return {
         },
         { "<leader>ht",
           function()
-            require("grapple").untag()
-            require("mini.bufremove").delete(0, true)
+            local Grapple = require("grapple")
+            if Grapple.exists() then
+              Grapple.untag()
+              require("mini.bufremove").delete(0, true)
+            end
           end,
           desc = "Untag a file"
         },
