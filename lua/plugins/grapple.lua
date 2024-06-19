@@ -25,8 +25,21 @@ return {
     end,
     keys = function()
       local keys = {
-        { "<leader>a", "<cmd>Grapple tag<cr>",          desc = "Tag a file" },
-        { "<leader>ht", function() require("grapple").untag(); require("mini.bufremove").delete(0, true);  end, desc = "Untag a file" },
+        { "<leader>a",
+          function()
+            -- tag only if buffer is file, not neo-tree or terminal
+            if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == '' then
+              require("grapple").tag()
+            end
+          end,
+        },
+        { "<leader>ht",
+          function()
+            require("grapple").untag()
+            require("mini.bufremove").delete(0, true)
+          end,
+          desc = "Untag a file"
+        },
         { "<leader>j", "<cmd>Grapple toggle_tags<cr>",     desc = "Toggle tags menu" },
         { "<S-l>",     "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
         { "<S-h>",     "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
