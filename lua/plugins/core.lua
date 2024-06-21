@@ -179,10 +179,20 @@ return {
     keys = function()
       local zigbuild = require('toggleterm.terminal').Terminal:new({
         direction = "vertical",
-        cmd =
-        "watchexec -c -r zig build",
+        cmd = "watchexec -c -r zig build",
         hidden = false
       })
+      local bun = function()
+        local filename = vim.fn.expand("%:p")
+        local basedir = vim.fn.fnamemodify(filename, ":h")
+        local cmd = "cd " .. basedir .. " && bun --watch " .. filename
+        print(cmd)
+        return require('toggleterm.terminal').Terminal:new({
+          direction = "vertical",
+          cmd = cmd,
+          hidden = false
+        })
+      end
       -- on_load copied from lazy/LazyVim/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
       -- require("which-key").register(which_key_table)
       local keys = {
@@ -207,13 +217,21 @@ return {
           desc = "Open terminal with 1/3 width"
         },
         {
-          "<leader>wb",
+          "<leader>wz",
           function()
             zigbuild:toggle()
             -- settings size in Terminal:new does not work when direction is vertical
             vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
           end,
           desc = "Open terminal with watchexec zig build with 1/3 width"
+        },
+        {
+          "<leader>wb",
+          function()
+            bun():toggle()
+            vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
+          end,
+          desc = "Run bun with current file in terminal with 1/3 width"
         },
       }
       return keys
@@ -242,6 +260,12 @@ return {
             kind = "",
           },
           opts = { skip = true },
+        },
+      },
+      cmdline = {
+        view = "cmdline",
+        position = {
+          row = -2,
         },
       },
     },
