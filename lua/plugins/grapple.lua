@@ -25,7 +25,8 @@ return {
     end,
     keys = function()
       local keys = {
-        { "<leader>a",
+        -- <leader>a stopped working
+        { "<leader>ha",
           function()
             -- tag only if buffer is file, not neo-tree or terminal
             if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == '' then
