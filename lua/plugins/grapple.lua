@@ -33,7 +33,7 @@ return {
             end
           end,
         },
-        { "<leader>ht",
+        { "<leader>hw",
           function()
             local Grapple = require("grapple")
             if Grapple.exists() then
