@@ -54,4 +54,13 @@ function M.toggle_signs_no_refresh(value)
   end
 end
 
+-- https://vi.stackexchange.com/questions/36457/how-can-i-switch-to-the-no-name-buffer/40062#40062
+function M.is_no_name_buf(buf)
+  return
+    vim.api.nvim_buf_is_loaded(buf)
+    and vim.api.nvim_get_option_value('buflisted', { buf = buf })
+    and vim.api.nvim_buf_get_name(buf) == ''
+    and vim.api.nvim_get_option_value('buftype', { buf = buf }) == ''
+    and vim.api.nvim_get_option_value('filetype', { buf = buf }) == ''
+end
 return M

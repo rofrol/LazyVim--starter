@@ -1,4 +1,5 @@
 -- if true then return {} end
+local Util = require("helpers.util")
 return {
   {
     "cbochs/grapple.nvim",
@@ -29,7 +30,7 @@ return {
         { "<leader>ha",
           function()
             -- tag only if buffer is file, not neo-tree or terminal
-            if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == '' then
+            if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == '' and not Util.is_no_name_buf(0) then
               require("grapple").tag()
             end
           end,
