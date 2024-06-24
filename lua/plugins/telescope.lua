@@ -20,9 +20,8 @@ end
 
 return {
   {
-    "telescope.nvim",
+    "nvim-telescope/telescope.nvim",
     dependencies = {
-      "natecraddock/telescope-zf-native.nvim",
       "natecraddock/telescope-zf-native.nvim",
       "cbochs/grapple.nvim",
       config = function()
@@ -79,14 +78,6 @@ return {
             },
           },
         },
-      }
-    }
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    -- change some options
-    opts = {
-      defaults = {
         -- layout_strategy = "horizontal",
         -- layout_config = { prompt_position = "top" },
         -- sorting_strategy = "ascending",
@@ -118,7 +109,7 @@ return {
             ["<C-y>"] = require("telescope.actions.layout").toggle_preview,
           }
         },
-      },
-    },
+      }
+    }
   },
 }
