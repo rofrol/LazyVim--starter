@@ -179,7 +179,7 @@ return {
     keys = function()
       local zigbuild = require('toggleterm.terminal').Terminal:new({
         direction = "vertical",
-        cmd = "watchexec -c -r zig build",
+        cmd = "watchexec -e zig -c -r zig build",
         hidden = false
       })
       local bun = function()
