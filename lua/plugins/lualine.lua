@@ -32,17 +32,10 @@ return {
         return statusline
       end
 
-      require('lualine').setup {
-      }
-      table.insert(opts.sections.lualine_a,
-        function()
-          return "😄"
-        end
-      )
-
       local wpm = require("wpm")
       wpm.setup({})
 
+      -- table.insert(opts.sections.lualine_a, function() return "✞" end)
       -- prepend with 1
       -- https://stackoverflow.com/questions/71299599/how-to-prepend-an-item-to-lua-array/71299679#71299679
       -- table.insert(opts.sections.lualine_z, 1, "location")
@@ -51,7 +44,10 @@ return {
 
       require('lualine').setup {
         sections = {
-          lualine_a = opts.sections.lualine_a,
+          lualine_a = {
+            function() return "✞" end,
+            unpack(opts.sections.lualine_a),
+          },
           lualine_z = {
             wpm.wpm,
             wpm.historic_graph,
