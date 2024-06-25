@@ -31,4 +31,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
-vim.g.myzenmode = true
+vim.g.myzenmode = false
