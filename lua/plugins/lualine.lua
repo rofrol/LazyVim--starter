@@ -45,7 +45,7 @@ return {
       require('lualine').setup {
         sections = {
           lualine_a = {
-            function() return "✞" end,
+            function() return "🕇" end,
             unpack(opts.sections.lualine_a),
           },
           lualine_z = {
