@@ -1,43 +1,12 @@
 return {
-  -- from https://github.com/catdadcode/lazyvim.github.io/blob/1c1ba57afa08a1bfe0f698ead63776e9a091f80b/lua/recipes.lua#L29C3-L69C5
   {
     "hrsh7th/nvim-cmp",
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
-      local cmp = require("cmp")
-
-      opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-            cmp.select_next_item()
-          elseif vim.snippet.active({ direction = 1 }) then
-            vim.schedule(function()
-              vim.snippet.jump(1)
-            end)
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif vim.snippet.active({ direction = -1 }) then
-            vim.schedule(function()
-              vim.snippet.jump(-1)
-            end)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+    opts = function()
+      -- https://github.com/BSathvik/dotfiles/blob/f908c002159a7a91bf5984de7caf8b76ffc7f30b/nvim/init.lua#L600
+      -- https://github.com/hrsh7th/nvim-cmp/discussions/759
+      -- https://github.com/NvChad/NvChad/discussions/2397
+      require("cmp").setup.filetype({ "markdown" }, {
+        sources = {},
       })
     end,
   },
