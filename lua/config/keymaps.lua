@@ -56,7 +56,7 @@ if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
   -- Util.map({ "i", "x", "n", "s" }, "<C-s>", "<Nop>")
   vim.keymap.del({ "i", "x", "n", "s" }, "<C-s>")
 
-  Util.map({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+  Util.map({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr>", { desc = "Save file" })
 end
 
 function Run_command_and_close(command)
