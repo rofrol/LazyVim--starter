@@ -27,7 +27,7 @@ return {
     keys = function()
       local keys = {
         -- <leader>a stopped working
-        { "<leader>jj",
+        { "<leader>ju",
           function()
             -- tag only if buffer is file, not neo-tree or terminal
             if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == '' and not Util.is_no_name_buf(0) then
@@ -46,7 +46,7 @@ return {
           end,
           desc = "Untag a file"
         },
-        { "<leader>jh", "<cmd>Grapple toggle_tags<cr>",     desc = "Toggle tags menu" },
+        { "<leader>jj", "<cmd>Grapple toggle_tags<cr>",     desc = "Toggle tags menu" },
         { "<S-l>",     "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
         { "<S-h>",     "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
       }
