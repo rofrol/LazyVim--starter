@@ -34,6 +34,7 @@ return {
               require("grapple").tag()
             end
           end,
+          desc = "Tag a file"
         },
         { "<leader>jm",
           function()
@@ -45,7 +46,7 @@ return {
           end,
           desc = "Untag a file"
         },
-        { "<leader>j", "<cmd>Grapple toggle_tags<cr>",     desc = "Toggle tags menu" },
+        { "<leader>jh", "<cmd>Grapple toggle_tags<cr>",     desc = "Toggle tags menu" },
         { "<S-l>",     "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
         { "<S-h>",     "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
       }
