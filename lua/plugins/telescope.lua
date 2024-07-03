@@ -107,6 +107,10 @@ return {
             -- https://github.com/nvim-telescope/telescope.nvim/blob/3466159b0fcc1876483f6f53587562628664d850/lua/telescope/mappings.lua#L179
             ['<CR>'] = select_one_or_multi,
             ["<C-y>"] = require("telescope.actions.layout").toggle_preview,
+            ["<C-k>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-j>"] = require("telescope.actions").preview_scrolling_down,
+            ["<C-h>"] = require("telescope.actions").preview_scrolling_left,
+            ["<C-l>"] = require("telescope.actions").preview_scrolling_right,
           }
         },
       }
