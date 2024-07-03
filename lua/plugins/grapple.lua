@@ -27,7 +27,7 @@ return {
     keys = function()
       local keys = {
         -- <leader>a stopped working
-        { "<leader>ha",
+        { "<leader>jj",
           function()
             -- tag only if buffer is file, not neo-tree or terminal
             if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == '' and not Util.is_no_name_buf(0) then
@@ -35,7 +35,7 @@ return {
             end
           end,
         },
-        { "<leader>hw",
+        { "<leader>jm",
           function()
             local Grapple = require("grapple")
             if Grapple.exists() then
