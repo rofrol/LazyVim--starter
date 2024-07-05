@@ -4,12 +4,6 @@ return {
   {
     "cbochs/grapple.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.bufremove" },
-    opts = {
-      scope = "git",          -- also try out "git_branch"
-      icons = true,           -- setting to "true" requires "nvim-web-devicons"
-      status = true,
-      include_icon = false,   -- this has no effect, always set to true when checked in lualine.lua
-    },
     config = function()
       vim.api.nvim_set_hl(0, 'GrappleActive', { fg = "#333333" })
       vim.api.nvim_set_hl(0, 'GrappleInactive', { fg = "#555555", bg = "#cccccc" })
@@ -23,6 +17,20 @@ return {
       vim.api.nvim_set_hl(0, 'GrappleBg', { fg = "#ffffff", bg = "#aaaaaa" })
 
       vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd", bg = "#cccccc" })
+
+      -- setting in opts does not work for win_opts.width
+      require("grapple").setup(
+        {
+          scope = "git",          -- also try out "git_branch"
+          icons = true,           -- setting to "true" requires "nvim-web-devicons"
+          status = true,
+          include_icon = false,   -- this has no effect, always set to true when checked in lualine.lua
+          win_opts = {
+            -- Can be fractional
+            width = 140,
+            height = 14,
+          },
+        })
     end,
     keys = function()
       local keys = {
