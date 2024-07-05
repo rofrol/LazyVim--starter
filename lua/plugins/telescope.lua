@@ -111,6 +111,8 @@ return {
             ["<C-j>"] = require("telescope.actions").preview_scrolling_down,
             ["<C-h>"] = require("telescope.actions").preview_scrolling_left,
             ["<C-l>"] = require("telescope.actions").preview_scrolling_right,
+            ["<C-;>"] = require("telescope.actions").move_selection_next,
+            ["<C-n>"] = false,
           }
         },
       }
