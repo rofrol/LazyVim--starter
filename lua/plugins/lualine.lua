@@ -17,17 +17,17 @@ return {
             local file_name = vim.fn.fnamemodify(tag.path, ":t")
 
             if current and current.path == tag.path then
-              table.insert(output, string.format("%%#GrappleActiveOpeningTriangle#◢%%#GrappleNumberActive# %s%%#GrappleActive# %s %%#GrappleActiveClosingTriangle#◣", index, file_name))
+              table.insert(output, string.format("%%#GrappleActiveOpeningTriangle#%%#GrappleNumberActive#%s %%#GrappleActive#%s%%#GrappleActiveClosingTriangle#", index, file_name))
             else
-              table.insert(output, string.format("%%#GrappleBg#%%#GrappleInactiveOpeningTriangle#◢%%#GrappleNumberInctive# %s%%#GrappleInactive# %s %%#GrappleInactiveClosingTriangle#◣", index, file_name))
+              table.insert(output, string.format("%%#GrappleBg#%%#GrappleInactiveOpeningTriangle#%%#GrappleNumberInctive#%s %%#GrappleInactive#%s%%#GrappleInactiveClosingTriangle#", index, file_name))
             end
           end
         end
 
         local statusline = table.concat(output, ' ')
-        if opts.include_icon then
-          statusline = string.format("%s %%#GrappleIcon# %s", statusline, opts.icon)
-        end
+        -- if opts.include_icon then
+        --   statusline = string.format("%s %%#GrappleIcon# %s", statusline, opts.icon)
+        -- end
 
         return statusline
       end
@@ -43,6 +43,7 @@ return {
       -- table.insert(opts.sections.lualine_z, 1, wpm.historic_graph)
 
       require('lualine').setup {
+        options = { section_separators = '', component_separators = '' },
         sections = {
           lualine_a = {
             function() return "🕇" end,
@@ -60,9 +61,13 @@ return {
           lualine_a = {
             {
               Grapple_files,
-              -- setting bg is needed to disable right separator . bug?
+              -- setting bg is needed to disable right separator. bug?
               -- https://www.reddit.com/r/neovim/comments/18s7185/help_with_lualines_component_separators/
               color = { bg = '#ffffff' },
+              icons_enabled = false,
+              icon = nil,
+              separator = nil,
+              padding = 0,
             }
           },
         },
