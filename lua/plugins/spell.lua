@@ -32,31 +32,22 @@ return {
     "folke/which-key.nvim",
     optional = true,
     opts = {
-      defaults = {
-        ["<leader>o"] = {
-          name = "Spell",
-          p = {
-            function()
-              vim.bo.spelllang = "pl"
-              vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/pl.utf-8.add"
-              print("Spelling set to Polish");
-            end,
-            "Spelling set to Polish"
-          },
-          e = {
-            function()
-              vim.bo.spelllang = "en_us"
-              vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
-              print("Spelling set to English (US)");
-            end,
-            "Spelling set to English (US)"
-          },
-          m = {
-            spell_multiple,
-            "Spelling set to techspeak, Polish, English (US)"
-          },
-        },
-      },
+      spec = {
+        { "<leader>o", group = "spell" },
+      }
+    },
+    keys = {
+      { "<leader>oe", function()
+        vim.bo.spelllang = "en_us"
+        vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+        print("Spelling set to English (US)");
+      end, desc = "Spelling set to English (US)" },
+      { "<leader>om", spell_multiple, desc = "Spelling set to techspeak, Polish, English (US)" },
+      { "<leader>op", function()
+        vim.bo.spelllang = "pl"
+        vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/pl.utf-8.add"
+        print("Spelling set to Polish");
+      end, desc = "Spelling set to Polish" },
     },
   },
 }

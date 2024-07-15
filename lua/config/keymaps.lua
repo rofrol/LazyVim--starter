@@ -74,32 +74,16 @@ function Run_command_and_close(command)
 end
 
 local which_key_table = {
-  ["<leader>"] = {
-    w = {
-      o = {
-        close_all_non_visible_file_buffers,
-        "close_all_non_visible_file_buffers"
-      },
-    },
-    z = {
-      z = { function()
-        Util.toggle_zen_mode()
-      end, "my zen mode" },
-    },
-    g = {
-      m = {
-        function()
-          Run_command_and_close("git sync")
-        end,
-        "my git sync"
-      },
-    },
-  }
+  { "<leader>gm", function()
+    Run_command_and_close("git sync")
+  end, desc = "my git sync" },
+  { "<leader>wo", close_all_non_visible_file_buffers, desc = "close_all_non_visible_file_buffers" },
+  { "<leader>zz", Util.toggle_zen_mode, desc = "my zen mode" },
 }
 -- on_load copied from lazy/LazyVim/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
 LazyVim.on_load("which-key.nvim", function()
   vim.schedule(function()
-    require("which-key").register(which_key_table)
+    require("which-key").add(which_key_table)
   end)
 end)
 
@@ -155,18 +139,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
 
       -- https://github.com/nix-community/kickstart-nix.nvim/blob/758ca4ef427ca1444d530b0e32dd6add32734181/nvim/plugin/autocommands.lua#L100
-      require("which-key").register(
+      require("which-key").add(
         {
-          ["<leader>"] = {
-            c = {
-              h = {
-                function()
-                  vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
-                end,
-                "[lsp] toggle inlay hints"
-              },
-            },
-          },
+          { "<leader>ch", function()
+            vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
+          end, desc = "[lsp] toggle inlay hints" },
         }
       )
     end
