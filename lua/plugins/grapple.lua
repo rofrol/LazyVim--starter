@@ -5,16 +5,18 @@ return {
     "cbochs/grapple.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.bufremove" },
     config = function()
-      vim.api.nvim_set_hl(0, 'GrappleActive', { fg = "#333333" })
+      vim.api.nvim_set_hl(0, 'GrappleActive', { fg = "#333333", bg = "#eeeeee" })
       vim.api.nvim_set_hl(0, 'GrappleInactive', { fg = "#555555", bg = "#cccccc" })
-      vim.api.nvim_set_hl(0, 'GrappleNumberActive', { fg = "#af01db" })
+      vim.api.nvim_set_hl(0, 'GrappleNumberActive', { fg = "#af01db", bg = "#eeeeee" })
       vim.api.nvim_set_hl(0, 'GrappleNumberInctive', { fg = "#af01db", bg = "#cccccc" })
       vim.api.nvim_set_hl(0, 'GrappleIcon', { fg = "#af01db", bg = "#ffffff" })
-      vim.api.nvim_set_hl(0, 'GrappleActiveOpeningTriangle', { fg = "#ffffff", bg = "#eeeeee" })
-      vim.api.nvim_set_hl(0, 'GrappleActiveClosingTriangle', { fg = "#ffffff", bg = "#eeeeee" })
-      vim.api.nvim_set_hl(0, 'GrappleInactiveOpeningTriangle', { fg = "#cccccc", bg = "#eeeeee" })
+      vim.api.nvim_set_hl(0, 'GrappleActiveOpeningTriangle', { fg = "#cccccc", bg = "#eeeeee" })
+      vim.api.nvim_set_hl(0, 'GrappleActiveClosingTriangle', { fg = "#eeeeee", bg = "#cccccc" })
+      vim.api.nvim_set_hl(0, 'GrappleActiveClosingTriangleLast', { fg = "#eeeeee", bg = "#ffffff" })
+      vim.api.nvim_set_hl(0, 'GrappleInactiveOpeningTriangle', { fg = "#ffffff", bg = "#cccccc" })
       vim.api.nvim_set_hl(0, 'GrappleInactiveClosingTriangle', { fg = "#cccccc", bg = "#eeeeee" })
-      vim.api.nvim_set_hl(0, 'GrappleBg', { fg = "#ffffff", bg = "#aaaaaa" })
+      vim.api.nvim_set_hl(0, 'GrappleInactiveClosingTriangleLast', { fg = "#cccccc", bg = "#ffffff" })
+      vim.api.nvim_set_hl(0, 'GrappleBg', { fg = "#ffffff", bg = "#555555" })
 
       vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd", bg = "#cccccc" })
 

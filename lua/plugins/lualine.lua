@@ -1,3 +1,4 @@
+local Util = require("helpers.util")
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -12,19 +13,42 @@ return {
         local current = Grapple.find({ buffer = 0 })
         local output = {}
 
+        local active_previous = false;
+        local length = Util.getTableSize(tags)
         if tags ~= nil then
           for index, tag in ipairs(tags) do
             local file_name = vim.fn.fnamemodify(tag.path, ":t")
 
             if current and current.path == tag.path then
-              table.insert(output, string.format("%%#GrappleActiveOpeningTriangle#%%#GrappleNumberActive#%s %%#GrappleActive#%s%%#GrappleActiveClosingTriangle#", index, file_name))
+              local left = ""
+              if index == 1 then
+                left = ""
+              end
+              local right = ""
+              local last = "%#GrappleActiveClosingTriangle#"
+              if index == length then
+                last = "%#GrappleActiveClosingTriangleLast#"
+              end
+              active_previous = true
+              table.insert(output, string.format("%%#GrappleActiveOpeningTriangle#%s%%#GrappleNumberActive# %s %%#GrappleActive#%s %s%s", left, index, file_name, last, right))
             else
-              table.insert(output, string.format("%%#GrappleBg#%%#GrappleInactiveOpeningTriangle#%%#GrappleNumberInctive#%s %%#GrappleInactive#%s%%#GrappleInactiveClosingTriangle#", index, file_name))
+              local left = ""
+              if index == 1 or active_previous then
+                left = ""
+              end
+              local last = "%#GrappleInactiveClosingTriangle#"
+              local right = ""
+              if index == length then
+                last = "%#GrappleInactiveClosingTriangleLast#"
+                right = ""
+              end
+              active_previous = false
+              table.insert(output, string.format("%%#GrappleBg#%%#GrappleInactiveOpeningTriangle#%s%%#GrappleNumberInctive# %s %%#GrappleInactive#%s %s%s", left, index, file_name, last, right))
             end
           end
         end
 
-        local statusline = table.concat(output, ' ')
+        local statusline = table.concat(output, '')
         -- if opts.include_icon then
         --   statusline = string.format("%s %%#GrappleIcon# %s", statusline, opts.icon)
         -- end
@@ -43,7 +67,7 @@ return {
       -- table.insert(opts.sections.lualine_z, 1, wpm.historic_graph)
 
       require('lualine').setup {
-        options = { section_separators = '', component_separators = '' },
+        -- options = { section_separators = '', component_separators = '' },
         sections = {
           lualine_a = {
             function() return "🕇" end,

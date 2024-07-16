@@ -63,4 +63,14 @@ function M.is_no_name_buf(buf)
     and vim.api.nvim_get_option_value('buftype', { buf = buf }) == ''
     and vim.api.nvim_get_option_value('filetype', { buf = buf }) == ''
 end
+
+-- https://stackoverflow.com/questions/31452871/table-getn-is-deprecated-how-can-i-get-the-length-of-an-array/53287006#53287006
+function M.getTableSize(t)
+    local count = 0
+    for _, _ in pairs(t) do
+        count = count + 1
+    end
+    return count
+end
+
 return M
