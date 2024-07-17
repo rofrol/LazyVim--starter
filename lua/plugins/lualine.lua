@@ -22,7 +22,8 @@ return {
           for index, tag in ipairs(tags) do
             -- https://github.com/nvim-lualine/lualine.nvim/wiki/Component-snippets#truncating-components-in-smaller-window
             local f = vim.fn.fnamemodify(tag.path, ":t")
-            local file_name = f:sub(1, trunc_len)..' '..MiniIcons.get('file', f)
+            local sep = trunc_len < #f and '…' or ' '
+            local file_name = f:sub(1, trunc_len)..sep..MiniIcons.get('file', f)
 
             if current and current.path == tag.path then
               local left = ""
