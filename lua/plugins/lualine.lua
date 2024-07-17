@@ -16,11 +16,13 @@ return {
 
         local active_previous = false;
         local length = Util.getTableSize(tags)
-        local win_width = vim.fn.winwidth(0)
-        local trunc_len = math.floor((win_width - length * 7 ) / length)
+        -- https://neovim.discourse.group/t/how-can-i-get-size-of-my-current-workspace/1876/5
+        -- https://vi.stackexchange.com/questions/37530/how-to-get-total-width-of-vim-with-vertical-splits/37531#37531
+        local trunc_len = math.floor((vim.o.columns - length * 7 ) / length)
         if tags ~= nil then
           for index, tag in ipairs(tags) do
             -- https://github.com/nvim-lualine/lualine.nvim/wiki/Component-snippets#truncating-components-in-smaller-window
+            -- https://github.com/nvim-lualine/lualine.nvim/issues/225
             local f = vim.fn.fnamemodify(tag.path, ":t")
             local sep = trunc_len < #f and '…' or ' '
             local file_name = f:sub(1, trunc_len)..sep..MiniIcons.get('file', f)
