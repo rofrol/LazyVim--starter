@@ -193,6 +193,15 @@ return {
           hidden = false
         })
       end
+      local ng_serve = function()
+        local cmd = "cd " .. vim.fs.root(0, '.git') .. " && ng s"
+        print(cmd)
+        return require('toggleterm.terminal').Terminal:new({
+          direction = "horizontal",
+          cmd = cmd,
+          hidden = false
+        })
+      end
       -- on_load copied from lazy/LazyVim/lua/lazyvim/plugins/extras/coding/copilot-chat.lua
       -- require("which-key").register(which_key_table)
       local keys = {
@@ -205,7 +214,7 @@ return {
         { "<M-3>",     "<Cmd>3ToggleTerm<Cr>", desc = "Terminal #3" },
         { "<M-4>",     "<Cmd>4ToggleTerm<Cr>", desc = "Terminal #4" },
         {
-          "<leader>wv",
+          "<leader>tv",
           function()
             local term = require("toggleterm.terminal").Terminal:new({
               direction = "vertical",
@@ -217,7 +226,7 @@ return {
           desc = "Open terminal with 1/3 width"
         },
         {
-          "<leader>wz",
+          "<leader>tz",
           function()
             zigbuild:toggle()
             -- settings size in Terminal:new does not work when direction is vertical
@@ -226,12 +235,20 @@ return {
           desc = "Open terminal with watchexec zig build with 1/3 width"
         },
         {
-          "<leader>wb",
+          "<leader>tb",
           function()
             bun():toggle()
             vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.33))
           end,
           desc = "Run bun with current file in terminal with 1/3 width"
+        },
+        {
+          "<leader>ts",
+          function()
+            ng_serve():toggle()
+            -- vim.cmd("horizontal resize " .. math.floor(vim.o.rows * 0.33))
+          end,
+          desc = "Run ng s in terminal with 1/3 height"
         },
       }
       return keys
