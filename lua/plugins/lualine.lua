@@ -2,10 +2,11 @@ local Util = require("helpers.util")
 return {
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "cbochs/grapple.nvim", "asyncedd/wpm.nvim" },
+    dependencies = { "cbochs/grapple.nvim", "asyncedd/wpm.nvim", { 'echasnovski/mini.icons', version = false } },
     config = function(_, opts)
       -- https://github.com/ThePrimeagen/harpoon/issues/352#issuecomment-1873053256
       function Grapple_files()
+        local MiniIcons = require('mini.icons')
         local Grapple = require("grapple")
         local app = Grapple.app()
         opts = vim.tbl_deep_extend("keep", opts or {}, app.settings.statusline)
@@ -16,11 +17,12 @@ return {
         local active_previous = false;
         local length = Util.getTableSize(tags)
         local win_width = vim.fn.winwidth(0)
-        local trunc_len = math.floor((win_width - length * 5 ) / length)
+        local trunc_len = math.floor((win_width - length * 7 ) / length)
         if tags ~= nil then
           for index, tag in ipairs(tags) do
             -- https://github.com/nvim-lualine/lualine.nvim/wiki/Component-snippets#truncating-components-in-smaller-window
-            local file_name = vim.fn.fnamemodify(tag.path, ":t"):sub(1, trunc_len)
+            local f = vim.fn.fnamemodify(tag.path, ":t")
+            local file_name = f:sub(1, trunc_len)..' '..MiniIcons.get('file', f)
 
             if current and current.path == tag.path then
               local left = ""
