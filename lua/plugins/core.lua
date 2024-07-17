@@ -1,6 +1,17 @@
 -- if true then return {} end
 local Util = require("helpers.util")
 return {
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<leader>j", group = "grapple" },
+        { "<leader>o", group = "spell" },
+        { "<leader>t", group = "terminal" },
+        { "<leader>z", group = "misc" },
+      }
+    },
+  },
   -- { "Olical/nfnl",            ft = "fennel" },
   -- {
   --   "nvim-treesitter/nvim-treesitter",

@@ -31,12 +31,8 @@ return {
   {
     "folke/which-key.nvim",
     optional = true,
-    opts = {
-      spec = {
-        { "<leader>o", group = "spell" },
-      }
-    },
     keys = {
+      { "<leader>o", group = "spell" },
       { "<leader>oe", function()
         vim.bo.spelllang = "en_us"
         vim.bo.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"

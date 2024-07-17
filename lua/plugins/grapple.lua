@@ -82,13 +82,5 @@ return {
       end
       return keys
     end,
-  },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      spec = {
-        { "<leader>j", group = "grapple" },
-      }
-    },
   }
 }
