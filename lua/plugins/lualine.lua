@@ -15,9 +15,12 @@ return {
 
         local active_previous = false;
         local length = Util.getTableSize(tags)
+        local win_width = vim.fn.winwidth(0)
+        local trunc_len = math.floor((win_width - length * 5 ) / length)
         if tags ~= nil then
           for index, tag in ipairs(tags) do
-            local file_name = vim.fn.fnamemodify(tag.path, ":t")
+            -- https://github.com/nvim-lualine/lualine.nvim/wiki/Component-snippets#truncating-components-in-smaller-window
+            local file_name = vim.fn.fnamemodify(tag.path, ":t"):sub(1, trunc_len)
 
             if current and current.path == tag.path then
               local left = ""
