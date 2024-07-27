@@ -61,7 +61,7 @@ return {
         --   statusline = string.format("%s %%#GrappleIcon# %s", statusline, opts.icon)
         -- end
 
-        return statusline
+        return "%#GrappleIcon# 🕇 "..statusline
       end
 
       local wpm = require("wpm")
@@ -77,10 +77,6 @@ return {
       require('lualine').setup {
         -- options = { section_separators = '', component_separators = '' },
         sections = {
-          lualine_a = {
-            function() return "🕇" end,
-            unpack(opts.sections.lualine_a),
-          },
           lualine_z = {
             wpm.wpm,
             wpm.historic_graph,
