@@ -296,6 +296,15 @@ return {
           row = -2,
         },
       },
+      -- Turn off documentation popup
+      -- https://www.reddit.com/r/neovim/comments/1bri8a3/comment/kx9haec/
+      lsp = {
+        signature = {
+          auto_open = {
+            enabled = false,
+          },
+        },
+      },
     },
   },
   {
