@@ -456,11 +456,6 @@ return {
     end,
   },
   { "lukas-reineke/headlines.nvim", enabled = false },
-  -- https://github.com/folke/noice.nvim/issues/805#issuecomment-2114947709
-  {
-    "folke/noice.nvim",
-    tag = "v2.0.2",
-  },
   {
     "stevearc/conform.nvim",
     optional = true,
