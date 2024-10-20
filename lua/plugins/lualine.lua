@@ -78,6 +78,7 @@ return {
         -- options = { section_separators = '', component_separators = '' },
         sections = {
           lualine_z = {
+            "%L",
             wpm.wpm,
             wpm.historic_graph,
             "location",
