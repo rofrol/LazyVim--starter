@@ -32,3 +32,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.g.myzenmode = false
+
+-- line heightlight only for number column?
+-- https://www.reddit.com/r/neovim/comments/12ufetq/comment/jh85j9c/
+vim.opt.cursorlineopt='number'
