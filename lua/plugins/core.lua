@@ -490,4 +490,17 @@ return {
         { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
     end
   },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      --https://github.com/davvil/nvim_config/blob/3e97063a82190d853fc5c29c54e5b049fb436b60/lua/plugins/plugins.lua#L61
+      require('render-markdown').setup({
+        anti_conceal = { enabled = true },
+        checkbox = { enabled = false },
+        heading = { enabled = false },
+        bullet = { enabled = false },
+      })
+    end
+  },
 }
