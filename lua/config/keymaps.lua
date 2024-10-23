@@ -161,3 +161,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- https://stackoverflow.com/questions/4768088/automatic-new-line-and-indentation-in-vim-when-inside-braces
 -- https://www.reddit.com/r/neovim/comments/hz9pwo/enable_smart_indent_on_curly_braces/
 Util.map('i', '{<CR>', '{<CR>}<Esc>O')
+
+local function insert_datetime()
+  local datetime = "## " .. os.date("%Y-%m-%d %H:%M")
+  vim.api.nvim_put({ '', datetime, '', '' }, 'l', true, true)
+  vim.cmd('normal! 3ji')
+end
+
+vim.keymap.set('n', '<leader>zd', insert_datetime, { desc = 'Insert date and time' })
+vim.keymap.set('i', '<C-d>', function() insert_datetime() end, { desc = 'Insert date and time' })
