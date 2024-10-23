@@ -165,8 +165,8 @@ Util.map('i', '{<CR>', '{<CR>}<Esc>O')
 local function insert_datetime()
   local datetime = "## " .. os.date("%Y-%m-%d %H:%M")
   vim.api.nvim_put({ '', datetime, '', '' }, 'l', true, true)
-  vim.cmd('normal! 3ji')
+  vim.cmd('normal! 3j')
+  vim.cmd('startinsert')
 end
 
-vim.keymap.set('n', '<leader>zd', insert_datetime, { desc = 'Insert date and time' })
-vim.keymap.set('i', '<C-d>', function() insert_datetime() end, { desc = 'Insert date and time' })
+Util.map({'n','i'}, '<C-d>', function() insert_datetime() end, { desc = 'Insert date and time' })
