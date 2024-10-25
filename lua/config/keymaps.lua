@@ -163,6 +163,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 Util.map('i', '{<CR>', '{<CR>}<Esc>O')
 
 local function insert_datetime()
+  vim.cmd('normal! G')
   local datetime = "## " .. os.date("%Y-%m-%d %H:%M")
   vim.api.nvim_put({ '', datetime, '', '' }, 'l', true, true)
   vim.cmd('normal! 3j')
