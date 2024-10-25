@@ -64,8 +64,9 @@ return {
         return "%#GrappleIcon# 🕇😄 "..statusline
       end
 
-      local wpm = require("wpm")
-      wpm.setup({})
+      -- fancy widget to display words per minute graph
+      -- local wpm = require("wpm")
+      -- wpm.setup({})
 
       -- table.insert(opts.sections.lualine_a, function() return "✞" end)
       -- prepend with 1
@@ -78,10 +79,10 @@ return {
         -- options = { section_separators = '', component_separators = '' },
         sections = {
           lualine_z = {
-            "%L",
-            wpm.wpm,
-            wpm.historic_graph,
             "location",
+            "%L",
+            -- wpm.wpm,
+            -- wpm.historic_graph,
             -- https://stackoverflow.com/questions/50478236/lua-spread-operator-on-an-array/50478498#50478498
             unpack(opts.sections.lualine_z),
           },
