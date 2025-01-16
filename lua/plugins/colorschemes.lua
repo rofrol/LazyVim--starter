@@ -1,23 +1,127 @@
 return {
-  -- { "folke/tokyonight.nvim", enabled = false },
-  -- { "folke/tokyonight.nvim", opts = { style = "light" } },
-  -- { "folke/tokyonight.nvim", opts = { style = "moon" } },
-  -- { "folke/tokyonight.nvim", opts = { style = "storm" } },
-  -- { "folke/tokyonight.nvim", opts = { style = "night" } },
-  { "catppuccin/nvim", enabled = false },
-  "https://gitlab.com/protesilaos/tempus-themes-vim",
-  "projekt0n/github-nvim-theme",
   {
     "LazyVim/LazyVim",
     opts = {
+      background = "light",
+      -- colorscheme = "vscode",
+      -- colorscheme = "github_light",
+      colorscheme = "catppuccin",
+      -- colorscheme = "dayfox",
+
+      -- colorscheme = "antiphoton",
+      -- colorscheme = "lumiere",
+
+      -- colorscheme = "off",
       -- background = "light",
-      colorscheme = "vscode",
+
+      -- colorscheme = "plain",
+      -- background = "light",
+
+      -- colorscheme = "paramount",
+      -- background = "light",
+
+      -- colorscheme = "onedark",
+
+      -- colorscheme = "modus",
+
+      -- colorscheme = "deepwhite",
+
+      -- colorscheme = "ivory",
+
+      -- colorscheme = "nano-theme",
+
+      -- colorscheme = "accent",
+
+      -- colorscheme = "fogbell_light",
+
+      -- colorscheme = "mies",
+
+
+      -- colorscheme = "nofrils-light",
+
       -- colorscheme = "visual_studio_code",
       -- colorscheme = "sakura",
       -- colorscheme = "onedark",
       -- colorscheme = "quantum",
     },
   },
+  -- { "folke/tokyonight.nvim", enabled = false },
+  -- { "folke/tokyonight.nvim", opts = { style = "light" } },
+  -- { "folke/tokyonight.nvim", opts = { style = "moon" } },
+  -- { "folke/tokyonight.nvim", opts = { style = "storm" } },
+  -- { "folke/tokyonight.nvim", opts = { style = "night" } },
+  -- { "catppuccin/nvim", enabled = false },
+  -- https://www.reddit.com/r/neovim/comments/1bukmz6/comment/kxzjzp6/
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      transparent_background = true, -- disables dimming on inactive pane
+      color_overrides = {
+        all = {
+          text = "#000000",
+        },
+        -- https://github.com/catppuccin/nvim/discussions/323#discussioncomment-8105066
+        latte = {
+          rosewater = "#cc7983",
+          flamingo = "#bb5d60",
+          pink = "#d54597",
+          mauve = "#a65fd5",
+          red = "#b7242f",
+          maroon = "#db3e68",
+          peach = "#e46f2a",
+          yellow = "#bc8705",
+          green = "#1a8e32",
+          teal = "#00a390",
+          sky = "#089ec0",
+          sapphire = "#0ea0a0",
+          blue = "#017bca",
+          lavender = "#8584f7",
+          text = "#444444",
+          subtext1 = "#555555",
+          subtext0 = "#666666",
+          overlay2 = "#777777",
+          overlay1 = "#888888",
+          overlay0 = "#999999",
+          surface2 = "#aaaaaa",
+          surface1 = "#bbbbbb",
+          surface0 = "#cccccc",
+          base = "#ffffff",
+          mantle = "#eeeeee",
+          crust = "#dddddd",
+        },
+      }
+    },
+    config = function(_, opts)
+      require('catppuccin').setup(opts)
+      vim.cmd.colorscheme 'catppuccin-latte'
+    end
+  },
+  { "EdenEast/nightfox.nvim",
+    -- opts = {
+    --   options={
+    --     transparent = true,     -- Disable setting background
+    --     terminal_colors = true,  -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+    --     dim_inactive = true,
+    --   },
+    -- },
+    config = function()
+      require("nightfox").setup({
+        options = {
+          transparent = true,     -- Disable setting background
+          terminal_colors = true,  -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+          dim_inactive = false,
+          palettes = {
+            dayfox = {
+              bg1 = "#ffffff",
+            },
+          },
+        },
+      })
+    end,
+  },
+  "https://gitlab.com/protesilaos/tempus-themes-vim",
+  "projekt0n/github-nvim-theme",
   {
     "Mofiqul/vscode.nvim",
     name = "vscode",
@@ -100,4 +204,79 @@ return {
   --     })
   --   end,
   -- },
+  'alexanderjeurissen/lumiere.vim',
+  {
+    'pbrisbin/vim-colors-off',
+    config = function()
+      -- require("quantum").setup()
+      -- vim.api.nvim_set_hl(0, "Normal", { fg = "#000000", bg = "#ffffff" })
+    end,
+  },
+  'andreypopp/vim-colors-plain',
+  'owickstrom/vim-colors-paramount',
+  {
+    "shaunsingh/nord.nvim",
+    config = function()
+      local hl_groups = vim.api.nvim_get_hl(0, {})
+
+      -- disable italic font
+      for key, hl_group in pairs(hl_groups) do
+        if hl_group.italic then
+          vim.api.nvim_set_hl(0, key, vim.tbl_extend("force", hl_group, { italic = false }))
+        end
+      end
+    end,
+  },
+  {
+    "miikanissi/modus-themes.nvim",
+    config = function()
+      require("modus-themes").setup({
+        style = "modus_operandi", -- Always use modus_operandi regardless of `vim.o.background`
+        styles = {
+          comments = { italic = false },
+          keywords = { italic = false },
+          functions = { italic = false },
+          variables = { italic = false },
+        },
+
+        on_colors = function(colors)
+          colors.error = colors.red_faint -- Change error color to the "faint" variant
+        end,
+        on_highlights = function(highlight, color)
+          highlight.Boolean = { fg = color.green } -- Change Boolean highlight to use the green color
+        end,
+      })
+    end,
+  },
+  'Verf/deepwhite.nvim',
+  {
+    -- Colorscheme
+    "mstcl/ivory",
+    lazy = false,
+    priority = 1000,
+    dependencies = {
+      "rktjmp/lush.nvim",
+    },
+    config = function()
+      -- vim.cmd.colorscheme("ivory_extended")
+    end,
+  },
+  {
+    "ronisbr/nano-theme.nvim",
+    init = function ()
+      vim.o.background = "light" -- or "dark".
+    end
+  },
+  {
+    'alligator/accent.vim',
+    config = function()
+      vim.g.accent_colour="blue"
+      vim.g.accent_darken = 1
+      vim.g.accent_no_bg=1
+    end
+  },
+  'jaredgorski/fogbell.vim',
+  'jaredgorski/Mies.vim',
+  'robertmeta/nofrils',
+  'rofrol/photon.vim',
 }
