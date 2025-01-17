@@ -69,7 +69,7 @@ require("lazy").setup({
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     -- vim.api.nvim_set_hl(0, "@lsp.type.parameter", { fg = "Yellow" })
-    vim.api.nvim_set_hl(0, "Normal", { fg = "#000000", bg = "#ffffff" })
+    -- vim.api.nvim_set_hl(0, "Normal", { fg = "#000000", bg = "#ffffff" })
     -- vim.api.nvim_set_hl(0, "@lsp.mod.readonly", { italic = true })
   end,
 })

@@ -26,7 +26,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   callback = function()
     if vim.o.background == 'light' then
-      vim.api.nvim_set_hl(0, 'Normal', { bg = "#ffffff" })
+      -- vim.api.nvim_set_hl(0, 'Normal', { bg = "#ffffff" })
+      vim.api.nvim_set_hl(0, "Normal", { fg = "#000000", bg = "#ffffff" })
     end
   end,
 })
