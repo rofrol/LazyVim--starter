@@ -491,17 +491,38 @@ return {
         { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
     end
   },
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config = function()
-      --https://github.com/davvil/nvim_config/blob/3e97063a82190d853fc5c29c54e5b049fb436b60/lua/plugins/plugins.lua#L61
-      require('render-markdown').setup({
-        anti_conceal = { enabled = true },
-        checkbox = { enabled = false },
-        heading = { enabled = false },
-        bullet = { enabled = false },
-      })
-    end
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   config = function ()
+  --     -- https://github.com/22a/dotfiles/blob/eb4c08fd58ae9e654f34682a8d1e137f99f4cac5/init.lua#L311
+  --     require('nvim-treesitter.configs').setup {
+  --       highlight = {
+  --         enable = false,
+  --         disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,
+  --       },
+  --     }
+  --   end
+  -- },
+  -- disabling because it hides code blocks ```
+  { 'MeanderingProgrammer/render-markdown.nvim', enabled = false },
+  -- {
+  --   'MeanderingProgrammer/render-markdown.nvim',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  --     --https://github.com/davvil/nvim_config/blob/3e97063a82190d853fc5c29c54e5b049fb436b60/lua/plugins/plugins.lua#L61
+  --   opts = {
+  --     anti_conceal = {
+  --       enabled = false,
+  --       ignore = {
+  --         code_background = true,
+  --         code_language = true,
+  --         code_background = true,
+  --         code_border = true,
+  --       },
+  --     },
+  --     checkbox = { enabled = false },
+  --     heading = { enabled = false },
+  --     bullet = { enabled = false },
+  --     code = { enabled = false },
+  --   }
+  -- },
 }
