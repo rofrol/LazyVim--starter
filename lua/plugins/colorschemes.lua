@@ -61,6 +61,7 @@ return {
         all = {
           text = "#000000",
         },
+        -- https://github.com/WilliamHsieh/catppuccin.nvim/blob/main/lua/catppuccin/palettes/latte.lua
         -- https://github.com/catppuccin/nvim/discussions/323#discussioncomment-8105066
         latte = {
           rosewater = "#cc7983",
@@ -77,17 +78,19 @@ return {
           sapphire = "#0ea0a0",
           blue = "#017bca",
           lavender = "#8584f7",
-          text = "#444444",
-          subtext1 = "#555555",
-          subtext0 = "#666666",
-          overlay2 = "#777777",
-          overlay1 = "#888888",
-          overlay0 = "#999999",
-          surface2 = "#aaaaaa",
-          surface1 = "#bbbbbb",
-          surface0 = "#cccccc",
-          base = "#ffffff",
-          mantle = "#eeeeee",
+          -- subtext1 = "#555555",
+          -- subtext0 = "#666666",
+          -- overlay2 = "#777777",
+          -- overlay1 = "#888888",
+          -- overlay0 = "#999999",
+          -- surface2 = "#aaaaaa",
+          -- surface1 = "#bbbbbb",
+          surface1 = "#eeeeee", -- lighter background color for active item in https://github.com/jesseduffield/lazygit
+          -- surface0 = "#cccccc",
+
+          -- base and mantle are use to set background color for active item in telescope
+          base = "#000000",
+          mantle = "#ffffff",
           crust = "#dddddd",
         },
       }
