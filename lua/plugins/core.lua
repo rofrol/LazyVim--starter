@@ -662,4 +662,16 @@ return {
       },
     },
   },
+  { 'ibhagwan/fzf-lua', version = '*',
+    opts = {
+      -- disable header https://github.com/ibhagwan/fzf-lua/discussions/1577
+      -- https://www.reddit.com/r/neovim/comments/1how30n/hide_the_exclude_hidden_files_message_in_fzflua/
+      -- https://github.com/ibhagwan/fzf-lua/blob/main/lua/fzf-lua/defaults.lua
+      -- https://github.com/ibhagwan/fzf-lua/blob/main/lua/fzf-lua/core.lua
+      -- Dynamically respecting .gitignore https://github.com/junegunn/fzf/discussions/3363
+      defaults = {
+        debug = true,
+      },
+    },
+  }
 }
