@@ -524,4 +524,126 @@ return {
   --     code = { enabled = false },
   --   }
   -- },
+  {
+    'stevearc/oil.nvim',
+  ---@module 'oil'
+  ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    keys = {
+      { mode = "n", "<leader>fo", "<cmd>Oil --float<cr>", desc = "Oil --float" },
+      { mode = "n", "<leader>fO", "<cmd>Oil<cr>", desc = "Oil" },
+    },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    config = function()
+      require("oil").setup({
+        use_default_keymaps = true,
+        view_options = {
+          show_hidden = false,
+          is_hidden_file = function(name, bufnr)
+            return vim.startswith(name, ".")
+          end,
+          is_always_hidden = function(name, bufnr)
+            return false
+          end,
+          sort = {
+            { "type", "asc" },
+            { "name", "asc" },
+          },
+        },
+        float = {
+          padding = 1,
+          max_width = 60,
+          max_height = 16,
+          border = "rounded",
+          win_options = {
+            winblend = 0,
+          },
+          override = function(conf)
+            return conf
+          end,
+        },
+
+        preview = {
+          max_width = 0.9,
+          min_width = { 40, 0.4 },
+          width = nil,
+          max_height = 0.9,
+          min_height = { 5, 0.1 },
+          height = nil,
+          border = "rounded",
+          win_options = {
+            winblend = 0,
+          },
+        },
+
+        keymaps = {
+          -- ["<C-c>"] = false,
+          ["q"] = "actions.close",
+          ["h"] = "actions.parent",
+          ["l"] = "actions.select",
+          -- ["g?"] = "actions.show_help",
+          -- ["<CR>"] = "actions.select",
+          -- ["<C-s>"] = "actions.select_vsplit",
+          -- ["<C-h>"] = "actions.select_split",
+          -- ["<C-t>"] = "actions.select_tab",
+          -- ["<C-p>"] = "actions.preview",
+          -- ["<C-c>"] = "actions.close",
+          -- ["<C-l>"] = "actions.refresh",
+          -- ["-"] = "actions.parent",
+          -- ["_"] = "actions.open_cwd",
+          -- ["`"] = "actions.cd",
+          -- ["~"] = "actions.tcd",
+          -- ["gs"] = "actions.change_sort",
+          -- ["g."] = "actions.toggle_hidden",
+        },
+      })
+
+      -- require("oil").setup({
+      --   default_file_explorer = true,
+      --   delete_to_trash = true,
+      --   skip_confirm_for_simple_edits = true,
+      --   view_options = {
+      --     show_hidden = true,
+      --     natural_order = true,
+      --     is_always_hidden = function(name, _)
+      --       return name == ".." or name == ".git"
+      --     end,
+      --   },
+      --   float = {
+      --     padding = 2,
+      --     max_width = 90,
+      --     max_height = 0,
+      --   },
+      --   win_options = {
+      --     wrap = true,
+      --     winblend = 0,
+      --   },
+      --   keymaps = {
+      --     ["<C-c>"] = false,
+      --     ["q"] = "actions.close",
+      --   },
+      -- })
+    end,
+  },
+  {
+    "albenisolmos/telescope-oil.nvim",
+    dependencies = {
+      { "stevearc/oil.nvim", opts = {} },
+    },
+    keys = {
+      { mode = "n", "<leader>to", "<cmd>Telescope oil<cr>", desc = "Telescope Oil" },
+    },
+    config = function()
+        -- optionally override defaults
+        -- local settings = require("telescope-oil.settings")
+        -- settings.set({ hidden = true })
+        -- settings.set({ no_ignore = false })
+        -- settings.set({ show_preview = true })
+
+        -- load extension
+        require("telescope").load_extension("oil")
+    end
+  },
 }
