@@ -673,5 +673,46 @@ return {
         debug = true,
       },
     },
-  }
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      -- https://github.com/nikbrunner/nbr.nvim/blob/0a942ab3fdf8e2d4c341ac4b4bbc6b7ea10e746b/lua/nbr/specs/snacks.lua#L163
+      -- https://github.com/folke/snacks.nvim/blob/main/lua/snacks/picker/config/defaults.lua
+      picker = {
+        layouts = {
+          sidebar_right = {
+            preview = "main",
+            layout = {
+              backdrop = false,
+              width = 40,
+              min_width = 40,
+              height = 0,
+              position = "right",
+              border = "none",
+              box = "vertical",
+              {
+                win = "input",
+                height = 1,
+                border = "rounded",
+                title = "{title} {live} {flags}",
+                title_pos = "center",
+              },
+              { win = "list", border = "none" },
+              { win = "preview", title = "{preview}", height = 0.4, border = "top" },
+            },
+          },
+        },
+
+        sources = {
+          explorer = {
+            replace_netrw = true,
+            layout = { preset = "sidebar_right", preview = false },
+          },
+        },
+      },
+    },
+  },
 }
