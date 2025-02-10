@@ -58,6 +58,9 @@ if vim.fn.has("mac") == 1 and vim.env.TERM_PROGRAM ~= "iTerm.app" then
 
   Util.map({ "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
   Util.map("i", "<D-s>", "<cmd>w<cr><esc>l", { desc = "Save file" })
+  -- simulate emacs C-x C-s to save
+  Util.map({ "x", "n", "s" }, "<D-x><D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+  Util.map("i", "<D-x>", "<esc>", { desc = "Save file" })
 end
 
 function Run_command_and_close(command)
