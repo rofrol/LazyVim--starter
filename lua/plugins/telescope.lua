@@ -18,6 +18,64 @@ local select_one_or_multi = function(prompt_bufnr)
   end
 end
 
+local vimgrep_args = {
+    "rg",
+    "--follow",        -- Follow symbolic links
+    "--no-heading",    -- Don't group matches by each file
+    "--with-filename", -- Print the file path with the matched lines
+    "--line-number",   -- Show line numbers
+    "--column",        -- Show column numbers
+    "--smart-case",    -- Smart case search
+
+    -- Exclude some patterns from search
+    "--glob=!**/.git/*",
+    "--glob=!**/.idea/*",
+    "--glob=!**/.vscode/*",
+    "--glob=!**/build/*",
+    "--glob=!**/dist/*",
+    "--glob=!**/yarn.lock",
+    "--glob=!**/package-lock.json",
+    "--glob=!**/node_modules/*",
+    "--glob=!**/.angular/*",
+  }
+
+local function toggle_vimgrep_args()
+  -- Define your new temporary vimgrep arguments
+  local vimgrep_args_hidden = {
+    "rg",
+    "--follow",        -- Follow symbolic links
+    "--hidden",        -- Search for hidden files
+    "--no-heading",    -- Don't group matches by each file
+    "--with-filename", -- Print the file path with the matched lines
+    "--line-number",   -- Show line numbers
+    "--column",        -- Show column numbers
+    "--smart-case",    -- Smart case search
+
+    -- Exclude some patterns from search
+    "--glob=!**/.git/*",
+    "--glob=!**/.idea/*",
+    "--glob=!**/.vscode/*",
+    "--glob=!**/build/*",
+    "--glob=!**/dist/*",
+    "--glob=!**/yarn.lock",
+    "--glob=!**/package-lock.json",
+    "--glob=!**/node_modules/*",
+    "--glob=!**/.angular/*",
+  }
+
+  -- Set the new temporary vimgrep arguments
+  require('telescope.config').values.vimgrep_arguments = vimgrep_args_hidden
+
+  -- Perform your telescope search
+  require('telescope.builtin').live_grep()
+
+  -- Reset to original vimgrep arguments after the search is done
+  require('telescope.config').values.vimgrep_arguments = vimgrep_args
+end
+
+local Util = require("helpers.util")
+Util.map('n', '<leader>tg', toggle_vimgrep_args)
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -37,27 +95,7 @@ return {
         -- },
         -- ignores package-lock.json
         -- https://stackoverflow.com/questions/71809098/how-to-include-specific-hidden-file-folder-in-search-result-when-using-telescope/76991432#76991432
-        vimgrep_arguments = {
-          "rg",
-          "--follow",        -- Follow symbolic links
-          -- "--hidden",        -- Search for hidden files
-          "--no-heading",    -- Don't group matches by each file
-          "--with-filename", -- Print the file path with the matched lines
-          "--line-number",   -- Show line numbers
-          "--column",        -- Show column numbers
-          "--smart-case",    -- Smart case search
-
-          -- Exclude some patterns from search
-          "--glob=!**/.git/*",
-          "--glob=!**/.idea/*",
-          "--glob=!**/.vscode/*",
-          "--glob=!**/build/*",
-          "--glob=!**/dist/*",
-          "--glob=!**/yarn.lock",
-          "--glob=!**/package-lock.json",
-          "--glob=!**/node_modules/*",
-          "--glob=!**/.angular/*",
-        },
+        vimgrep_arguments = vimgrep_args,
         pickers = {
           -- does not ignore package-lock.json
           find_files = {
