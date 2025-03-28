@@ -13,7 +13,7 @@ ccmd("FileType", {
   group = vim.api.nvim_create_augroup("markdown_conceal", { clear = true }),
   pattern = { "markdown", "json" },
   callback = function()
-    vim.wo.conceallevel = 0
+    -- vim.wo.conceallevel = 0
   end,
 })
 
