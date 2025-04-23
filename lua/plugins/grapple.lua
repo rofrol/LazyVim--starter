@@ -1,4 +1,9 @@
 -- if true then return {} end
+
+-- when grapple does not load marks or adding new mark is not possible with error:
+-- notify.error Expected the end but found invalid token at character 516
+-- vim.json.decode fails in ~/.local/share/nvim/lazy/grapple.nvim/lua/grapple/state.lua
+-- fix some corrupted json file from ~/.local/share/nvim/grapple/ or run `Grapple reset`
 local Util = require("helpers.util")
 return {
   {
