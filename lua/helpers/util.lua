@@ -32,6 +32,7 @@ function M.disable_zen_mode()
   vim.o.number = true
   vim.o.laststatus = 3
   vim.cmd("set showmode")
+  require('lualine').hide({ place  = { 'statusline' }, unhide = true })
   M.toggle_signs_no_refresh(true)
 end
 
@@ -40,6 +41,7 @@ function M.enable_zen_mode()
   vim.o.number = false
   vim.o.laststatus = 0
   vim.cmd("set noshowmode")
+  require('lualine').hide({ place  = { 'statusline' }, unhide = false })
   M.toggle_signs_no_refresh(false)
 end
 

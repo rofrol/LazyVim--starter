@@ -102,6 +102,11 @@ return {
           },
         },
       }
+
+      -- disable satusline by default
+      vim.o.laststatus = 0
+      vim.cmd("set noshowmode")
+      require('lualine').hide({ place  = { 'statusline' }, unhide = false }) -- hide statusline
     end,
   },
 }
