@@ -23,7 +23,7 @@ return {
       vim.api.nvim_set_hl(0, 'GrappleInactiveClosingTriangleLast', { fg = "#cccccc", bg = "#ffffff" })
       vim.api.nvim_set_hl(0, 'GrappleBg', { fg = "#ffffff", bg = "#555555" })
 
-      vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd", bg = "#cccccc" })
+      vim.api.nvim_set_hl(0, 'TabLineFill', { fg = "#dddddd", bg = "#ffffff" })
 
       -- setting in opts does not work for win_opts.width
       require("grapple").setup(
