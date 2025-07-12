@@ -5,6 +5,8 @@ local M = {}
 function M.setup()
   -- Wybierz odpowiednią powłokę (bash lub zsh)
   local shell = "bash"
+  -- nvm install node
+  -- nvm alias default node
   local cmd = shell .. [[ -c 'source "$HOME/.nvm/nvm.sh" && nvm use default > /dev/null && echo $PATH']]
   local handle = io.popen(cmd)
   if handle then
