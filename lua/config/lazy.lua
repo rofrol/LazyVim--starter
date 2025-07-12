@@ -98,3 +98,5 @@ end, {
 })
 
 -- require("sth/hello")
+
+require("config.nvm").setup()
