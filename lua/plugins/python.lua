@@ -1,6 +1,7 @@
 return {
   {
     "linux-cultist/venv-selector.nvim",
+    enabled = false,
     init = function()
       vim.api.nvim_create_autocmd("VimEnter", {
         desc = "Auto select virtualenv Nvim open",
