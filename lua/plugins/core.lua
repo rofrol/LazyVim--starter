@@ -32,7 +32,7 @@ return {
       },
     },
   },
-  { "echasnovski/mini.pairs", enabled = false },
+  { "nvim-mini/mini.pairs", enabled = false },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
@@ -475,14 +475,14 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "markdownlint-cli2" })
     end,
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     opts = function()
       Util.map('n', '<leader>za', 'gsaiw`wl',
         { remap = true, desc = 'mini.surround: wrap with backtick (`) and go to the end' })
@@ -530,7 +530,7 @@ return {
   ---@type oil.SetupOpts
     opts = {},
     -- Optional dependencies
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
     keys = {
       { mode = "n", "<leader>fo", "<cmd>Oil --float<cr>", desc = "Oil --float" },
       { mode = "n", "<leader>fO", "<cmd>Oil<cr>", desc = "Oil" },
@@ -646,7 +646,7 @@ return {
         require("telescope").load_extension("oil")
     end
   },
-  { 'echasnovski/mini.files', version = '*',
+  { 'nvim-mini/mini.files', version = '*',
     opts = {
       windows = {
         -- Maximum number of windows to show side by side

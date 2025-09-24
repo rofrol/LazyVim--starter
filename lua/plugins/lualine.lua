@@ -2,7 +2,7 @@ local Util = require("helpers.util")
 return {
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "cbochs/grapple.nvim", "asyncedd/wpm.nvim", { 'echasnovski/mini.icons', version = false } },
+    dependencies = { "cbochs/grapple.nvim", "asyncedd/wpm.nvim", { 'nvim-mini/mini.icons', version = false } },
     config = function(_, opts)
       -- https://github.com/ThePrimeagen/harpoon/issues/352#issuecomment-1873053256
       function Grapple_files()

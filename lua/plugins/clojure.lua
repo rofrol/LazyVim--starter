@@ -13,7 +13,7 @@ return {
 
   -- Add Clojure LSP server
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "clojure-lsp" })
@@ -39,7 +39,7 @@ return {
 
   -- Add s-exp mappings
   { "PaterJason/nvim-treesitter-sexp" },
-  { "echasnovski/mini.surround" },
+  { "nvim-mini/mini.surround" },
 
   -- Colorize the output of the log buffer
   {

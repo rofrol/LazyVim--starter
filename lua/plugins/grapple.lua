@@ -8,7 +8,7 @@ local Util = require("helpers.util")
 return {
   {
     "cbochs/grapple.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.bufremove" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "nvim-mini/mini.bufremove" },
     config = function()
       vim.api.nvim_set_hl(0, 'GrappleActive', { fg = "#333333", bg = "#eeeeee" })
       vim.api.nvim_set_hl(0, 'GrappleInactive', { fg = "#555555", bg = "#cccccc" })
