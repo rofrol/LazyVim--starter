@@ -61,7 +61,7 @@ return {
         --   statusline = string.format("%s %%#GrappleIcon# %s", statusline, opts.icon)
         -- end
 
-        return "%#GrappleIcon# 🕇🧘 "..statusline
+        return "%#GrappleIcon# 🕇 "..statusline
       end
 
       -- fancy widget to display words per minute graph
