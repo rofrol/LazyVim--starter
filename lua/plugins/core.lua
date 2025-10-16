@@ -734,5 +734,9 @@ return {
         },
       },
     } -- your configuration
+  },
+  {
+    "gpanders/editorconfig.nvim",
+    lazy = false,
   }
 }
