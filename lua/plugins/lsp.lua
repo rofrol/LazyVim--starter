@@ -19,7 +19,7 @@ return {
           -- cmd = { vim.fn.exepath("ols") },
           -- ols newer than from mason
           -- odifmt needs `odinfmt.json` in project directory https://github.com/DanielGavin/ols?tab=readme-ov-file#odinfmt-configurations
-          cmd = { vim.fn.exepath("$HOME/personal_projects/odin/vendor/ols/ols") },
+          cmd = { vim.fn.exepath(vim.fn.expand("$HOME/personal_projects/odin/vendor/ols/ols")) },
           filetypes = { "odin" },
           root_dir = require("lspconfig.util").root_pattern('ols.json', '.git', '*.odin'),
         }
