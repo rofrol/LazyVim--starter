@@ -174,3 +174,75 @@ local function insert_datetime()
 end
 
 Util.map({'n','i'}, '<C-d>', function() insert_datetime() end, { desc = 'Insert date and time' })
+
+-- Odin
+
+-- https://yeripratama.com/blog/customizing-nvim-telescope/
+
+local function normalize_path(path)
+  return path:gsub("\\", "/")
+end
+
+local function get_odin_root()
+  return normalize_path(vim.fn.system("odin root"))
+end
+
+local function path_display(_, path)
+  local normalized_path = normalize_path(path)
+  local odin_root = get_odin_root()
+
+  if normalized_path:sub(1, #odin_root) == odin_root then
+    normalized_path = normalized_path:sub(#odin_root + 1)
+  end
+
+  local filename = normalized_path:match("[^/]+$") or normalized_path
+  local stripped_path = normalized_path:sub(1, -(#filename + 1))
+
+  if filename == stripped_path or stripped_path == "" then
+    return filename
+  end
+  return string.format("%s ~ %s", filename, stripped_path)
+end
+-- _G.path_display = path_display
+-- _G.get_odin_root = get_odin_root
+
+local odin_root = vim.fn.system("odin root")
+local config = {
+    -- https://stackoverflow.com/questions/71809098/how-to-include-specific-hidden-file-folder-in-search-result-when-using-telescope/72545476#72545476
+    -- https://github.com/nvim-telescope/telescope.nvim/blob/master/doc/telescope.txt
+    file_ignore_patterns = {"%_private.odin"},
+    layout_strategy = "vertical",
+    layout_config = {
+      vertical = {
+        preview_height = 0.4,     -- preview window, results will take the rest if preview_cutoff = 0
+        preview_cutoff = 0,       -- minimal height to show preview
+        height = 0.9,             -- height of whole telescope window
+        width = 0.9,              -- width of whole telescope window
+        mirror = true,            -- search input on top
+      },
+      prompt_position = "top",
+    },
+    path_display = path_display,
+    prompt_title = "Odin Standard Library"
+  }
+
+local builtin = require('telescope.builtin')
+
+vim.keymap.set('n', '<leader>osc', function()
+  builtin.live_grep(vim.tbl_deep_extend("force", config, {
+    search_dirs = { odin_root .. "core" }
+  }))
+end, { desc = "Search core of Odin Standard Library" })
+
+vim.keymap.set('n', '<leader>osb', function()
+  builtin.live_grep(vim.tbl_deep_extend("force", config, {
+    search_dirs = { odin_root .. "base" }
+  }))
+end, { desc = "Search base of Odin Standard Library" })
+
+vim.keymap.set('n', '<leader>osv', function()
+  builtin.live_grep(vim.tbl_deep_extend("force", config, {
+    search_dirs = { odin_root .. "vendor" }
+  }))
+end, { desc = "Search vendor of Odin Standard Library" })
+
