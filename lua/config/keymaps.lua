@@ -226,23 +226,23 @@ local config = {
     prompt_title = "Odin Standard Library"
   }
 
-local builtin = require('telescope.builtin')
+-- local builtin = require('telescope.builtin')
 
-vim.keymap.set('n', '<leader>osc', function()
-  builtin.live_grep(vim.tbl_deep_extend("force", config, {
-    search_dirs = { odin_root .. "core" }
-  }))
-end, { desc = "Search core of Odin Standard Library" })
+-- vim.keymap.set('n', '<leader>osc', function()
+--   builtin.live_grep(vim.tbl_deep_extend("force", config, {
+--     search_dirs = { odin_root .. "core" }
+--   }))
+-- end, { desc = "Search core of Odin Standard Library" })
 
-vim.keymap.set('n', '<leader>osb', function()
-  builtin.live_grep(vim.tbl_deep_extend("force", config, {
-    search_dirs = { odin_root .. "base" }
-  }))
-end, { desc = "Search base of Odin Standard Library" })
+-- vim.keymap.set('n', '<leader>osb', function()
+--   builtin.live_grep(vim.tbl_deep_extend("force", config, {
+--     search_dirs = { odin_root .. "base" }
+--   }))
+-- end, { desc = "Search base of Odin Standard Library" })
 
-vim.keymap.set('n', '<leader>osv', function()
-  builtin.live_grep(vim.tbl_deep_extend("force", config, {
-    search_dirs = { odin_root .. "vendor" }
-  }))
-end, { desc = "Search vendor of Odin Standard Library" })
+-- vim.keymap.set('n', '<leader>osv', function()
+--   builtin.live_grep(vim.tbl_deep_extend("force", config, {
+--     search_dirs = { odin_root .. "vendor" }
+--   }))
+-- end, { desc = "Search vendor of Odin Standard Library" })
 
