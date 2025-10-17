@@ -2,8 +2,8 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
-      -- needed: autoformat of odin files will behave strange when used with ols
-      odin = { "odinfmt" },
+      -- you may need conform if autoformat with just ols of odin files will behave strange
+      -- odin = { "odinfmt" },
     },
   },
 }
