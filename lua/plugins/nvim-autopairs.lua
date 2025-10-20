@@ -17,20 +17,24 @@ return {
 
     npairs.remove_rule("'")
     npairs.remove_rule('"')
-    
+
     -- remove standard pairs that interfere
     npairs.remove_rule("{")
     npairs.remove_rule("[")
     npairs.remove_rule("(")
 
-    local function closing_bracket_after_enter(opening_char, closing_char)
-      return Rule(opening_char, "")
+    local function closing_bracket_after_enter(open_char, close_char)
+      -- handle case when there is no space between ) and {
+      local escaped_open = open_char:gsub("[%-%[%]%+%*%?%^%$%(%)%%%.]", "%%%0")
+      local pattern = ".*" .. escaped_open .. "$"
+      return Rule(pattern, "")
+        :use_regex(true)
         :with_pair(cond.none())
         :with_move(cond.none())
         :with_del(cond.none())
         :only_cr(cond.done())
         :replace_map_cr(function()
-          return "<C-g>u<CR>" .. closing_char .. "<CR><C-c>kO"
+          return "<C-g>u<CR>" .. close_char .. "<CR><C-c>kO"
         end)
     end
 
