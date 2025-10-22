@@ -24,16 +24,23 @@ return {
     npairs.remove_rule("(")
 
     local function closing_bracket_after_enter(open_char, close_char)
-      -- handle case when there is no space between ) and {
-      local escaped_open = open_char:gsub("[%-%[%]%+%*%?%^%$%(%)%%%.]", "%%%0")
-      local pattern = ".*" .. escaped_open .. "$"
-      return Rule(pattern, "")
-        :use_regex(true)
-        :with_pair(cond.none())
-        :with_move(cond.none())
-        :with_del(cond.none())
-        :only_cr(cond.done())
+      return Rule(open_char, "")
+        :with_pair(cond.none())        -- don't insert closing char immediately
+        :with_move(cond.none())        -- don't jump over closing char
+        :with_del(cond.none())         -- don't automatically delete closing char
+        :with_cr(function(options)
+          -- Check if we're at the end of line and the previous character matches
+          return options.prev_char == open_char and options.next_char == ''
+        end)
         :replace_map_cr(function()
+          -- Sequence that:
+          -- 1. <C-g>u - break undo sequence
+          -- 2. <CR> - new line with auto-indent
+          -- 3. close_char - insert closing character
+          -- 4. <CR> - another new line
+          -- 5. <C-c> - switch to normal mode
+          -- 6. k - move up (to the line with closing char)
+          -- 7. O - open new line ABOVE the current line and enter insert mode
           return "<C-g>u<CR>" .. close_char .. "<CR><C-c>kO"
         end)
     end
