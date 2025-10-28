@@ -335,7 +335,6 @@ return {
     },
   },
   { "nvimdev/dashboard-nvim", enabled = false },
-  { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -679,6 +678,8 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+      dashboard = { enabled = false },
+
       -- https://github.com/nikbrunner/nbr.nvim/blob/0a942ab3fdf8e2d4c341ac4b4bbc6b7ea10e746b/lua/nbr/specs/snacks.lua#L163
       -- https://github.com/folke/snacks.nvim/blob/main/lua/snacks/picker/config/defaults.lua
       picker = {
