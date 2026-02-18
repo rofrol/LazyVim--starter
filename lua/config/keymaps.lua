@@ -246,3 +246,13 @@ local config = {
 --   }))
 -- end, { desc = "Search vendor of Odin Standard Library" })
 
+-- Ruchy kursora (j=lewo, i=góra, k=dół, l=prawo)
+Util.map({ "x", "n", "s" }, 'j', 'i')
+Util.map({ "x", "n", "s" }, 'i', 'k')
+Util.map({ "x", "n", "s" }, 'k', 'j')
+-- l pozostaje bez zmian (prawo)
+
+-- Ponowne zmapowanie nadpisanych funkcji
+-- i (insert) -> przeniesione na h
+Util.map({ "x", "n", "s" }, 'h', 'i')
+-- h (lewo) -> już pod j
