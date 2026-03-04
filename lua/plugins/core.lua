@@ -719,5 +719,10 @@ return {
   {
     "gpanders/editorconfig.nvim",
     lazy = false,
+  },
+  {
+    'BranimirE/fix-auto-scroll.nvim',
+    config = true,
+    event = 'VeryLazy'
   }
 }
